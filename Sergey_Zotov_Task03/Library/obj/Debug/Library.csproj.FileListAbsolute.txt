@@ -1,0 +1,6 @@
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\bin\Debug\Library.dll
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\bin\Debug\Library.pdb
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\obj\Debug\Library.csprojAssemblyReference.cache
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\obj\Debug\Library.dll
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Library\obj\Debug\Library.pdb

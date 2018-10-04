@@ -1,0 +1,10 @@
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\bin\Debug\Task3.exe.config
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\bin\Debug\Task3.exe
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\bin\Debug\Task3.pdb
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\bin\Debug\Library.dll
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\bin\Debug\Library.pdb
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\obj\Debug\Task3.csprojAssemblyReference.cache
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\obj\Debug\Task3.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\obj\Debug\Task3.csproj.CopyComplete
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\obj\Debug\Task3.exe
+C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task03\Zotov_Sergey_Task03\Task3\obj\Debug\Task3.pdb
