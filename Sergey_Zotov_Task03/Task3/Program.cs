@@ -9,22 +9,24 @@ namespace Task3
         {
             Init init = new Init();
             Printer printer = new Printer();
-            int[] Arr = new int[10];
-            init.Initializing(Arr);
+            int[] arr = new int[10];
+            init.Initializing(arr);
             Console.WriteLine("Исходный массив:\n");
-            printer.Print(Arr);
-            Console.WriteLine($"Сумма неотрицательных элементов равна {Summ(Arr)}");
+            printer.Print(arr);
+            Console.WriteLine($"Сумма неотрицательных элементов равна {GetSumOfPosiveNumbers(arr)}");
             Console.ReadKey();
         }
 
-        static int Summ(int[] Arr)
+        static int GetSumOfPosiveNumbers(int[] Arr)
         {
             int summ = 0;
 
             foreach(int value in Arr)
             {
                 if (value >= 0)
+                {
                     summ += value;
+                }
             }
 
             return summ;

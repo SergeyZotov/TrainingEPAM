@@ -9,16 +9,16 @@ namespace Zotov_Sergey_Task03
         {
             Init init = new Init();
             Printer printer = new Printer();
-            int[] Arr = new int[10];
-            init.Initializing(Arr);
+            int[] arr = new int[10];
+            init.Initializing(arr);
             Console.WriteLine("Исходный массив:\n");
-            printer.Print(Arr);
-            Console.WriteLine($"Максимальное значение массива: {MaxValue(Arr)}");
-            Console.WriteLine($"\nМинимальное значение массива: {MinValue(Arr)}");
-            Sorting(Arr);
+            printer.Print(arr);
+            Console.WriteLine($"Максимальное значение массива: {MaxValue(arr)}");
+            Console.WriteLine($"\nМинимальное значение массива: {MinValue(arr)}");
+            Sorting(arr);
             Console.WriteLine();
             Console.WriteLine($"\nОтсортированный массив:\n");
-            printer.Print(Arr);
+            printer.Print(arr);
             Console.ReadKey();
 
         }

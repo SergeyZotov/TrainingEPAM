@@ -9,15 +9,15 @@ namespace Task4
         {
             Init init = new Init();
             Printer printer = new Printer();
-            int[,] Arr = new int[10, 10];
-            init.Initializing(Arr);
+            int[,] arr = new int[10, 10];
+            init.Initializing(arr);
             Console.WriteLine("Исходный массив:\n");
-            printer.Print(Arr);
-            Console.WriteLine($"Сумма элементов, стоящих в четных позициях, равна {Summ(Arr)}");
+            printer.Print(arr);
+            Console.WriteLine($"Сумма элементов, стоящих в четных позициях, равна {GetSummOFEvenPositionNumbers(arr)}");
             Console.ReadKey();
         }
 
-        static int Summ(int[,] Arr)
+        static int GetSummOFEvenPositionNumbers(int[,] Arr)
         {
             int summ = 0;
            
@@ -26,7 +26,9 @@ namespace Task4
                 for (int j = 0; j < 10; ++j)
                 {
                     if ((i + j) % 2 == 0)
-                        summ = summ + Arr[i, j];                       
+                    {
+                        summ = summ + Arr[i, j];
+                    }
                 }
             }
             return summ;

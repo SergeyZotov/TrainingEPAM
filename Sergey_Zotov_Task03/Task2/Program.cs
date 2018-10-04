@@ -9,13 +9,13 @@ namespace Task2
         {
             Init init = new Init();
             Printer printer = new Printer();
-            int[, ,] Arr = new int[3, 5, 5];
-            init.Initializing(Arr);
+            int[, ,] arr = new int[3, 5, 5];
+            init.Initializing(arr);
             Console.WriteLine("Исходный массив:");
-            printer.Print(Arr);
-            RemovePositive(Arr);
+            printer.Print(arr);
+            RemovePositive(arr);
             Console.WriteLine("Измененный массив:");
-            printer.Print(Arr);
+            printer.Print(arr);
             Console.ReadKey();
         }
 
