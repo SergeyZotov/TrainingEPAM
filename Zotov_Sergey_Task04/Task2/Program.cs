@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 // Does not work
 namespace Task2
 {
@@ -13,32 +15,50 @@ namespace Task2
             string firstLine = Console.ReadLine();
             Console.WriteLine("Введите вторую строку:");
             string secondLine = Console.ReadLine();
-            Console.WriteLine($"Результирующая строка:\n{GetResultString(firstLine, secondLine)}");
+            Console.WriteLine($"Результирующая строка:\n{GetNewString(firstLine, secondLine)}");
             Console.ReadKey();
 
         }
 
-        static string GetResultString(string firstLine, string secondLine)
+        static string GetNewString(string firstLine, string secondLine)
         {
             string resultLine = string.Empty;
-            foreach (var value in firstLine)
+            List<char> charArr2 = GetCharArray(firstLine);
+            int index = 0;
+            for (int i = 0; i < firstLine.Length; ++i)
             {
-                resultLine += value;
+                resultLine = resultLine +  firstLine[i];
 
-                if (secondLine.Contains(value.ToString()))
+                foreach(var ch in charArr2)
                 {
-                    resultLine += value;
+                    if (resultLine[index] == ch)
+                    {
+                        resultLine = resultLine + ch;
+                        index++;
+                        break;
+                    }
+                    /*if (resultLine[i] == ch)
+                    {
+                        resultLine = resultLine + ch;
+                        break;
+                    }
+                    else continue;*/
                 }
             }
+
+
             return resultLine;
         }
 
-        static string GetString(string firstLine)
+        static List<char> GetCharArray(string firstLine)
         {
-            string charArr = string.Empty;
+            List<char> charArr = new List<char>();
             foreach(char ch in firstLine)
             {
-                    charArr = charArr + ch.ToString();
+                if (ch != ' ')
+                {
+                    charArr.Add(ch);
+                }
             }
             return charArr;
         }
