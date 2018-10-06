@@ -1,7 +1,0 @@
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\bin\Debug\Task3.exe.config
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\bin\Debug\Task3.exe
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\bin\Debug\Task3.pdb
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\obj\Debug\Task3.csprojAssemblyReference.cache
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\obj\Debug\Task3.csproj.CoreCompileInputs.cache
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\obj\Debug\Task3.exe
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task3\obj\Debug\Task3.pdb
