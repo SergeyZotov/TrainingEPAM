@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 // Does not work
 namespace Task2
 {
@@ -10,57 +8,32 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            string resultLine = string.Empty;
+            string resultString = string.Empty;
             Console.WriteLine("Введите первую строку:");
-            string firstLine = Console.ReadLine();
+            string firstString = Console.ReadLine();
             Console.WriteLine("Введите вторую строку:");
-            string secondLine = Console.ReadLine();
-            Console.WriteLine($"Результирующая строка:\n{GetNewString(firstLine, secondLine)}");
+            string secondString = Console.ReadLine();
+            Console.WriteLine("Результирующая строка:");
+            Console.WriteLine(GetResultString(firstString, secondString));
             Console.ReadKey();
 
         }
 
-        static string GetNewString(string firstLine, string secondLine)
+        static string GetResultString(string firstString, string secondString)
         {
-            string resultLine = string.Empty;
-            List<char> charArr2 = GetCharArray(firstLine);
-            int index = 0;
-            for (int i = 0; i < firstLine.Length; ++i)
-            {
-                resultLine = resultLine +  firstLine[i];
+            string resultString = string.Empty;
 
-                foreach(var ch in charArr2)
+            foreach (var value in firstString)
+            {
+                resultString = resultString + value.ToString();
+
+                if (secondString.Contains(value.ToString()))
                 {
-                    if (resultLine[index] == ch)
-                    {
-                        resultLine = resultLine + ch;
-                        index++;
-                        break;
-                    }
-                    /*if (resultLine[i] == ch)
-                    {
-                        resultLine = resultLine + ch;
-                        break;
-                    }
-                    else continue;*/
+                    resultString = resultString + value.ToString();
                 }
             }
 
-
-            return resultLine;
-        }
-
-        static List<char> GetCharArray(string firstLine)
-        {
-            List<char> charArr = new List<char>();
-            foreach(char ch in firstLine)
-            {
-                if (ch != ' ')
-                {
-                    charArr.Add(ch);
-                }
-            }
-            return charArr;
+            return resultString;
         }
     }
 }

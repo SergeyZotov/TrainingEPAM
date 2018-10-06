@@ -20,16 +20,16 @@ namespace Task1
         {
             string[] tempString = myString.Split(new char[] { '.', ',', '!', '?', ';',
                 ':', '-', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            double avg = 0;
+            double average = 0;
             int index = 0;
 
-            foreach (var v in tempString)
+            foreach (var value in tempString)
             {
-                avg = avg + v.Length;
+                average = average + value.Length;
                 index++;
             }
 
-            return avg / index;
+            return average / index;
         }
     }
 }
