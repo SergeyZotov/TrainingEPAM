@@ -14,26 +14,28 @@ namespace Task2
             Console.WriteLine("Введите вторую строку:");
             string secondString = Console.ReadLine();
             Console.WriteLine("Результирующая строка:");
-            Console.WriteLine(GetResultString(firstString, secondString));
+            resultString = GetResultString(firstString, secondString);
+            Console.WriteLine(resultString);
             Console.ReadKey();
 
         }
 
         static string GetResultString(string firstString, string secondString)
         {
-            string resultString = string.Empty;
-
+            // Можно через string.replace, regex
+            StringBuilder resultString = new StringBuilder();
+           
             foreach (var value in firstString)
             {
-                resultString = resultString + value.ToString();
+                resultString.Append(value.ToString());
 
                 if (secondString.Contains(value.ToString()))
                 {
-                    resultString = resultString + value.ToString();
+                    resultString.Append(value.ToString());
                 }
             }
 
-            return resultString;
+            return resultString.ToString();
         }
     }
 }
