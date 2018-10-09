@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-// Does not work
-// HTML теги
+using System.Text;
+
 namespace Task5
 {
     class Program
@@ -10,18 +10,24 @@ namespace Task5
         {
             Console.WriteLine("Введите HTML текст:");
             string myString = Console.ReadLine();
-            Console.WriteLine($"Результат замены:\n{Result(myString)}");
+            Console.WriteLine($"Результат замены:\n{GetResultString(myString)}");
             Console.ReadKey();
 
         }
 
-        static string Result(string myString)
+        static string GetResultString(string myString)
         {
-            string pattern = @"/<[\W+]>";
-            Regex regex = new Regex(pattern);
+            string pattern = @"/<([^>]+)>";
+            Regex regex = new Regex(pattern, RegexOptions.Singleline);
+            MatchCollection matches = regex.Matches(myString);
 
-            myString = regex.Replace(myString, pattern);
-            return myString;
+            StringBuilder stringBuilder = new StringBuilder(myString);
+           
+            foreach (MatchCollection value in matches)
+            {
+                stringBuilder.Replace(value.ToString(), "_");    
+            }
+            return stringBuilder.ToString();
         }
     }
 }

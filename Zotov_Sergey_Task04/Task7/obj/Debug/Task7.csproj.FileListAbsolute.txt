@@ -1,7 +1,0 @@
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\bin\Debug\Task7.exe.config
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\bin\Debug\Task7.exe
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\bin\Debug\Task7.pdb
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\obj\Debug\Task7.csprojAssemblyReference.cache
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\obj\Debug\Task7.csproj.CoreCompileInputs.cache
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\obj\Debug\Task7.exe
-C:\Users\USER\Desktop\EPAM\Zotov_Sergey_Task04\Task7\obj\Debug\Task7.pdb
