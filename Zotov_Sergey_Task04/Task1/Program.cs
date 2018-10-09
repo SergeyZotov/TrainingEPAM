@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Task1
 {
@@ -18,13 +15,16 @@ namespace Task1
 
         static double GetAverageLengthOfWords(string myString)
         {
-            string[] tempString = myString.Split(new char[] { '.', ',', '!', '?', ';',
-                ':', '-', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string pattern = @"\s+";
+            Regex regex = new Regex(pattern, RegexOptions.Singleline);
+            var temp = regex.Split(myString);
             double average = 0;
             int index = 0;
 
-            foreach (var value in tempString)
+            foreach (var value in temp)
             {
+                if (value == "")
+                    continue;
                 average = average + value.Length;
                 index++;
             }

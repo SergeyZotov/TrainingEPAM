@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Task4
 {
@@ -22,7 +19,7 @@ namespace Task4
             }
             watcher1.Stop();
 
-            Console.WriteLine($"Вот так работает сложение в string:\t\t{watcher1.Elapsed}");
+            Console.WriteLine($"Вот так работает сложение в string:\t\t{watcher1 .Elapsed}");
 
             var watcher = Stopwatch.StartNew();
 

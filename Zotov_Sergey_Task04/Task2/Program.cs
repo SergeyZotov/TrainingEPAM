@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 
-// Does not work
 namespace Task2
 {
     class Program
@@ -22,20 +21,29 @@ namespace Task2
 
         static string GetResultString(string firstString, string secondString)
         {
-            // Можно через string.replace, regex
-            StringBuilder resultString = new StringBuilder();
-           
-            foreach (var value in firstString)
+            foreach (var value in GetChangedString(secondString))
             {
-                resultString.Append(value.ToString());
+                firstString = firstString.Replace($"{value}", $"{value}{value}");
+            }
 
-                if (secondString.Contains(value.ToString()))
+            return firstString;
+        }
+
+        static string GetChangedString(string str)
+        {
+
+            StringBuilder shortierString = new StringBuilder();
+
+            foreach (char c in str)
+            {
+                if (shortierString.ToString().IndexOf(c) == -1)
                 {
-                    resultString.Append(value.ToString());
+                    shortierString.Append(c);
                 }
             }
 
-            return resultString.ToString();
+            return shortierString.ToString();
+
         }
     }
 }
