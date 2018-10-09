@@ -15,17 +15,16 @@ namespace Task1
 
         static double GetAverageLengthOfWords(string myString)
         {
-            string pattern = @"\s+";
-            Regex regex = new Regex(pattern, RegexOptions.Singleline);
-            var temp = regex.Split(myString);
+            string pattern = @"\s{0}\b(\w+)\b";
+            Regex regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
             double average = 0;
             int index = 0;
 
-            foreach (var value in temp)
+            MatchCollection matches = regex.Matches(myString);
+
+            foreach(var match in matches)
             {
-                if (value == "")
-                    continue;
-                average = average + value.Length;
+                average += match.ToString().Length;
                 index++;
             }
 
