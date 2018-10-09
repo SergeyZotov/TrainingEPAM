@@ -17,17 +17,8 @@ namespace Task5
 
         static string GetResultString(string myString)
         {
-            string pattern = @"/<([^>]+)>";
-            Regex regex = new Regex(pattern, RegexOptions.Singleline);
-            MatchCollection matches = regex.Matches(myString);
-
-            StringBuilder stringBuilder = new StringBuilder(myString);
-           
-            foreach (MatchCollection value in matches)
-            {
-                stringBuilder.Replace(value.ToString(), "_");    
-            }
-            return stringBuilder.ToString();
+            string pattern = @"<[^>]+>";
+            return Regex.Replace(myString, pattern, "_");
         }
     }
 }
