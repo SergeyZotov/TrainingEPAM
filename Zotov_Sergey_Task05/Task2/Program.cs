@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,8 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите координаты окружности, x и y соответственно");
-            double x = double.Parse(Console.ReadLine());
-            double y = double.Parse(Console.ReadLine());
-            Console.WriteLine("Введите радиус окружности");
-            int radius = int.Parse(Console.ReadLine());
-            Round round = new Round(x, y, radius);          
+            Console.WriteLine("Введите координаты и радиус");
+            Round round = new Round(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
             Print(round);
             Console.ReadKey();
         }

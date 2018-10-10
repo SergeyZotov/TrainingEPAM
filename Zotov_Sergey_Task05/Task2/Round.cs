@@ -8,55 +8,127 @@ namespace Task2
 {
     public class Round
     {
-        internal double X
+        private double radius;
+        private double x;
+        private double y;
+
+        public Round(string x, string y, string radius)
         {
-            set
+            try
             {
-                X = value;
+                Y = double.Parse(y);
+                X = double.Parse(x);
             }
-            get
+            catch (FormatException)
             {
-                return X;
+                throw new FormatException("Координаты должны быть целым или вещественным числом");
             }
+
+            try
+            {
+                Radius = double.Parse(radius);
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Радиус не может быть меньше нуля");
+            }
+
         }
         
-        internal double Y
+        internal protected double X
         {
-            set
+            private set
             {
-                Y = value;
-            }
-            get
-            {
-                return Y;
-            }
-        }
-        
-        internal int Radius
-        {
-            set
-            {
-                if (Radius < 0)
-                    throw new ArgumentException("Радиус не может быть меньше 0");
+                x = value;
+                /* if (!double.TryParse(value.ToString(), out value))
+                     throw new ArgumentException("Координаты должны быть целым или вещественным числом");
 
-                Radius = value;
+                 x = value;*/
             }
-            get
-            {
-                return Radius;
-            }
+
+            get => x;
         }
 
-        public Round(double x, double y, int radius)
+        internal protected double Y
         {
-            X = x;
-            Y = y;
-            Radius = radius;
+            private set
+            {
+                y = value;
+
+                /*if (!double.TryParse(value.ToString(), out value))
+                    throw new ArgumentException("Координаты должны быть целым или вещественным числом");
+
+                y = value;*/
+            }
+
+            get => y;
         }
 
-        internal double GetSquareOfCircle { get => Math.PI * Radius * Radius; }
+        internal protected double Radius
+        {
+            private set
+            {
 
-        internal double GetLengthOfCircumCircle { get => 2 * Math.PI * Radius; }
+                radius = value;
+
+                /*if (value < 0)
+                    throw new ArgumentException("Радиус не может быть меньше нуля");
+
+                radius = value;*/
+            }
+            get => radius;
+        }
+
+        internal protected void SetValueX(string x)
+        {
+            if (!double.TryParse(x, out this.x))
+                throw new ArgumentException("Вы ввели некорректное значение");
+
+            X = double.Parse(x);
+        }
+
+        internal protected void SetValueY(string y)
+        {
+            if (!double.TryParse(y, out this.y))
+                throw new ArgumentException("Вы ввели некорректное значение");
+
+            Y = double.Parse(y);
+        }
+
+        internal protected void SetValueRadius(string radius)
+        {
+            if (!double.TryParse(radius, out this.radius))
+                throw new ArgumentException("Вы ввели некорректное значение");
+
+            Radius = double.Parse(radius);
+        }
+
+        /*internal protected void SetValues(string radius, string x, string y)
+        {
+
+            try
+            {
+                Y = double.Parse(y);
+                X = double.Parse(x);
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Координаты должны быть целым или вещественным числом");
+            }
+
+            try
+            {
+                Radius = double.Parse(radius);
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Радиус не может быть меньше нуля");
+            }
+        }*/
+
+        internal protected double GetSquareOfCircle { get => Math.PI * Radius * Radius; }
+
+        internal protected double GetLengthOfCircumCircle { get => 2 * Math.PI * Radius; }
 
     }       
 }
