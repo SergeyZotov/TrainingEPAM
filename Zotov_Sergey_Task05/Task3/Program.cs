@@ -7,18 +7,15 @@ namespace Task3
         static void Main(string[] args)
         {
             Console.WriteLine("Введите стороны треугольника.");
-            uint sideA = uint.Parse(Console.ReadLine());
-            uint sideB = uint.Parse(Console.ReadLine());
-            uint sideC = uint.Parse(Console.ReadLine());
-            Triangle triangle = new Triangle(sideA, sideB, sideC);
+            Triangle triangle = new Triangle(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
             Print(triangle);
             Console.ReadKey();
         }
 
         static void Print(Triangle triangle)
         {
-            Console.WriteLine($"Периметр треугольника со сторонами {triangle.sideA}, " +
-                $"{triangle.sideB}, {triangle.sideC} равен {triangle.GetPerimeter()}.\n" +
+            Console.WriteLine($"Периметр треугольника со сторонами {triangle.SideA}, " +
+                $"{triangle.SideB}, {triangle.SideC} равен {triangle.GetPerimeter()}.\n" +
                 $"Площадь этого треугольника равна {triangle.GetSquare()}");
         }
     }

@@ -4,22 +4,37 @@ namespace Task3
 {
     public class Triangle
     {
-        internal readonly uint sideA;
-        internal readonly uint sideB;
-        internal readonly uint sideC;
-        private readonly double halfPerimeter;
+        private double halfPerimeter;
 
-        public Triangle(uint sideA, uint sideB, uint sideC)
+        public Triangle(string sideA, string sideB, string sideC)
         {
-            this.sideA = sideA;
-            this.sideB = sideB;
-            this.sideC = sideC;
-            halfPerimeter = (sideA + sideB + sideC) / 2;
+            try
+            {
+                SideA = int.Parse(sideA);
+                SideB = int.Parse(sideB);
+                SideC = int.Parse(sideC);
+
+                if (SideA <= 0 || SideB <= 0 || SideC <= 0)
+                    throw new FormatException();
+
+                if (((SideA + SideB) <= SideC) || ((SideB + SideC) <= SideA) || ((SideA + SideC) <= SideB))
+                    throw new ArgumentException("Неправильное соотношение сторон, такого треугольника не существует");
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Сторона не может являться не целым числом или быть меньше или равна 0");
+            }
+
+            halfPerimeter = (SideA + SideB + SideC) / 2.0;
         }
 
-        public uint GetPerimeter() => sideA + sideB + sideC;
+        internal int SideA { get; private set; }
+        internal int SideB { get; private set; }
+        internal int SideC { get; private set; }
+
+        public int GetPerimeter() => SideA + SideB + SideC;
 
         public double GetSquare() => 
-            Math.Sqrt(halfPerimeter * (halfPerimeter - sideA) * (halfPerimeter - sideB) * (halfPerimeter - sideC));
+            Math.Sqrt(halfPerimeter * (halfPerimeter - SideA) * (halfPerimeter - SideB) * (halfPerimeter - SideC));
     }
 }
