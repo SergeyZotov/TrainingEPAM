@@ -8,20 +8,55 @@ namespace Task2
 {
     public class Round
     {
-        internal readonly int x;
-        internal readonly int y;
-        internal uint radius;
-
-        public Round(int x, int y, uint radius)
+        internal double X
         {
-            this.x = x;
-            this.y = y;
-            this.radius = radius;
+            set
+            {
+                X = value;
+            }
+            get
+            {
+                return X;
+            }
+        }
+        
+        internal double Y
+        {
+            set
+            {
+                Y = value;
+            }
+            get
+            {
+                return Y;
+            }
+        }
+        
+        internal int Radius
+        {
+            set
+            {
+                if (Radius < 0)
+                    throw new ArgumentException("Радиус не может быть меньше 0");
+
+                Radius = value;
+            }
+            get
+            {
+                return Radius;
+            }
         }
 
-        internal double GetSquareOfCircle { get => Math.PI * radius * radius; }
+        public Round(double x, double y, int radius)
+        {
+            X = x;
+            Y = y;
+            Radius = radius;
+        }
 
-        internal double GetLengthOfCircumCircle { get => 2 * Math.PI * radius; }
+        internal double GetSquareOfCircle { get => Math.PI * Radius * Radius; }
+
+        internal double GetLengthOfCircumCircle { get => 2 * Math.PI * Radius; }
 
     }       
 }

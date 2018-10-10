@@ -1,18 +1,57 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Task1
 {
     public class User
     {
-        public string firstName;
-        public string lastName;
-        public string middleName;
-        public string dateOfBirthday;
-        public double age;
+        private string FirstName
+        {
+            set
+            {
+                if (FirstName == "")
+                    throw new ArgumentException("Имя не может быть пустым!");                         
+            }
+            get
+            {
+                return FirstName;
+            }
+        }
+        private string LastName
+        {
+            set
+            {
+                if (LastName == "")
+                    throw new ArgumentException("Имя не может быть пустым!");
+                LastName = value;
+            }
+            get
+            {
+                return LastName;
+            }
+        }
+        private string MiddleName
+        {
+            set
+            {
+                MiddleName = value;
+            }
+            get
+            {
+                return MiddleName;
+            }
+        }
+        private string DateOfBirthday
+        {
+            set
+            {
+                //if (DateOfBirthday != DateTime.Now.ToString())
+            }
+            get
+            {
+                return DateOfBirthday;
+            }
+        }
 
         public User()
         {
@@ -21,11 +60,10 @@ namespace Task1
 
         public User (string firstName, string lastName, string middleName, string dateOfBirthday, double age)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.middleName = middleName;
-            this.dateOfBirthday = dateOfBirthday;
-            this.age = age;
+            FirstName = firstName;
+            LastName = lastName;
+            MiddleName = middleName;
+            DateOfBirthday = dateOfBirthday;
         }
     }
 }

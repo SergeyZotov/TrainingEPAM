@@ -11,10 +11,10 @@ namespace Task2
         static void Main(string[] args)
         {
             Console.WriteLine("Введите координаты окружности, x и y соответственно");
-            int x = int.Parse(Console.ReadLine());
-            int y = int.Parse(Console.ReadLine());
+            double x = double.Parse(Console.ReadLine());
+            double y = double.Parse(Console.ReadLine());
             Console.WriteLine("Введите радиус окружности");
-            uint radius = uint.Parse(Console.ReadLine());
+            int radius = int.Parse(Console.ReadLine());
             Round round = new Round(x, y, radius);          
             Print(round);
             Console.ReadKey();
@@ -23,8 +23,8 @@ namespace Task2
         static void Print(Round round)
         {
             Console.WriteLine($"Координаты центра круга:\n" +
-                $"x = {round.x}, y = {round.y}\n" +
-                $"Радиус окружности равен {round.radius}\n" +
+                $"x = {round.X}, y = {round.Y}\n" +
+                $"Радиус окружности равен {round.Radius}\n" +
                 $"Площадь круга равна {Math.Round(round.GetSquareOfCircle, 3)}\n" +
                 $"Длина описанной окружности равна {Math.Round(round.GetLengthOfCircumCircle, 3)}");
         }
