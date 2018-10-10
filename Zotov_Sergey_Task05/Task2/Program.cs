@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2
 {
@@ -23,7 +18,7 @@ namespace Task2
                 $"x = {round.X}, y = {round.Y}\n" +
                 $"Радиус окружности равен {round.Radius}\n" +
                 $"Площадь круга равна {Math.Round(round.GetSquareOfCircle, 3)}\n" +
-                $"Длина описанной окружности равна {Math.Round(round.GetLengthOfCircumCircle, 3)}");
+                $"Длина описанной окружности равна {Math.Round(round.GetLengthOfCircumcircle, 3)}");
         }
     }
 }

@@ -9,8 +9,6 @@ namespace Task2
     public class Round
     {
         private double radius;
-        private double x;
-        private double y;
 
         public Round(string x, string y, string radius)
         {
@@ -18,68 +16,31 @@ namespace Task2
             {
                 Y = double.Parse(y);
                 X = double.Parse(x);
-            }
-            catch (FormatException)
-            {
-                throw new FormatException("Координаты должны быть целым или вещественным числом");
-            }
-
-            try
-            {
                 Radius = double.Parse(radius);
             }
             catch (FormatException)
             {
-                throw new FormatException("Радиус не может быть меньше нуля");
+                throw new FormatException("Координаты и радиус должны быть целым или вещественным числом");
             }
-
-        }
-        
-        internal protected double X
-        {
-            private set
-            {
-                x = value;
-                /* if (!double.TryParse(value.ToString(), out value))
-                     throw new ArgumentException("Координаты должны быть целым или вещественным числом");
-
-                 x = value;*/
-            }
-
-            get => x;
         }
 
-        internal protected double Y
-        {
-            private set
-            {
-                y = value;
+        internal protected double X { private set; get; }
 
-                /*if (!double.TryParse(value.ToString(), out value))
-                    throw new ArgumentException("Координаты должны быть целым или вещественным числом");
-
-                y = value;*/
-            }
-
-            get => y;
-        }
+        internal protected double Y { private set; get; }
 
         internal protected double Radius
         {
             private set
             {
-
-                radius = value;
-
-                /*if (value < 0)
+                if (value < 0)
                     throw new ArgumentException("Радиус не может быть меньше нуля");
 
-                radius = value;*/
+                radius = value;
             }
             get => radius;
         }
 
-        internal protected void SetValueX(string x)
+        /*internal protected void SetValueX(string x)
         {
             if (!double.TryParse(x, out this.x))
                 throw new ArgumentException("Вы ввели некорректное значение");
@@ -103,7 +64,7 @@ namespace Task2
             Radius = double.Parse(radius);
         }
 
-        /*internal protected void SetValues(string radius, string x, string y)
+        internal protected void SetValues(string radius, string x, string y)
         {
 
             try
@@ -128,7 +89,7 @@ namespace Task2
 
         internal protected double GetSquareOfCircle { get => Math.PI * Radius * Radius; }
 
-        internal protected double GetLengthOfCircumCircle { get => 2 * Math.PI * Radius; }
+        internal protected double GetLengthOfCircumcircle { get => 2 * Math.PI * Radius; }
 
     }       
 }
