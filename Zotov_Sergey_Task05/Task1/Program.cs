@@ -6,33 +6,22 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            /*User iAm = new User();
-            Initializing(iAm);
-            Print(iAm);*/
+            Console.WriteLine("Enter your first name, second name, middle name (if you have), date of birthday:");
+            User iAm = new User(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
+            Print(iAm);
             Console.ReadKey();
-        }
-        /*
-        static void Initializing(User user)
-        {
-                Console.WriteLine("Ввведите ваше имя.");
-                user.firstName = Console.ReadLine();
-                Console.WriteLine("Ввведите вашу фамилию.");
-                user.LastName\\ = Console.ReadLine();
-                Console.WriteLine("Ввведите ваше отчество.");
-                user.MiddleName = Console.ReadLine();
-                Console.WriteLine("Ввведите вашу дату рождения.");
-                user.DateOfBirthday = Console.ReadLine();
-                Console.WriteLine("Ввведите ваш возраст.");
-                user.age = double.Parse(Console.ReadLine());
-        }
+        }       
 
         static void Print(User user)
         {
-                Console.WriteLine($"Ваше имя:\t\t{user.firstName}\n" +
-                    $"Ваша фамилия:\t\t{user.LastName\\}\n" +
-                    $"Ваше отчество:\t\t{user.MiddleName}\n" +
-                    $"Ваша дата рождения:\t{user.DateOfBirthday}\n" +
-                    $"Ваш возраст:\t\t{user.age} years");
-        }*/
+            string middleName = user.MiddleName;
+            if (middleName == "")
+                middleName = "Middle name is missing";
+                Console.WriteLine($"Your first name:\t{user.FirstName}\n" +
+                    $"Your second name:\t{user.LastName}\n" +
+                    $"Your middle name:\t{middleName}\n" +
+                    $"Your birthday:\t\t{user.DateOfBirthday}\n" +
+                    $"Your age:\t\t{DateTime.Now.Year - DateTime.Parse(user.DateOfBirthday).Year} years");
+        }
     }
 }
