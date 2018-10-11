@@ -3,14 +3,14 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Task1
-{
+{//[a-zA-Z]
     public class User
     {
-        private static string pattern = @"(\s+[\W*])|(\s+\w*[a-zA-Z])|([0-9])";
-        private string firstName = "";
-        private string lastName = "";
-        private string middleName = "";
-        private string dateOfBirthday = "";
+        private protected string pattern = @"(\s+[\W*])|(\s+\w*)|([0-9]+)";
+        private protected string firstName = "";
+        private protected string lastName = "";
+        private protected string middleName = "";
+        private protected string dateOfBirthday = "";
 
         public User(string firstName, string lastName, string middleName, string dateOfBirthday)
         {
@@ -20,7 +20,7 @@ namespace Task1
             DateOfBirthday = dateOfBirthday;
         }
 
-        internal string FirstName
+        internal protected string FirstName
         {
             private set
             {
@@ -35,7 +35,7 @@ namespace Task1
             }
         }
 
-        internal string LastName
+        internal protected string LastName
         {
             private set
             {
@@ -50,7 +50,7 @@ namespace Task1
             }
         }
 
-        internal string MiddleName
+        internal protected string MiddleName
         {
             private set
             {
@@ -62,7 +62,7 @@ namespace Task1
             }
         }
 
-        internal string DateOfBirthday
+        internal protected string DateOfBirthday
         {
             private set
             {

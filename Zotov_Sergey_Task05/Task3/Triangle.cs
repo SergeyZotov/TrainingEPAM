@@ -4,7 +4,7 @@ namespace Task3
 {
     public class Triangle
     {
-        private double halfPerimeter;
+        private protected double halfPerimeter;
 
         public Triangle(string sideA, string sideB, string sideC)
         {
@@ -28,9 +28,9 @@ namespace Task3
             halfPerimeter = (SideA + SideB + SideC) / 2.0;
         }
 
-        internal int SideA { get; private set; }
-        internal int SideB { get; private set; }
-        internal int SideC { get; private set; }
+        internal protected int SideA { get; private set; }
+        internal protected int SideB { get; private set; }
+        internal protected int SideC { get; private set; }
 
         public int GetPerimeter() => SideA + SideB + SideC;
 

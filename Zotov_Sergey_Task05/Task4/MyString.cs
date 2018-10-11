@@ -34,62 +34,9 @@ namespace Task4
             return new MyString(resultString.ToString());
         }
 
-        public static MyString operator -(MyString mainString, MyString subString)
-        {
-            /*MyString myString = new MyString("");
-
-            for (int i = 0; i < mainString.Length - subString.Length; ++i)
-            {
-                myString = GetString(mainString, subString, myString, ref i);
-            }*/
-
-            return new MyString(mainString.ToString().Replace(subString.ToString(), ""));
-            //return myString;
-        }
-        
-        private static MyString GetString(MyString mainString, MyString subString, MyString myString, ref int index)
-        {
-            MyString temp = new MyString("");
-
-            int index1 = 0;
-
-
-            if (index + subString.Length > mainString.Length)
-            {
-                int helper = myString.Length;
-
-                for (int i = index; i < mainString.Length; ++i, ++helper)
-                {
-                    myString[helper] = mainString[i];
-                }
-
-                index = mainString.Length;
-            }
-
-            for (int i = index; i < index + subString.Length; ++i, ++index1)
-            {
-                temp[index1] = mainString[i];
-            }
-
-            if (temp == subString)
-            {
-                index += subString.Length;
-                return mainString;
-            }
-            else
-            {
-                int helper = myString.Length;
-
-                for (int i = 0; i < subString.Length; ++i, ++helper)
-                {
-                    myString[helper] = temp[i];
-                    index++;
-                }
-
-                return myString;
-            }
-        }
-
+        public static MyString operator -(MyString mainString, MyString subString) =>
+            new MyString(mainString.ToString().Replace(subString.ToString(), ""));
+                   
         public static bool operator ==(MyString string1, MyString string2)
         {
             if (string1.Length == string2.Length)

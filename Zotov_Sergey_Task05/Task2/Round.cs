@@ -4,7 +4,7 @@ namespace Task2
 {
     public class Round
     {
-        private double radius;
+        private protected double radius;
 
         public Round(string x, string y, string radius)
         {

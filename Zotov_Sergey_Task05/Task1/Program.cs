@@ -15,13 +15,15 @@ namespace Task1
         static void Print(User user)
         {
             string middleName = user.MiddleName;
+
             if (middleName == "")
                 middleName = "Middle name is missing";
-                Console.WriteLine($"Your first name:\t{user.FirstName}\n" +
-                    $"Your second name:\t{user.LastName}\n" +
-                    $"Your middle name:\t{middleName}\n" +
-                    $"Your birthday:\t\t{user.DateOfBirthday}\n" +
-                    $"Your age:\t\t{DateTime.Now.Year - DateTime.Parse(user.DateOfBirthday).Year} years");
+
+            Console.WriteLine($"Your first name:\t{user.FirstName}\n" +
+                $"Your second name:\t{user.LastName}\n" +
+                $"Your middle name:\t{middleName}\n" +
+                $"Your birthday:\t\t{user.DateOfBirthday}\n" +
+                $"Your age:\t\t{DateTime.Now.Year - DateTime.Parse(user.DateOfBirthday).Year} years");
         }
     }
 }
