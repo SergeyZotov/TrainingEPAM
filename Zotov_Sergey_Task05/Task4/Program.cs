@@ -10,10 +10,11 @@ namespace Task4
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Введите вашу строку");
-            MyString ms1 = new MyString(" hello");
-            MyString ms2 = new MyString("hello");
-            Console.WriteLine(ms2 + ms1);
+            Console.WriteLine("Введите первую строку");
+            MyString ms1 = new MyString(" ");
+            //Console.WriteLine("Введите вторую строку");
+            MyString ms2 = new MyString("");
+            Console.WriteLine(ms1 == ms2);
 
             /*for (int i = 0; i < ms2.Length; ++i)
             {

@@ -24,43 +24,49 @@ namespace Task4
 
         public static MyString operator +(MyString string1, MyString string2)
         {
-            int firstStringLength = string1.Length;
-
-            string resultString = string1.ToString();
+            StringBuilder sb = new StringBuilder(string1.ToString());
 
             for (int i = 0; i < string2.Length; ++i)
             {
-                resultString += string2[i];
-            }
-
-            return new MyString(resultString);
-        }
-
-        public static MyString operator -(MyString srcString, MyString substring)
-        {
-            int index = 0;
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < srcString.Length; ++i)
-            {
-
+                sb.Append(string2[i]);
             }
 
             return new MyString(sb.ToString());
         }
 
+        public static MyString operator -(MyString mainString, MyString subString)
+        {
+            string mainStr;
+
+            if (mainString.Length < subString.Length || subString == null)
+                return mainString;
+
+
+            return new MyString(mainString.ToString());
+        }
+
         public static bool operator ==(MyString string1, MyString string2)
         {
-            if (string1.ToString() == string2.ToString())
+            if (string1.Length == string2.Length)
+            {
+                for (int i = 0; i < string1.Length; ++i)
+                {
+                    if (string1[i] != string2[i])
+                    {
+                        return false;
+                    }
+                }
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public static bool operator !=(MyString string1, MyString string2)
         {
-            if (string1.ToString() == string2.ToString())
+            if (string1 == string2)
                 return false;
             else
                 return true;
@@ -85,13 +91,13 @@ namespace Task4
             {
                 if (index >-1 && index < newCharArr.Length)
                     return newCharArr[index];
-                else throw new ArgumentOutOfRangeException();
+                else throw new ArgumentOutOfRangeException("Вы вышли за пределы строки");
             }
 
             set
             {
                 if (index > newCharArr.Length)
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Размер строки меньше, чем номер индекса");
 
                 newCharArr[index] = value;
             }
