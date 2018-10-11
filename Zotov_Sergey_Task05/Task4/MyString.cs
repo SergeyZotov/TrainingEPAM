@@ -8,86 +8,87 @@ namespace Task4
 {
     internal class MyString
     {
-        private char[] newCharArr;
+        private char[] myString;
 
         public MyString(string str)
         {
             int index = 0;
-            newCharArr = new char[str.Length];
+            myString = new char[str.Length];
 
             while(index < str.Length)
             {
-                newCharArr[index] = str[index];
+                myString[index] = str[index];
                 index++;
             }
         }
 
         public static MyString operator +(MyString string1, MyString string2)
         {
-            StringBuilder sb = new StringBuilder(string1.ToString());       
+            StringBuilder resultString = new StringBuilder(string1.ToString());       
 
             for (int i = 0; i < string2.Length; ++i)
             {
-                sb.Append(string2[i]);
-            }
-
-            return new MyString(sb.ToString());
-        }
-
-        /*public static MyString operator -(MyString mainString, MyString subString)
-        {
-            int offset = subString.Length;
-
-            if (mainString.Length < offset)
-                throw new ArgumentOutOfRangeException("", "Подстрока длиннее основной строки!");
-
-            StringBuilder resultString = new StringBuilder();
-
-            for (int i = 0; i < mainString.Length; ++i)
-            {
-                if ((SearchSubString(mainString, subString, i) != -1) && (SearchSubString(mainString, subString, i) != 1))
-                {
-                    resultString.Append(mainString[i]);
-                }
-                else if (SearchSubString(mainString, subString, i) == 1)
-                {
-                    break;
-                }
-            }
-
-            for (int i = mainString.Length - offset - 1; i < mainString.Length; ++i)
-            {
-                resultString.Append(mainString[i]);
+                resultString.Append(string2[i]);
             }
 
             return new MyString(resultString.ToString());
-
-            //return new MyString(resultString.ToString());         
         }
 
-        private static int SearchSubString(MyString mainString, MyString subString, int startIndex)
+        public static MyString operator -(MyString mainString, MyString subString)
         {
-            if (startIndex + subString.Length < mainString.Length)
+            /*MyString myString = new MyString("");
+
+            for (int i = 0; i < mainString.Length - subString.Length; ++i)
             {
-                return 1;                   
+                myString = GetString(mainString, subString, myString, ref i);
+            }*/
+
+            return new MyString(mainString.ToString().Replace(subString.ToString(), ""));
+            //return myString;
+        }
+        
+        private static MyString GetString(MyString mainString, MyString subString, MyString myString, ref int index)
+        {
+            MyString temp = new MyString("");
+
+            int index1 = 0;
+
+
+            if (index + subString.Length > mainString.Length)
+            {
+                int helper = myString.Length;
+
+                for (int i = index; i < mainString.Length; ++i, ++helper)
+                {
+                    myString[helper] = mainString[i];
+                }
+
+                index = mainString.Length;
             }
 
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = startIndex; i < mainString.Length - subString.Length + startIndex; ++i)
+            for (int i = index; i < index + subString.Length; ++i, ++index1)
             {
-                sb.Append(mainString[i]);
+                temp[index1] = mainString[i];
             }
 
-            if (sb.ToString() == subString.ToString())
+            if (temp == subString)
             {
-                return -1;
+                index += subString.Length;
+                return mainString;
             }
             else
             {
-                return 0;
+                int helper = myString.Length;
+
+                for (int i = 0; i < subString.Length; ++i, ++helper)
+                {
+                    myString[helper] = temp[i];
+                    index++;
+                }
+
+                return myString;
             }
-        }*/
+        }
 
         public static bool operator ==(MyString string1, MyString string2)
         {
@@ -108,8 +109,6 @@ namespace Task4
             }
         }
 
-
-
         public static bool operator !=(MyString string1, MyString string2)
         {
             if (string1 == string2)
@@ -120,10 +119,9 @@ namespace Task4
 
         public override string ToString()
         {
-
             StringBuilder sb = new StringBuilder();
 
-            foreach(char value in newCharArr)
+            foreach(char value in myString)
             {
                 sb.Append(value);
             }
@@ -135,21 +133,21 @@ namespace Task4
         {
             get
             {
-                if (index >-1 && index < newCharArr.Length)
-                    return newCharArr[index];
+                if (index >-1 && index < myString.Length)
+                    return myString[index];
                 else throw new ArgumentOutOfRangeException("Вы вышли за пределы строки");
             }
 
             set
             {
-                if (index > newCharArr.Length)
-                    throw new ArgumentOutOfRangeException("Размер строки меньше, чем номер индекса");
+                if (index > myString.Length || index < 0)
+                    throw new IndexOutOfRangeException("Размер строки меньше, чем номер индекса");
 
-                newCharArr[index] = value;
+                myString[index] = value;
             }
             
         }
 
-        internal int Length { get => newCharArr.Length; }
+        internal int Length { get => myString.Length; }
     }    
 }

@@ -17,6 +17,7 @@ namespace Task4
             Console.WriteLine($"My strings are equal : {ms1 == ms2}");
             Console.WriteLine($"My strings are not equal : {ms1 != ms2}");
             Console.WriteLine($"My first string plus my second string equals to \"{ms1 + ms2}\"");
+            Console.WriteLine($"My first string minus my second string equals to \"{ms1 - ms2}\"");
             Console.ReadKey();
         }
     }
