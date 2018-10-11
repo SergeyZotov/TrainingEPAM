@@ -22,7 +22,7 @@ namespace Task1
 
         internal protected string FirstName
         {
-            private set
+            private protected set
             {
                 if (value == "")
                     throw new ArgumentException("First name cannot be empty!");
@@ -37,7 +37,7 @@ namespace Task1
 
         internal protected string LastName
         {
-            private set
+            private protected set
             {
                 if (value == "")
                     throw new ArgumentException("Last name cannot be empty!");
@@ -52,7 +52,7 @@ namespace Task1
 
         internal protected string MiddleName
         {
-            private set
+            private protected set
             {
                     middleName = value;
             }
@@ -64,7 +64,7 @@ namespace Task1
 
         internal protected string DateOfBirthday
         {
-            private set
+            private protected set
             {
                 if (DateTime.Parse(value) > DateTime.Now || DateTime.Parse(value) < DateTime.Parse("01.01.1900"))
                     throw new ArgumentException("Your date is more than current date");

@@ -15,7 +15,7 @@ namespace Task3
                 SideC = int.Parse(sideC);
 
                 if (SideA <= 0 || SideB <= 0 || SideC <= 0)
-                    throw new FormatException();
+                    throw new Exception("У треугольника не может быть длина сторон меньше 0");
 
                 if (((SideA + SideB) <= SideC) || ((SideB + SideC) <= SideA) || ((SideA + SideC) <= SideB))
                     throw new ArgumentException("Неправильное соотношение сторон, такого треугольника не существует");

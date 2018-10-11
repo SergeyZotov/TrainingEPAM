@@ -95,6 +95,6 @@ namespace Task4
             
         }
 
-        internal int Length { get => myString.Length; }
+        internal protected int Length { get => myString.Length; }
     }    
 }
