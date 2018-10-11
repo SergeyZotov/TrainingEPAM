@@ -24,7 +24,7 @@ namespace Task4
 
         public static MyString operator +(MyString string1, MyString string2)
         {
-            StringBuilder sb = new StringBuilder(string1.ToString());
+            StringBuilder sb = new StringBuilder(string1.ToString());       
 
             for (int i = 0; i < string2.Length; ++i)
             {
@@ -34,16 +34,60 @@ namespace Task4
             return new MyString(sb.ToString());
         }
 
-        public static MyString operator -(MyString mainString, MyString subString)
+        /*public static MyString operator -(MyString mainString, MyString subString)
         {
-            string mainStr;
+            int offset = subString.Length;
 
-            if (mainString.Length < subString.Length || subString == null)
-                return mainString;
+            if (mainString.Length < offset)
+                throw new ArgumentOutOfRangeException("", "Подстрока длиннее основной строки!");
 
+            StringBuilder resultString = new StringBuilder();
 
-            return new MyString(mainString.ToString());
+            for (int i = 0; i < mainString.Length; ++i)
+            {
+                if ((SearchSubString(mainString, subString, i) != -1) && (SearchSubString(mainString, subString, i) != 1))
+                {
+                    resultString.Append(mainString[i]);
+                }
+                else if (SearchSubString(mainString, subString, i) == 1)
+                {
+                    break;
+                }
+            }
+
+            for (int i = mainString.Length - offset - 1; i < mainString.Length; ++i)
+            {
+                resultString.Append(mainString[i]);
+            }
+
+            return new MyString(resultString.ToString());
+
+            //return new MyString(resultString.ToString());         
         }
+
+        private static int SearchSubString(MyString mainString, MyString subString, int startIndex)
+        {
+            if (startIndex + subString.Length < mainString.Length)
+            {
+                return 1;                   
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = startIndex; i < mainString.Length - subString.Length + startIndex; ++i)
+            {
+                sb.Append(mainString[i]);
+            }
+
+            if (sb.ToString() == subString.ToString())
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }*/
 
         public static bool operator ==(MyString string1, MyString string2)
         {
@@ -63,6 +107,8 @@ namespace Task4
                 return false;
             }
         }
+
+
 
         public static bool operator !=(MyString string1, MyString string2)
         {
