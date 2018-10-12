@@ -34,6 +34,7 @@ namespace Task4
             return new MyString(resultString.ToString());
         }
 
+        // Если subString.Length > mainString.Length то возвращает строку mainString
         public static MyString operator -(MyString mainString, MyString subString) =>
             new MyString(mainString.ToString().Replace(subString.ToString(), ""));
                    
