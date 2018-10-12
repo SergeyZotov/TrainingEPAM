@@ -7,9 +7,9 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter your first name, second name, middle name (if you have), date of birthday:");
             Console.WriteLine("Enter your birthday: year month day");
             DateTime birthday = new DateTime(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()));
+            Console.WriteLine("Enter your first name, second name, middle name (if you have):");
             User iAm = new User(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), birthday);
             Print(iAm);
             Console.ReadKey();
