@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task1
 {
@@ -70,6 +65,7 @@ namespace Task1
             {
                 throw new ArgumentException("Day must be an integer number!");
             }
+
             try
             {
                 return new DateTime(year, month, day);

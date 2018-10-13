@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2
 {
@@ -10,12 +6,15 @@ namespace Task2
     {
         private protected double innerRadius;
 
-        public Ring(string x, string y, string innerRadius, string outterRadius) : base(x, y, outterRadius)
+        public Ring(string x, string y, string innerRadius, string outterRadius) : 
+            base(x, y, outterRadius)
         {
-            X = double.Parse(x);
-            Y = double.Parse(y);
-            InnerRadius = double.Parse(innerRadius);
-            Radius = double.Parse(outterRadius);
+            if(!double.TryParse(innerRadius, out this.innerRadius))
+            {
+                throw new FormatException("Inner radius must be a real number!");
+            }
+            else
+                InnerRadius = this.innerRadius;
         }
 
         internal protected double InnerRadius
@@ -23,11 +22,18 @@ namespace Task2
             private protected set
             {
                 if (value < 0 || value >= radius)
-                    throw new ArgumentException("Радиус не может быть меньше нуля");
+                    throw new ArgumentException("Inner radius must be more than 0 and less than outter radius!");
 
                 innerRadius = value;
             }
             get => innerRadius;
         }
+        private new double GetSquareOfCircle => Math.PI* InnerRadius * InnerRadius;
+
+        private new double GetLengthOfCircumcircle => 2 * Math.PI * InnerRadius;
+
+        internal protected double RingSquare => base.GetSquareOfCircle - GetSquareOfCircle;
+
+        internal protected double SumOfCircumcircles => base.GetLengthOfCircumcircle + GetLengthOfCircumcircle;
     }
 }

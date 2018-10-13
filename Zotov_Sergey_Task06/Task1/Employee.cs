@@ -17,7 +17,7 @@ namespace Task1
 
         {
             DateOfBirthday = dateOfBirthday;
-            Position = Regex.Replace(post, base.pattern, "");
+            Position = Regex.Replace(post, pattern, "");
             MedicalBook = medicalBook.ToString();
             EmployeeID = id;
 

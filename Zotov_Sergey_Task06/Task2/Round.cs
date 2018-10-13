@@ -5,18 +5,21 @@ namespace Task2
     public class Round
     {
         private protected double radius;
+        private protected double x;
+        private protected double y;
 
         public Round(string x, string y, string radius)
         {
-            try
+            if (!double.TryParse(x, out this.x) || !double.TryParse(y, out this.y) ||
+                !double.TryParse(radius, out this.radius))
             {
-                Y = double.Parse(y);
-                X = double.Parse(x);
-                Radius = double.Parse(radius);
+                throw new FormatException("Coordinates and radius must be positive numbers");
             }
-            catch (FormatException)
+            else
             {
-                throw new FormatException("Координаты и радиус должны быть целым или вещественным числом");
+                X = this.x;
+                Y = this.y;
+                Radius = this.radius;
             }
         }
 
@@ -29,16 +32,15 @@ namespace Task2
             private protected set
             {
                 if (value < 0)
-                    throw new ArgumentException("Радиус не может быть меньше нуля");
+                    throw new ArgumentException("Radius cannot be less than 0");
 
                 radius = value;
             }
             get => radius;
         }
 
-        internal protected double GetSquareOfCircle { get => Math.PI * Radius * Radius; }
+        internal protected double GetSquareOfCircle => Math.PI * Radius * Radius; 
 
-        internal protected double GetLengthOfCircumcircle { get => 2 * Math.PI * Radius; }
-
+        internal protected double GetLengthOfCircumcircle => 2 * Math.PI * Radius; 
     }       
 }
