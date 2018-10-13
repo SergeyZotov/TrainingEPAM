@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Globalization;
-// Testing
+
 namespace Task1
 {
     class Program
