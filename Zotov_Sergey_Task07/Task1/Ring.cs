@@ -21,12 +21,6 @@ namespace Task1
             InnerRadius = this.innerRadius;
         }
 
-        public override string Draw()
-        {
-            return $"This figure is a ring. Its center is at point ({X};{Y}).\n" +
-                $"Inner radius equals to {InnerRadius} and outter radius equals to {Radius}";
-        }
-
         internal protected double InnerRadius
         {
             private protected set

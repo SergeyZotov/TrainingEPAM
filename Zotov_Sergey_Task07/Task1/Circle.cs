@@ -18,11 +18,6 @@ namespace Task1
             Radius = this.radius;          
         }
 
-        public override string Draw()
-        {
-            return $"This figure is a circle.Center of this circle is at point ({X},{Y}). Its radius equals to {Radius}.";
-        }
-
         internal protected double Radius
         {
             private protected set

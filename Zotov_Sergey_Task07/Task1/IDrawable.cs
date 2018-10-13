@@ -2,6 +2,6 @@
 {
     interface IDrawable
     {
-        string Draw();
+        string Draw(Figure figure);
     }
 }
