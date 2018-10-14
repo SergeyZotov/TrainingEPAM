@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Figure //: IDrawable
+    class Figure : IDrawable
     {
         private protected double x;
         private protected double y;
@@ -25,17 +25,17 @@ namespace Task1
             return "This is a figure";
         }
 
-       /* public virtual string Draw(Line line)
+        /*public string Draw(Line line)
         {
             return $"This figure is a line. This line begins at point {X} and ends at point {Y}";
         }
-
-        public virtual string Draw(Circle circle)
+        
+        public string Draw(Circle circle)
         {
             return $"This figure is a circle.Center of this circle is at point ({X},{Y}). Its radius equals to {circle.Radius}.";
         }
 
-        public virtual string Draw(Rectangle rectangle)
+        public string Draw(Rectangle rectangle)
         {
             if (X == Y)
                 return $"This figure is a square with sides equal to {X}";
@@ -43,13 +43,13 @@ namespace Task1
                 return $"This figure is a rectangle with length equals to {X} and width equals to {Y}";
         }
 
-        public virtual string Draw(Ring ring)
+        public string Draw(Ring ring)
         {
             return $"This figure is a ring. Its center is at point ({X};{Y}).\n" +
                 $"Inner radius equals to {ring.InnerRadius} and outter radius equals to {ring.Radius}";
         }
 
-        public virtual string Draw(Round round)
+        public string Draw(Round round)
         {
             return $"This figure is a round. Its area is located inside the circle with center at ({X};{Y}).\n" +
                 $"Its radius equals to {round.Radius}";

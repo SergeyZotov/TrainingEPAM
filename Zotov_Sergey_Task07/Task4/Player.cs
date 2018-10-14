@@ -5,12 +5,12 @@
         private int damage;
         private int lives;
 
-        public Player player = new Player();
+        public Player player; 
 
         public Player(string startPositionX = "0", string startPositionY = "0") : 
             base(startPositionX, startPositionY)
         {
-
+            player = new Player();
         }
 
         public bool GetMove(int coordinateX, int coordinateY)
