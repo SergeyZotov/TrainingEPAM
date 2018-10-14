@@ -2,6 +2,10 @@
 {
     interface IDrawable
     {
-        string Draw(Figure figure);
+        string Draw(IDrawable id);
+        /*string Draw(Circle figure);
+        string Draw(Rectangle figure);
+        string Draw(Ring figure);
+        string Draw(Round figure);*/
     }
 }

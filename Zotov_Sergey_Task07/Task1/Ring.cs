@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task1
 {
@@ -26,12 +22,18 @@ namespace Task1
             private protected set
             {
                 if (value >= Radius)
-                    throw new ArgumentException("");
+                    throw new ArgumentException("Inner radius must be less than outter radius");
 
                 innerRadius = value;
             }
 
             get => innerRadius;
+        }
+
+        public override string Draw()
+        {
+            return $"This figure is a ring. Its center is at point ({X};{Y}).\n" +
+                $"Inner radius equals to {InnerRadius} and outter radius equals to {Radius}";
         }
     }
 }
