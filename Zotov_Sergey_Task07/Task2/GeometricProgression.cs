@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2
 {
@@ -11,9 +7,8 @@ namespace Task2
         private double denominatorOfProgression;
         private int currentIndex;
         private double start;
-        private int count;
 
-        public GeometricProgression(string start, string denominatorOfProgression, string count)
+        public GeometricProgression(string start, string denominatorOfProgression)
         {
             if (!double.TryParse(start, out this.start) || 
                 !double.TryParse(denominatorOfProgression, out this.denominatorOfProgression))
@@ -22,27 +17,8 @@ namespace Task2
                     "cannot be equal to 0");
             }
 
-            if (!int.TryParse(count, out this.count) || this.count < 1)
-            {
-                throw new ArgumentException("The count of your sequence cannot be less than 1 and must be integer!");
-            }
-
             Start = this.start;
             DenominatorOfProgression = this.denominatorOfProgression;
-            Count = this.count;
-        }
-
-        internal protected int Count
-        {
-            private set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Count of your sequence cannot be less than 1 ");
-
-                count = value;
-            }
-
-            get => count;
         }
 
         internal protected double Start
@@ -64,6 +40,7 @@ namespace Task2
             {
                 if (value == 0)
                     throw new ArgumentException("The denominator of progression of sequence cannot be equals to 0!");
+
                 denominatorOfProgression = value;
             }
 
@@ -83,7 +60,7 @@ namespace Task2
 
         public void Reset()
         {
-            currentIndex = 2;
+            currentIndex = 1;
         }
 
 

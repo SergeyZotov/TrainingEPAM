@@ -30,10 +30,10 @@ namespace Task1
             get => innerRadius;
         }
 
-        /*public override string Draw()
+        public override string Draw(IDrawable ring)
         {
             return $"This figure is a ring. Its center is at point ({X};{Y}).\n" +
                 $"Inner radius equals to {InnerRadius} and outter radius equals to {Radius}";
-        }*/
+        }
     }
 }

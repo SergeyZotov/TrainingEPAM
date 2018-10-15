@@ -6,19 +6,20 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter first member, denominator " +
-                "and number of your progression:");
-            GeometricProgression geometricProgression = new GeometricProgression(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
-            PrintSeries(geometricProgression, geometricProgression.Count);
+            Console.WriteLine("Enter first member, denominator ");
+            GeometricProgression geometricProgression = new GeometricProgression(Console.ReadLine(), Console.ReadLine());
+            PrintSeries(geometricProgression);
             Console.ReadKey();
         }
 
-        static void PrintSeries(ISeries mySeries, int count)
+        static void PrintSeries(ISeries mySeries)
         {
-            while (mySeries.MoveNext() && count != 0)
+            mySeries.Reset();
+
+            for (int i = 0; i < 10; ++i)
             {
-                Console.Write($"{mySeries.GetCurrent()}  ");
-                count--;
+                Console.Write(mySeries.GetCurrent() + " ");
+                mySeries.MoveNext();
             }
         }
     }

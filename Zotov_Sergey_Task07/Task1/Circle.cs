@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Circle : Figure
+    class Circle : Figure, IDrawable
     {
         private protected double radius;
 
@@ -28,11 +24,9 @@ namespace Task1
             get => radius;
         }
 
-
-
-        /*public override string Draw()
+        public virtual string Draw(IDrawable circle)
         {
-            return $"This figure is a circle.Center of this circle is at point ({X},{Y}). Its radius equals to {Radius}.";
-        }*/
+            return $"This figure is a circle. Center of this circle is at point ({X};{Y}). Its radius equals to {Radius}.";
+        }
     }
 }

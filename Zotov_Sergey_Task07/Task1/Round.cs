@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Task1
+﻿namespace Task1
 {
     class Round : Circle
     {
@@ -15,10 +9,10 @@ namespace Task1
 
         }
 
-        /*public override string Draw()
+        public override string Draw(IDrawable round)
         {
             return $"This figure is a round. Its area is located inside the circle with center at ({X};{Y}).\n" +
                 $"Its radius equals to {Radius}";
-        }*/
+        }
     }
 }
