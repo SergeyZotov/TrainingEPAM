@@ -12,24 +12,26 @@ namespace Task1
         private protected int id;
 
         public Employee(string firstName, string lastName, string middleName, 
-            DateTime dateOfBirthday, string post, string workExperience, string medicalBook, string id) : 
+            string[] dateOfBirthday, string post, string workExperience, string medicalBook, string id) : 
             base(firstName, lastName, middleName, dateOfBirthday)
 
         {
-            DateOfBirthday = dateOfBirthday;
+            if (!int.TryParse(dateOfBirthday[0], out int year) || !int.TryParse(dateOfBirthday[1], out int month) ||
+                !int.TryParse(dateOfBirthday[2], out int day))
+            {
+                throw new ArgumentException("You can write only integer numbers!");
+            }
+
+            DateOfBirthday = new DateTime(year, month, day);
             Position = Regex.Replace(post, pattern, "");
             MedicalBook = medicalBook.ToString();
             EmployeeID = id;
 
-            try
-            {
-                WorkExperience = double.Parse(workExperience, NumberStyles.AllowDecimalPoint);
-
-            }
-            catch (FormatException)
-            {
+            if (!double.TryParse(workExperience, NumberStyles.AllowDecimalPoint, CultureInfo.CurrentCulture, out this.workExperience))
                 throw new FormatException("Work expirience must be numeric");
-            }
+
+            WorkExperience = this.workExperience;
+
         }
 
         internal protected double WorkExperience
@@ -49,7 +51,7 @@ namespace Task1
             private set
             {
                 if (value == "")
-                    throw new Exception();
+                    throw new Exception("You have to write your position");
 
                 post = value;
             }
@@ -78,7 +80,7 @@ namespace Task1
                 else if (value.ToString().Equals("no"))
                     medicalBook = false;
                 else
-                    throw new ArgumentException("ti pidor");
+                    throw new ArgumentException("You can write only \"yes/no\" ");
             }
 
             get => medicalBook.ToString();
@@ -93,6 +95,11 @@ namespace Task1
                 if (!int.TryParse(value, out id))
                 {
                     throw new ArgumentException("ID must be an integer number");
+                }
+
+                if (id < 0)
+                {
+                    throw new ArgumentException("ID cannot be less than 0");
                 }
             }
             get => id.ToString();

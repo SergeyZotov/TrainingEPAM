@@ -12,12 +12,31 @@ namespace Task1
         private protected DateTime dateOfBirthday;
         private protected int age;                
 
-        public User(string firstName, string lastName, string middleName, DateTime dateOfBirthday)
+        public User(string firstName, string lastName, string middleName, string[] dateOfBirthday)
         {
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;
-            DateOfBirthday = dateOfBirthday;
+            int year;
+            int month;
+            int day;
+
+            try
+            {
+                year = int.Parse(dateOfBirthday[0]);
+                month = int.Parse(dateOfBirthday[1]);
+                day = int.Parse(dateOfBirthday[2]);
+            }
+            catch(FormatException)
+            {
+                throw new ArgumentException("You can write only integer numbers!");
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("You did not write all data!");
+            }
+
+            DateOfBirthday = new DateTime(year, month, day);
         }
 
         internal protected string FirstName
@@ -63,6 +82,15 @@ namespace Task1
                 if (DateTime.Parse(value.ToString()) > DateTime.Now || DateTime.Parse(value.ToString()) < DateTime.Parse("01.01.1900"))
                     throw new ArgumentException("Your date is more than current date");
 
+                try
+                {
+                    value =  new DateTime(value.Year, value.Month, value.Day);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    throw new ArgumentOutOfRangeException("Date must be correct!", e);
+                }
+
                 dateOfBirthday = value;
             }
             get => dateOfBirthday;
@@ -72,7 +100,7 @@ namespace Task1
         {
             get
             {
-                age = DateTime.Now.Year - DateOfBirthday.Year;
+                age = DateTime.Now.Year - 1;
 
                 if ((DateOfBirthday.Month < DateTime.Now.Month && DateOfBirthday.Day < DateTime.Now.Day) ||
                     (DateOfBirthday.Day < DateTime.Now.Day && DateOfBirthday.Month == DateTime.Now.Month))

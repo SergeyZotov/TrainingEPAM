@@ -6,7 +6,9 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            DateTime birthday = GetBirthday();
+            Console.WriteLine("Enter year, month and day of your birthday in one line:");
+
+            string[] birthday = Console.ReadLine().Split(new char[] { '.', ' ', '\n' }, 3);
 
             Console.WriteLine("Enter first name, last name, middle name (if you have), " +
                 "profesion, work experience, medical book, id");
@@ -21,6 +23,7 @@ namespace Task1
         static void PrintInfo(Employee employee)
         {
             string middleName;
+
             if (employee.MiddleName == "")
             {
                 middleName = "Middle name is missing";
@@ -40,40 +43,6 @@ namespace Task1
                 $"Salary:\t\t\t{employee.Salary}\n" +
                 $"Have medical book:\t{employee.MedicalBook}\n" +
                 $"ID:\t\t\t{employee.EmployeeID}");
-        }
-
-        static DateTime GetBirthday()
-        {
-
-            Console.WriteLine("Enter your year of birthday:");
-
-            if (!int.TryParse(Console.ReadLine(), out int year))
-            {
-                throw new ArgumentException("Year must be an integer number!");
-            }
-
-            Console.WriteLine("Enter your month of birthday:");
-
-            if (!int.TryParse(Console.ReadLine(), out int month))
-            {
-                throw new ArgumentException("Month must be an integer number!");
-            }
-
-            Console.WriteLine("Enter your day of birthday:");
-
-            if (!int.TryParse(Console.ReadLine(), out int day))
-            {
-                throw new ArgumentException("Day must be an integer number!");
-            }
-
-            try
-            {
-                return new DateTime(year, month, day);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                throw new ArgumentOutOfRangeException("Date must be correct!", e);
-            }
         }
     }
 }
