@@ -5,7 +5,7 @@
         public Tree(string positionX, string positionY) :
             base(positionX, positionY)
         {
-
+            IsTaken = false;
         }
     }
 }

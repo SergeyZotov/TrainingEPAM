@@ -2,6 +2,6 @@
 {
     interface INotMoveable
     {
-        bool IsTaken();
+        bool IsTaken { get; set; }
     }
 }

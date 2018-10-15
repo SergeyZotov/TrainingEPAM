@@ -13,10 +13,10 @@ namespace Task1
 
         }
 
-        public override string Draw()
+       /*public override string Draw()
         {
             return $"This figure is a line. This line begins at point {X} and ends at point {Y}";
-        }
+        }*/
 
     }
 }

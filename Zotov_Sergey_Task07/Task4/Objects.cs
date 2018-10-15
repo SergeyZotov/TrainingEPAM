@@ -17,16 +17,9 @@ namespace Task4
             Y = y;
         }
 
-        internal protected int X
-        {
-            private protected set;
-            get;
-        }
+        internal protected int X { private protected set; get; }
+            
 
-        internal protected int Y
-        {
-            private protected set;
-            get;
-        }
+        internal protected int Y { private protected set; get; }
     }
 }

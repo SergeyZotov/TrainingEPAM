@@ -8,9 +8,6 @@
             
         }
 
-        internal int RecoveryOneLife()
-        {
-            return default;
-        }
+        internal bool Immortality() => default;
     }
 }

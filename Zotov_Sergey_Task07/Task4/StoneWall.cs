@@ -10,9 +10,9 @@ namespace Task4
             base(positionX, positionY)
         {
             stoneWall = new List<Stone>();
+            IsTaken = false;
         }
 
         internal int Length { get; set; }
-
     }
 }

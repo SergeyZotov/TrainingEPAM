@@ -10,7 +10,7 @@ namespace Task1
             List<Figure> figures = new List<Figure>();
 
             Console.WriteLine("Enter the beginning and the end of the line:");
-            var line = new Line(Console.ReadLine(), Console.ReadLine()) as Line;
+            var line = new Line(Console.ReadLine(), Console.ReadLine());
             figures.Add(line);
 
             Console.WriteLine("Enter coordinates and radius for circle:");
@@ -31,9 +31,9 @@ namespace Task1
 
             Console.WriteLine();
 
-            foreach (var value in figures)
+            foreach (IDrawable value in figures)
             {
-                Console.WriteLine(value.Draw());
+                Console.WriteLine(value.Draw(value));
                 Console.WriteLine('\n');
             }
 

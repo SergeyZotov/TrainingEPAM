@@ -13,15 +13,8 @@ namespace Task4
             Y = randomPosition.Next(1, int.Parse(positionY));
         }
 
-        public bool IsTaken()
-        {
-            return default;
-        }
+        public bool IsTaken { get; set; }
 
-        protected double GetBonus()
-        {
-            return default;
-        }
-
+        protected bool GetBonus() => default;
     }
 }

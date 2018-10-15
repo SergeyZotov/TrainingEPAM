@@ -5,7 +5,7 @@ namespace Task4
     class Enemies : Objects, IMoveable
     {
         // Для алгоритма ходов
-        Random randomPosition = new Random();
+        private protected Random randomPosition = new Random();
 
         public Enemies(string startPositionX, string startPositionY) :
             base(startPositionX, startPositionY)
@@ -14,35 +14,10 @@ namespace Task4
             Y = randomPosition.Next(1, int.Parse(startPositionY));
         }
 
-        public bool GetMove(int coordinateX, int coordinateY)
-        {
-            return default;
-        }
+        public bool GetMove(int coordinateX, int coordinateY) => default;
 
-        public double Damage
-        {
-            set; get;
-        }
+        public bool IsDealtDamage() => default;
 
-        public int Lives
-        {
-            set; get;
-        }
-
-        public bool TakeDamage(int playerDamage)
-        {
-            return default;
-        }
-
-        public bool IsDealtDamage(int myDamage)
-        {
-            return default;
-        }
-
-        public int MoveSpeed
-        {
-            set;
-            get;
-        }
+        public int MoveSpeed { set; get; }
     }
 }

@@ -15,10 +15,10 @@ namespace Task1
 
         }
 
-        public override string Draw()
+        /*public override string Draw()
         {
             return $"This figure is a round. Its area is located inside the circle with center at ({X};{Y}).\n" +
                 $"Its radius equals to {Radius}";
-        }
+        }*/
     }
 }

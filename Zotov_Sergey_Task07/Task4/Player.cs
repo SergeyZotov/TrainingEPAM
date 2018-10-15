@@ -2,9 +2,6 @@
 {
     sealed internal class Player : Objects, IMoveable
     {
-        private int damage;
-        private int lives;
-
         public Player player; 
 
         public Player(string startPositionX = "0", string startPositionY = "0") : 
@@ -13,37 +10,12 @@
             player = new Player();
         }
 
-        public bool GetMove(int coordinateX, int coordinateY)
-        {
-            return default;
-        }
+        public bool GetMove(int coordinateX, int coordinateY) => default;
 
-        public double Damage
-        {
-            set;
-            get;
-        }
+        public bool Life { private set; get; }
 
-        public int Lives
-        {
-            set;
-            get;
-        }
+        public bool TakeDamage() => default;
 
-        public bool TakeDamage(int enemyDamage)
-        {
-            return default;
-        }
-
-        public bool IsDealtDamage(int myDamage)
-        {
-            return default;
-        }
-
-        public int MoveSpeed
-        {
-            set;
-            get;
-        }
+        public int MoveSpeed { get; set; }
     }
 }

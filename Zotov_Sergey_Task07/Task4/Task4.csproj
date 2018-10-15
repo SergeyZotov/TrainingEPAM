@@ -55,7 +55,6 @@
     <Compile Include="IMoveable.cs" />
     <Compile Include="Enemies.cs" />
     <Compile Include="INotMoveable.cs" />
-    <Compile Include="Mushroom.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Obstacles.cs" />
     <Compile Include="Player.cs" />

@@ -14,13 +14,13 @@ namespace Task1
 
         }
 
-        public override string Draw()
+        /*public override string Draw()
         {
             if (X == Y)
                 return $"This figure is a square with sides equal to {X}";
             else
                 return $"This figure is a rectangle with length equals to {X} and width equals to {Y}";
-        }
+        }*/
 
     }
 }

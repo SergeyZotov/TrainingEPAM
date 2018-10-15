@@ -21,16 +21,8 @@ namespace Task4
             Height = Y;
         }
 
-        internal int Width
-        {
-            private set;
-            get;
-        }
+        internal int Width { private set; get; }
 
-        internal int Height
-        {
-            private set;
-            get;
-        }
+        internal int Height { private set; get; }
     }
 }

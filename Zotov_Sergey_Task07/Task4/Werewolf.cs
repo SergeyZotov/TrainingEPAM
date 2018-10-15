@@ -8,11 +8,7 @@
 
         }
 
-        public void CastAbility()
-        {
-           Wolf wolf = new Wolf((X + 1).ToString(), (Y + 1).ToString());
-        }
-       
-
+        public void CastAbility() => new Wolf((X + randomPosition.Next(0, X)).ToString(),
+               (Y + randomPosition.Next(0, Y)).ToString());
     }
 }

@@ -8,9 +8,6 @@
 
         }
 
-        internal double GetIncreasedDamage()
-        {
-            return default;
-        }
+        internal double GetIncreasedMoveSpeed(Player player) => player.MoveSpeed += 1;
     }
 }
