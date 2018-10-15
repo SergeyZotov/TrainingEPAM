@@ -100,15 +100,10 @@ namespace Task1
         {
             get
             {
-                age = DateTime.Now.Year - 1;
+                age = DateTime.Today.Year - DateOfBirthday.Year;
 
-                if ((DateOfBirthday.Month < DateTime.Now.Month && DateOfBirthday.Day < DateTime.Now.Day) ||
-                    (DateOfBirthday.Day < DateTime.Now.Day && DateOfBirthday.Month == DateTime.Now.Month))
-                {
-                    return --age;
-                }
-                else
-                    return age;                                                
+                return ((DateOfBirthday.Month <= DateTime.Today.Month) && 
+                    (DateOfBirthday.Day <= DateTime.Today.Day)) == true ? age : --age;
             }
         }
 

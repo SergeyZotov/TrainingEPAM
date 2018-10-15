@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Task1
 {
@@ -17,8 +18,9 @@ namespace Task1
                 birthday, Console.ReadLine(), Console.ReadLine(), (Console.ReadLine()), Console.ReadLine());
 
             PrintInfo(employee);
+
             Console.ReadKey();
-    }
+        }
 
         static void PrintInfo(Employee employee)
         {
@@ -37,7 +39,7 @@ namespace Task1
                 $"Last name:\t\t{employee.LastName}\n" +
                 $"Middle name:\t\t{middleName}\n" +
                 $"Day of birthday:\t{employee.DateOfBirthday.ToShortDateString()}\n" +
-                $"Age:\t\t\t{employee.Age} years\n" +
+                $"Age:\t\t\t{employee.Age} full years\n" +
                 $"Profession:\t\t{employee.Position}\n" +
                 $"Work expirience:\t{employee.WorkExperience} years\n" +
                 $"Salary:\t\t\t{employee.Salary}\n" +
