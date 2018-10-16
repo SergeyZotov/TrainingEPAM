@@ -10,33 +10,13 @@ namespace Task1
         private protected string lastName = "";
         private protected string middleName = "";
         private protected DateTime dateOfBirthday;
-        private protected int age;                
 
-        public User(string firstName, string lastName, string middleName, string[] dateOfBirthday)
+        public User(string firstName, string lastName, string middleName, DateTime dateOfBirthday)
         {
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;
-            int year;
-            int month;
-            int day;
-
-            try
-            {
-                year = int.Parse(dateOfBirthday[0]);
-                month = int.Parse(dateOfBirthday[1]);
-                day = int.Parse(dateOfBirthday[2]);
-            }
-            catch(FormatException)
-            {
-                throw new ArgumentException("You can write only integer numbers!");
-            }
-            catch
-            {
-                throw new ArgumentOutOfRangeException("You did not write all data!");
-            }
-
-            DateOfBirthday = new DateTime(year, month, day);
+            DateOfBirthday = dateOfBirthday;
         }
 
         internal protected string FirstName
@@ -67,7 +47,7 @@ namespace Task1
         {
             private protected set
             {
-                    middleName = value;
+                middleName = value;
             }
             get
             {
@@ -79,18 +59,9 @@ namespace Task1
         {
             private protected set
             {
-                if (DateTime.Parse(value.ToString()) > DateTime.Now || DateTime.Parse(value.ToString()) < DateTime.Parse("01.01.1900"))
+                if (value > DateTime.Now || value < DateTime.Parse("01.01.1900"))
                     throw new ArgumentException("Your date is more than current date");
-
-                try
-                {
-                    value =  new DateTime(value.Year, value.Month, value.Day);
-                }
-                catch (ArgumentOutOfRangeException e)
-                {
-                    throw new ArgumentOutOfRangeException("Date must be correct!", e);
-                }
-
+                
                 dateOfBirthday = value;
             }
             get => dateOfBirthday;
@@ -100,12 +71,11 @@ namespace Task1
         {
             get
             {
-                age = DateTime.Today.Year - DateOfBirthday.Year;
+                var age = DateTime.Today.Year - DateOfBirthday.Year;
 
                 return ((DateOfBirthday.Month <= DateTime.Today.Month) && 
                     (DateOfBirthday.Day <= DateTime.Today.Day)) == true ? age : --age;
             }
         }
-
     }
 }

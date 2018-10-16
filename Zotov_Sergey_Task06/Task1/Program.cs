@@ -7,26 +7,34 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter year, month and day of your birthday in one line:");
-
-            string[] birthday = Console.ReadLine().Split(new char[] { '.', ' ', '\n' }, 3);
-
             Console.WriteLine("Enter first name, last name, middle name (if you have), " +
-                "profesion, work experience, medical book, id");
+                "year and month and day of birthday, profesion,\nwork experience, medical book, id");
 
-            Employee employee = new Employee(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(),
-                birthday, Console.ReadLine(), Console.ReadLine(), (Console.ReadLine()), Console.ReadLine());
+            try
+            {
+                Employee employee = new Employee(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(),
+                    new DateTime(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine())),
+                    Console.ReadLine(), double.Parse(Console.ReadLine()), (Console.ReadLine()), int.Parse(Console.ReadLine()));
 
-            PrintInfo(employee);
+                PrintInfo(employee);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("You enter wrong data");
+            }
+            catch(FormatException)
+            {
+                Console.WriteLine("ID must be integer");
+            }
 
             Console.ReadKey();
-        }
+    }
 
         static void PrintInfo(Employee employee)
         {
             string middleName;
 
-            if (employee.MiddleName == "")
+            if (string.IsNullOrEmpty(employee.MiddleName))
             {
                 middleName = "Middle name is missing";
             }

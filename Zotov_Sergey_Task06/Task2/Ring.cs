@@ -2,38 +2,22 @@
 
 namespace Task2
 {
-    internal class Ring : Round
+    internal class Ring
     {
-        private protected double innerRadius;
+        public Round inner;
+        public Round outter;
 
-        public Ring(string x, string y, string innerRadius, string outterRadius) : 
-            base(x, y, outterRadius)
+        public Ring(int x, int y, double innerRadius, double outterRadius)
         {
-            if(!double.TryParse(innerRadius, out this.innerRadius))
-            {
-                throw new FormatException("Inner radius must be a real number!");
-            }
-            else
-                InnerRadius = this.innerRadius;
+            if (innerRadius >= outterRadius)
+                throw new ArgumentException("Inner radius must be less than outter radius!");
+
+            outter = new Round(x, y, outterRadius);
+            inner = new Round(x, y, innerRadius);
         }
+       
+        public double RingSquare => outter.Square - inner.Square;
 
-        internal protected double InnerRadius
-        {
-            private protected set
-            {
-                if (value < 0 || value >= radius)
-                    throw new ArgumentException("Inner radius must be more than 0 and less than outter radius!");
-
-                innerRadius = value;
-            }
-            get => innerRadius;
-        }
-        private new double GetSquareOfCircle => Math.PI* InnerRadius * InnerRadius;
-
-        private new double GetLengthOfCircumcircle => 2 * Math.PI * InnerRadius;
-
-        internal protected double RingSquare => base.GetSquareOfCircle - GetSquareOfCircle;
-
-        internal protected double SumOfCircumcircles => base.GetLengthOfCircumcircle + GetLengthOfCircumcircle;
+        public double SumOfCircumcircles => outter.LengthOfCircumcircle + inner.LengthOfCircumcircle;
     }
 }

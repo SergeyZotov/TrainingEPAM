@@ -12,26 +12,14 @@ namespace Task1
         private protected int id;
 
         public Employee(string firstName, string lastName, string middleName, 
-            string[] dateOfBirthday, string post, string workExperience, string medicalBook, string id) : 
+            DateTime dateOfBirthday, string post, double workExperience, string medicalBook, int id) : 
             base(firstName, lastName, middleName, dateOfBirthday)
 
         {
-            if (!int.TryParse(dateOfBirthday[0], out int year) || !int.TryParse(dateOfBirthday[1], out int month) ||
-                !int.TryParse(dateOfBirthday[2], out int day))
-            {
-                throw new ArgumentException("You can write only integer numbers!");
-            }
-
-            DateOfBirthday = new DateTime(year, month, day);
             Position = Regex.Replace(post, pattern, "");
             MedicalBook = medicalBook.ToString();
             EmployeeID = id;
-
-            if (!double.TryParse(workExperience, NumberStyles.AllowDecimalPoint, CultureInfo.CurrentCulture, out this.workExperience))
-                throw new FormatException("Work expirience must be numeric");
-
-            WorkExperience = this.workExperience;
-
+            WorkExperience = workExperience;
         }
 
         internal protected double WorkExperience
@@ -39,7 +27,7 @@ namespace Task1
             private set
             {
                 if (value < 0)
-                    throw new Exception("Work experience cannot be less than 0");
+                    throw new ArgumentException("Work experience cannot be less than 0");
 
                 workExperience = value;
             }
@@ -50,10 +38,10 @@ namespace Task1
         {
             private set
             {
-                if (value == "")
-                    throw new Exception("You have to write your position");
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentNullException("You have to write your position");
 
-                post = value;
+                post = Regex.Replace(value, pattern, "");
             }
             get => post;
         }
@@ -88,21 +76,18 @@ namespace Task1
 
         internal protected double Salary => Math.Round((workExperience + 0.3) * Coefficient * 100000.5, 2);
 
-        internal protected string EmployeeID
+        internal protected int EmployeeID
         {
             private set
             {
-                if (!int.TryParse(value, out id))
-                {
-                    throw new ArgumentException("ID must be an integer number");
-                }
-
-                if (id < 0)
+                if (value < 0)
                 {
                     throw new ArgumentException("ID cannot be less than 0");
                 }
+
+                id = value;
             }
-            get => id.ToString();
+            get => id;
         }
 
     }
