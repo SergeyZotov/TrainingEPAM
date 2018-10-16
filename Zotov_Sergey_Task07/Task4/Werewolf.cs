@@ -1,6 +1,6 @@
 ﻿namespace Task4
 {
-    class Werewolf : Enemies, IAbility
+    class Werewolf : Enemy, IAbility
     { 
         public Werewolf(int startPositionX, int startPositionY) :
             base(startPositionX, startPositionY)

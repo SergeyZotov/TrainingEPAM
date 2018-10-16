@@ -18,7 +18,7 @@
 
         public void Move()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public int MoveSpeed { get; set; }

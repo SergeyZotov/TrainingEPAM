@@ -1,6 +1,6 @@
 ﻿namespace Task4
 {
-    class Tree : Obstacles
+    class Tree : Obstacle
     {
         public Tree(int positionX, int positionY) :
             base(positionX, positionY)

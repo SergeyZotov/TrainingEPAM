@@ -46,23 +46,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bear.cs" />
+    <Compile Include="CurrentPositions.cs" />
     <Compile Include="IAbility.cs" />
-    <Compile Include="Apples.cs" />
-    <Compile Include="Bonuses.cs" />
+    <Compile Include="Apple.cs" />
+    <Compile Include="Bonus.cs" />
     <Compile Include="Cherry.cs" />
     <Compile Include="ClawsOfDeath.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="IMoveable.cs" />
-    <Compile Include="Enemies.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="INotMoveable.cs" />
-    <Compile Include="Objects.cs" />
-    <Compile Include="Obstacles.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="Obstacle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stone.cs" />
-    <Compile Include="StoneWall.cs" />
-    <Compile Include="StorageOfObjects.cs" />
+    <Compile Include="InitializationOfObjects.cs" />
     <Compile Include="Tree.cs" />
     <Compile Include="Werewolf.cs" />
     <Compile Include="Wolf.cs" />

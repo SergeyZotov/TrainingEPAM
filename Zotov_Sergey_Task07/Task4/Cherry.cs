@@ -1,6 +1,6 @@
 ﻿namespace Task4
 {
-    sealed internal class Cherry : Bonuse
+    sealed internal class Cherry : Bonus
     {
         public Cherry(int positionX, int positionY) : 
             base(positionX, positionY)

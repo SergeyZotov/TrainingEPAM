@@ -1,6 +1,6 @@
 ﻿namespace Task4
 {
-    internal class ClawsOfDeath : Enemies, IAbility
+    internal class ClawsOfDeath : Enemy, IAbility
     {
         private protected int increaseDamageAbility;
 

@@ -5,24 +5,40 @@ namespace Task4
 {
     sealed class Field : GameObject
     {
-        internal static int width;
-        internal static int height;
+        internal int width;
+        internal int height;
 
-        internal Tuple<int, int>[,] cells = new Tuple<int, int>[width , height];
-
-        public Field(int width, int height, Player player, List<Enemies> enemies, 
-            List<Obstacles> obstacles, List<Bonuse> bonuses) : 
+        public Field(int width, int height, Player player, List<Enemy> enemies, 
+            List<Obstacle> obstacles, List<Bonus> bonuses) : 
             base(width, height)
         {
-            if (X <= 0 || Y <= 0)
+            if (width <= 0 || height <= 0)
                 throw new ArgumentException("Must be positive!");
 
-            Width = X;
-            Height = Y;
+            InitializationOfObjects initializationOfObjects = new InitializationOfObjects(ref player,
+                ref enemies, ref bonuses, ref obstacles, height, width);
+
+            Width = width;
+            Height = height;
         }
 
-        internal int Width { private set; get; }
+        internal int Width
+        {
+            private set
+            {
+                width = value;
+            }
+            get => width;
+        }
 
-        internal int Height { private set; get; }
+        internal int Height
+        {
+            private set
+            {
+                Height = value;
+            }
+
+            get => Height;
+        }
     }
 }

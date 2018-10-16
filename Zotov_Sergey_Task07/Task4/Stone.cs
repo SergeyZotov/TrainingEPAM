@@ -1,6 +1,6 @@
 ﻿namespace Task4
 {
-    class Stone : Obstacles
+    class Stone : Obstacle
     {
         public Stone(int positionX, int positionY) :
             base(positionX, positionY)
