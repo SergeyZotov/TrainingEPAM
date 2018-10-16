@@ -6,7 +6,7 @@ namespace Task4
     {
         List<Stone> stoneWall;
 
-        public StoneWall(string positionX, string positionY) :
+        public StoneWall(int positionX, int positionY) :
             base(positionX, positionY)
         {
             stoneWall = new List<Stone>();

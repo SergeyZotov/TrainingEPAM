@@ -2,7 +2,7 @@
 {
     class Stone : Obstacles
     {
-        public Stone(string positionX, string positionY) :
+        public Stone(int positionX, int positionY) :
             base(positionX, positionY)
         {
             IsTaken = false;

@@ -2,38 +2,25 @@
 
 namespace Task1
 {
-    class Ring : Round
+    class Ring : Figure, IDrawable
     {
-        private protected double innerRadius;
+        public Round outter;
+        public Round inner;
 
-        public Ring(string x, string y, string innerRadius, string outterRadius) :
-            base(x, y, outterRadius)
+        public Ring(int x, int y, double innerRadius, double outterRadius) :
+            base(x, y)
         {
-            if (!double.TryParse(innerRadius, out this.innerRadius) || this.innerRadius <= 0)
-            {
-                throw new ArgumentException("Radius must be an integer number, be more than 0 and less than outter radius");
-            }
+            if (innerRadius >= outterRadius)
+                throw new ArgumentException("Inner radius must be less than outter radius!");
 
-            InnerRadius = this.innerRadius;
+            outter = new Round(x, y, outterRadius);
+            inner = new Round(x, y, innerRadius);
         }
 
-        internal protected double InnerRadius
+        public string Draw()
         {
-            private protected set
-            {
-                if (value >= Radius)
-                    throw new ArgumentException("Inner radius must be less than outter radius");
-
-                innerRadius = value;
-            }
-
-            get => innerRadius;
-        }
-
-        public override string Draw(IDrawable ring)
-        {
-            return $"This figure is a ring. Its center is at point ({X};{Y}).\n" +
-                $"Inner radius equals to {InnerRadius} and outter radius equals to {Radius}";
+            return $"This figure is a ring. Its center is at point ({inner.X};{inner.Y}).\n" +
+                $"Inner radius equals to {inner.Radius} and outter radius equals to {outter.Radius}";
         }
     }
 }

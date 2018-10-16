@@ -1,8 +1,8 @@
 ﻿namespace Task4
 {
-    sealed internal class Apples : Bonuses
+    sealed internal class Apples : Bonuse
     {
-        public Apples(string positionX, string positionY) : 
+        public Apples(int positionX, int positionY) : 
             base(positionX, positionY)
         {
             

@@ -2,17 +2,13 @@
 
 namespace Task4
 {
-    abstract internal class Objects
+    abstract internal class GameObject
     {
         private int x;
         private int y;
-        public Objects(string coordinateX, string coordinateY)
-        {
-            if (!int.TryParse(coordinateX, out x) || !int.TryParse(coordinateY, out y))
-            {
-                throw new ArgumentException("Must be integer");
-            }
 
+        public GameObject(int coordinateX, int coordinateY)
+        {
             X = x;
             Y = y;
         }

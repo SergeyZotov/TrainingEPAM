@@ -4,7 +4,7 @@
     {
         private protected int increaseDamageAbility;
 
-        public ClawsOfDeath(string startPositionX, string startPositionY) : 
+        public ClawsOfDeath(int startPositionX, int startPositionY) : 
             base(startPositionX, startPositionY)
         {
 

@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canvas.cs" />
+    <Compile Include="ConsolePrinter.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="IDrawable.cs" />
+    <Compile Include="IPrinter.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

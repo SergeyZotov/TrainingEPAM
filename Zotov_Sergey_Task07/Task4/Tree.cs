@@ -2,7 +2,7 @@
 {
     class Tree : Obstacles
     {
-        public Tree(string positionX, string positionY) :
+        public Tree(int positionX, int positionY) :
             base(positionX, positionY)
         {
             IsTaken = false;

@@ -4,24 +4,17 @@ namespace Task2
 {
     class GeometricProgression : ISeries
     {
-        private double denominatorOfProgression;
-        private int currentIndex;
-        private double start;
+        public double denominatorOfProgression;
+        public int currentIndex;
+        public double start;
 
-        public GeometricProgression(string start, string denominatorOfProgression)
+        public GeometricProgression(double start, double denominatorOfProgression)
         {
-            if (!double.TryParse(start, out this.start) || 
-                !double.TryParse(denominatorOfProgression, out this.denominatorOfProgression))
-            {
-                throw new ArgumentException("The first member and denominator of progression " +
-                    "cannot be equal to 0");
-            }
-
-            Start = this.start;
-            DenominatorOfProgression = this.denominatorOfProgression;
+            Start = start;
+            DenominatorOfProgression = denominatorOfProgression;
         }
 
-        internal protected double Start
+        public double Start
         {
             private set
             {
@@ -34,7 +27,7 @@ namespace Task2
             get => start;
         }
 
-        internal protected double DenominatorOfProgression
+        public double DenominatorOfProgression
         {
             private set
             {

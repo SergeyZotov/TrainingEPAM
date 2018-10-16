@@ -2,21 +2,26 @@
 
 namespace Task4
 {
-    class Enemies : Objects, IMoveable
+    class Enemies : GameObject, IMoveable
     {
         // Для алгоритма ходов
         private protected Random randomPosition = new Random();
 
-        public Enemies(string startPositionX, string startPositionY) :
+        public Enemies(int startPositionX, int startPositionY) :
             base(startPositionX, startPositionY)
         {
-            X = randomPosition.Next(1, int.Parse(startPositionX));
-            Y = randomPosition.Next(1, int.Parse(startPositionY));
+            X = randomPosition.Next(1, startPositionX);
+            Y = randomPosition.Next(1, startPositionY);
         }
 
         public bool GetMove(int coordinateX, int coordinateY) => default;
 
         public bool IsDealtDamage() => default;
+
+        public void Move()
+        {
+            throw new NotImplementedException();
+        }
 
         public int MoveSpeed { set; get; }
     }

@@ -2,7 +2,7 @@
 {
     class Wolf : Werewolf
     {
-        public Wolf(string startPositionX, string startPositionY) :
+        public Wolf(int startPositionX, int startPositionY) :
             base(startPositionX, startPositionY)
         {
 

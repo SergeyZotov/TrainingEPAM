@@ -2,7 +2,7 @@
 {
     sealed internal class Bear : Enemies
     {
-        public Bear(string startPositionX, string startPositionY) :
+        public Bear(int startPositionX, int startPositionY) :
             base(startPositionX, startPositionY)
         {
 

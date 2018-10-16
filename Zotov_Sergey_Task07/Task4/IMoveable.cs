@@ -4,5 +4,6 @@
     {
         int MoveSpeed { set; get; }
         bool GetMove(int coordinateX, int coordinateY);
+        void Move();
     }
 }

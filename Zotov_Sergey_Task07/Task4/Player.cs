@@ -1,10 +1,10 @@
 ﻿namespace Task4
 {
-    sealed internal class Player : Objects, IMoveable
+    sealed internal class Player : GameObject, IMoveable
     {
         public Player player; 
 
-        public Player(string startPositionX = "0", string startPositionY = "0") : 
+        public Player(int startPositionX = 0, int startPositionY = 0) : 
             base(startPositionX, startPositionY)
         {
             player = new Player();
@@ -16,6 +16,13 @@
 
         public bool TakeDamage() => default;
 
+        public void Move()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public int MoveSpeed { get; set; }
+
+
     }
 }

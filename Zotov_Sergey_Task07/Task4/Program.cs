@@ -11,13 +11,25 @@ namespace Task4
             Random _randomCountObjects = new Random();
             List<Enemies> enemies = new List<Enemies>(_randomCountObjects.Next(3, 10));
             List<Obstacles> obstacles = new List<Obstacles>(_randomCountObjects.Next(1, 12));
-            List<Bonuses> bonuses = new List<Bonuses>(_randomCountObjects.Next(5, 10));
+            List<Bonuse> bonuses = new List<Bonuse>(_randomCountObjects.Next(5, 10));
 
             Player player = new Player();
             Console.WriteLine("Enter size of the field:");
-            Field field = new Field(Console.ReadLine(), Console.ReadLine(), player, enemies, obstacles, bonuses);
-            FillingCells(ref field);
-            Play(field);
+
+            try
+            {
+                Field field = new Field(int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()),
+                    player, enemies, obstacles, bonuses);
+
+                FillingCells(ref field);
+                Play(field);
+            }
+            catch(FormatException)
+            {
+                Console.WriteLine("You can enter only integer numbers!");
+            }
+
+
             Console.ReadKey();
         }
 
@@ -34,7 +46,7 @@ namespace Task4
                 }
             }
             else
-                throw new Exception("THe field is already existing");
+                Console.WriteLine("THe field is already existing");
         }
 
         static void Play(Field field)

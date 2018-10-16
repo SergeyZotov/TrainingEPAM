@@ -7,8 +7,20 @@ namespace Task2
         static void Main(string[] args)
         {
             Console.WriteLine("Enter first member, denominator ");
-            GeometricProgression geometricProgression = new GeometricProgression(Console.ReadLine(), Console.ReadLine());
-            PrintSeries(geometricProgression);
+
+            try
+            {
+                GeometricProgression geometricProgression = new GeometricProgression(double.Parse(Console.ReadLine()),
+                    double.Parse(Console.ReadLine()));
+
+                PrintSeries(geometricProgression);
+            }
+            catch(FormatException)
+            {
+                Console.WriteLine("You can enter only numbers");
+            }
+
+
             Console.ReadKey();
         }
 

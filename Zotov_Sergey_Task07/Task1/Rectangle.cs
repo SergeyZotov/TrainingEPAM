@@ -2,13 +2,13 @@
 {
     class Rectangle : Figure, IDrawable
     {
-        public Rectangle(string length, string width) :
+        public Rectangle(int length, int width) :
             base(length, width)
         {
 
         }
 
-        public string Draw(IDrawable rectangle)
+        public string Draw()
         {
             if (X == Y)
                 return $"This figure is a square with sides equal to {X}";
