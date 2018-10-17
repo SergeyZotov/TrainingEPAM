@@ -19,7 +19,6 @@ namespace Task1
                 throw new ArgumentException("Capacity cannot be less than 1");
 
             myArr = new T[newCapacity];
-
             capacity = newCapacity;
         }
 
@@ -40,7 +39,6 @@ namespace Task1
             {
                 T[] tempArray = myArr;
                 capacity *= 2;
-
                 myArr = new T[capacity];
 
                 for (int i = 0; i < Length; ++i)
@@ -53,9 +51,26 @@ namespace Task1
             }
         }
 
-        // Доработать увеличение capacity единожды, а не при входе в Add(value)
         public void AddRange(T[] array)
         {
+            if ((Length + array.Length) == capacity)
+            {
+                capacity *= 2;
+            }
+            else  if((Length + array.Length) > capacity)
+            { 
+                T[] tempArray = myArr;
+                int tempLength = Length ;
+                Length = 0;
+                capacity *= (array.Length / capacity) * 2;
+                myArr = new T[capacity];
+
+                for (int i = 0; i < tempLength; ++i)
+                {
+                    Add(tempArray[i]);
+                }
+            }
+
             foreach(var value in array)
             {
                 Add(value);
@@ -64,7 +79,40 @@ namespace Task1
 
         public bool Remove(T data)
         {
-            throw new NotImplementedException();
+            bool found = false;
+            int foundElementIndex = 0;
+            int tempLength = Length;
+
+            for (int i = 0; i < Length; ++i, ++foundElementIndex)
+            {
+                if (myArr[i].Equals(data))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                return found;
+            }
+
+
+            T[] tempArray = myArr;
+            myArr = new T[capacity];
+            Length = 0;
+
+            for (int i = 0; i < foundElementIndex; ++i)
+            {
+                Add(tempArray[i]);
+            }
+
+            for (int i = foundElementIndex + 1; i < tempLength; ++i)
+            {
+                Add(tempArray[i]);
+            }
+
+            return found;
         }
 
         public void Insert(T data, int position)
@@ -114,7 +162,6 @@ namespace Task1
             {
                 capacity *= 2;
                 tempArray = new T[capacity];
-
                 int index = 0;
 
                 for (int i = 0; i < Length; ++i, ++index)
@@ -165,13 +212,8 @@ namespace Task1
 
                 myArr[index] = value;
             }
-            get
-            {
-                /*if (index > capacity)
-                    throw new ArgumentOutOfRangeException("Calling unexisting object");*/
 
-                return myArr[index];
-            }
+            get => myArr[index];
         }
     }
 }
