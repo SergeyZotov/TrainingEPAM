@@ -5,7 +5,6 @@ namespace Task1
     class DynamicArray<T>
     {
         T[] myArr;
-        int length;
         int capacity;
  
         public DynamicArray()
@@ -27,30 +26,30 @@ namespace Task1
         public DynamicArray(T[] array)
         {
             myArr = array;
-            capacity = length = array.Length;
+            capacity = Length = array.Length;
         }
 
         public void Add(T data)
         {
-            if (length < capacity)
+            if (Length < capacity)
             {
-                myArr[length] = data;
-                length++;
+                myArr[Length] = data;
+                Length++;
             }
             else
             {
-                T[] tempArr = myArr;
+                T[] tempArray = myArr;
                 capacity *= 2;
 
                 myArr = new T[capacity];
 
-                for (int i = 0; i < length; ++i)
+                for (int i = 0; i < Length; ++i)
                 {
-                    myArr[i] = tempArr[i];
+                    myArr[i] = tempArray[i];
                 }
 
-                myArr[length] = data;
-                length++;
+                myArr[Length] = data;
+                Length++;
             }
         }
 
@@ -70,13 +69,79 @@ namespace Task1
 
         public void Insert(T data, int position)
         {
-            throw new NotImplementedException();
+            if (position < 0 || position > Length + 1)
+                throw new ArgumentOutOfRangeException($"Невозможно добавить элемент");
+            
+            if (position == Length + 1)
+            {
+                Add(data);
+                return;
+            }
+
+            T[] tempArray;
+
+            int firstLength = Length;
+
+            if (Length != capacity)
+            {
+                tempArray = new T[capacity];
+
+                int index = 0;
+
+                for (int i = 0; i < Length; ++i, ++index)
+                {
+                    tempArray[index] = myArr[i];
+
+                }
+
+                myArr = new T[capacity];
+
+                Length = 0;
+
+                for (int i = 0, j = 0; i < firstLength + 1; ++i)
+                {
+                    if (i == position)
+                    {
+                        Add(data);
+                        continue;
+                    }
+
+                    Add(tempArray[j]);
+                    j++;
+                }
+            }
+            else
+            {
+                capacity *= 2;
+                tempArray = new T[capacity];
+
+                int index = 0;
+
+                for (int i = 0; i < Length; ++i, ++index)
+                {
+                    tempArray[index] = myArr[i];
+
+                }
+
+                myArr = new T[capacity];
+
+                Length = 0;
+
+                for (int i = 0, j = 0; i < firstLength + 1; ++i)
+                {
+                    if (i == position)
+                    {
+                        Add(data);
+                        continue;
+                    }
+
+                    Add(tempArray[j]);
+                    j++;
+                }
+            }
         }
 
-        public int Length
-        {
-            get => length;
-        }
+        public int Length { get; private set; }
 
         public int Capacity
         {
@@ -95,7 +160,7 @@ namespace Task1
         {
             set
             {
-                if (index > capacity)
+                if (index > capacity && index < 0)
                     throw new ArgumentOutOfRangeException("Calling unexisting object");
 
                 myArr[index] = value;

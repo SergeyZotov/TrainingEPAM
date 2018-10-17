@@ -12,16 +12,10 @@ namespace Task1
         {
             int[] newArr = {1, 2, 3 };
 
-            DynamicArray<int> array = new DynamicArray<int>(newArr);
+            DynamicArray<int> array = new DynamicArray<int>(5);
+            array.AddRange(newArr);
 
             //array.Remove(3);
-            array.Add(-5);
-            array.Add(3);
-            array.Add(100);
-            //array.Insert(-1, 2);
-            array.AddRange(newArr);
-            array.AddRange(newArr);
-            array.Add(-34);
 
             for (int i = 0; i < array.Length; ++i)
             {
