@@ -97,18 +97,15 @@ namespace Task1
                 return found;
             }
 
-
             T[] tempArray = myArr;
             myArr = new T[capacity];
             Length = 0;
 
-            for (int i = 0; i < foundElementIndex; ++i)
+            for (int i = 0, j = 0; i < tempLength; ++i)
             {
-                Add(tempArray[i]);
-            }
+                if (i == foundElementIndex)
+                    continue;
 
-            for (int i = foundElementIndex + 1; i < tempLength; ++i)
-            {
                 Add(tempArray[i]);
             }
 
