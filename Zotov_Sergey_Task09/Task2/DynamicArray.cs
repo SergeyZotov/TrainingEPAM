@@ -17,8 +17,16 @@ namespace Task2
 
         public int Capacity
         {
-            get => myArr.Length;
+            private set
+            {
+                foreach (var data in myArr)
+                    capacity++;
+            }
+
+            get => capacity;
         }
+
+
 
         public DynamicArray()
         {
@@ -43,7 +51,28 @@ namespace Task2
 
         public DynamicArray(IEnumerable<T> array)
         {
+            IncrementOfCapacityAndLength(array);      
+            myArr = new T[capacity];
+            FillMyArray(array);
+        }
 
+        private void IncrementOfCapacityAndLength(IEnumerable<T> array)
+        {
+            foreach (var value in array)
+            {
+                capacity++;
+                Length++;
+            }
+        }
+
+        private void FillMyArray(IEnumerable<T> array)
+        {
+            int index = 0;
+            foreach (var value in array)
+            {
+                myArr[index] = value;
+                index++;
+            }
         }
 
         public void Add(T data)
@@ -240,5 +269,7 @@ namespace Task2
         {
             return ((IEnumerable<T>)myArr).GetEnumerator();
         }
+
+
     }
 }

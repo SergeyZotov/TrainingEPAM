@@ -10,13 +10,20 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>(15);
+            List<int> list = new List<int>
+            {
+                -12,
+                124
+            };
 
-            list.Add(-12);
             DynamicArray<int> vs = new DynamicArray<int>(list);
 
-            for (int i = 0; i < 5; ++i)
-                vs.Add(i);
+            Random random = new Random();
+
+            foreach(var value in vs)
+            {
+                vs.Add(random.Next(-10, 10));
+            }
 
             foreach(var value in vs)
             {
