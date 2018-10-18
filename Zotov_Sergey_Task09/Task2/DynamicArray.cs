@@ -51,27 +51,24 @@ namespace Task2
 
         public DynamicArray(IEnumerable<T> array)
         {
-            IncrementOfCapacityAndLength(array);      
+            CapacityIncrement(array);      
             myArr = new T[capacity];
             FillMyArray(array);
         }
 
-        private void IncrementOfCapacityAndLength(IEnumerable<T> array)
+        private void CapacityIncrement(IEnumerable<T> array)
         {
             foreach (var value in array)
             {
                 capacity++;
-                Length++;
             }
         }
 
         private void FillMyArray(IEnumerable<T> array)
         {
-            int index = 0;
             foreach (var value in array)
             {
-                myArr[index] = value;
-                index++;
+                Add(value);
             }
         }
 

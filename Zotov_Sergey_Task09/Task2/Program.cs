@@ -20,7 +20,7 @@ namespace Task2
 
             Random random = new Random();
 
-            foreach(var value in vs)
+            foreach (var value in vs)
             {
                 vs.Add(random.Next(-10, 10));
             }
@@ -29,6 +29,11 @@ namespace Task2
             {
                 Console.WriteLine(value);
             }
+
+            vs.Add(-15);
+
+            Console.WriteLine(vs.Capacity);
+            Console.WriteLine(vs.Length);
 
             Console.ReadKey();
             
