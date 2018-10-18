@@ -17,7 +17,13 @@ namespace Task1
 
         public int Capacity
         {
-            get => myArr.Length;
+            private set
+            {
+                foreach (var data in myArr)
+                    capacity++;
+            }
+
+            get => capacity;
         }
 
         public DynamicArray()
