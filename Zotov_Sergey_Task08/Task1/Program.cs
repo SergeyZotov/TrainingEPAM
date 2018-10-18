@@ -73,7 +73,7 @@ namespace Task1
                 {
                     Console.Write(array[i] + " ");
                 }
-                Console.WriteLine("\nAfter remove");
+                Console.WriteLine("\nAfter remove \'-40\'");
                 Console.WriteLine($"\nCapacity equals to {array.Capacity}");
                 Console.WriteLine($"Length equals to {array.Length}");
             }
@@ -85,7 +85,7 @@ namespace Task1
                 {
                     Console.Write(array[i] + " ");
                 }
-                Console.WriteLine("\nAfter remove");
+                Console.WriteLine("\nAfter remove \'-4\'");
                 Console.WriteLine($"\nCapacity equals to {array.Capacity}");
                 Console.WriteLine($"Length equals to {array.Length}");
             }
