@@ -81,7 +81,7 @@ namespace Task1
             if (array.Remove(-4))
             {
                 Console.WriteLine();
-                for (int i = 0; i < array.Capacity; ++i)
+                for (int i = 0; i < array.Length; ++i)
                 {
                     Console.Write(array[i] + " ");
                 }

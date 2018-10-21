@@ -11,25 +11,21 @@ namespace Task1
         {
             private set;
             get;
-
- 
         }
 
         public int Capacity
         {
             private set
             {
-                foreach (var data in myArr)
-                    capacity++;
+                capacity = myArr.Length;
             }
 
-            get => capacity;
+            get => myArr.Length;
         }
 
         public DynamicArray()
         {
             myArr = new T[8];
-            capacity = 8;
         }
 
         public DynamicArray(int newCapacity)
@@ -44,7 +40,7 @@ namespace Task1
         public DynamicArray(T[] array)
         {
             myArr = array;
-            capacity = Length = array.Length;
+            Length = array.Length;
         }
 
         public void Add(T data)
