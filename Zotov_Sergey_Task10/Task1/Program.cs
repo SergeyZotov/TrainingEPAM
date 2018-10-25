@@ -62,9 +62,9 @@ namespace Task1
             }
         }
 
-        static bool IsFirstStringLonger(string firstString, string secondString)/* => firstString.Length > secondString.Length == true ?
-            true : firstString.Length == secondString.Length ? (string.Compare(firstString, secondString, true) == 1 ? true : false) : false;*/
-        {
+        static bool IsFirstStringLonger(string firstString, string secondString) => firstString.Length > secondString.Length == true ?
+            true : firstString.Length == secondString.Length ? (string.Compare(firstString, secondString, true) == 1 ? true : false) : false;
+        /*{
             int str1L = firstString.Length;
             int str2L = secondString.Length;
 
@@ -80,6 +80,6 @@ namespace Task1
                 }
             }
             return false;
-        }
+        }*/
     }
 }
