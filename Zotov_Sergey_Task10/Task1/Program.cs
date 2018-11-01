@@ -22,22 +22,14 @@ namespace Task1
 
             Compare comparer = IsFirstStringLonger;
             string[] strings = new string[] { s2, s3, s1, s4 , s5, s6, s7, s8, s9, s10, s11};
-            Console.WriteLine("Массив строк до сортировки");
+            Console.WriteLine("Массив строк до сортировки\n");
             Print(strings);
             Console.WriteLine();
             StringSorting(strings, comparer);
-            Console.WriteLine("Массив строк после сортировки");
+            Console.WriteLine("Массив строк после сортировки\n");
             Print(strings);
             Console.ReadKey();
         }
-
-        static bool Smth(string s1, string s2)
-        {
-            if (s1.Length > s2.Length)
-                return false;
-            else return true;
-        }
-
         static void Print(string[] strings)
         {
             foreach (var value in strings)
@@ -52,7 +44,7 @@ namespace Task1
             {
                 for (int j = i + 1; j < strings.Length; j++)
                 {
-                    if (comparer(strings[i].ToLower(), strings[j].ToLower()))
+                    if (comparer(strings[i], strings[j]))
                     {
                         var temp = strings[i];
                         strings[i] = strings[j];
@@ -62,9 +54,9 @@ namespace Task1
             }
         }
 
-        static bool IsFirstStringLonger(string firstString, string secondString) => firstString.Length > secondString.Length == true ?
-            true : firstString.Length == secondString.Length ? (string.Compare(firstString, secondString, true) == 1 ? true : false) : false;
-        /*{
+        static bool IsFirstStringLonger(string firstString, string secondString) /*=> firstString.Length > secondString.Length == true ?
+            true : firstString.Length == secondString.Length ? (string.Compare(firstString, secondString, true) == 1 ? true : false) : false;*/
+        {
             int str1L = firstString.Length;
             int str2L = secondString.Length;
 
@@ -74,12 +66,12 @@ namespace Task1
             }
             else if (str1L == str2L)
             {
-                if (string.Compare(firstString, secondString, true) == 1)
+                if (string.Compare(firstString.ToLower(), secondString.ToLower(), true) == 1)
                 {
                     return true;
                 }
             }
             return false;
-        }*/
+        }
     }
 }

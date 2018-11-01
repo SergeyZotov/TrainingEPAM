@@ -2,16 +2,8 @@
 
 namespace Task2
 {
-    class Person
+    public class Person
     {
-        public delegate void Greeting(Person person, Person whoCame, MyEventArgs e);
-
-        public delegate void Farewell(Person person, Person whoGone);
-
-        public event Greeting Came;
-
-        public event Farewell Gone;
-
         public string Name { get; set; }
 
         public Person(string name)
@@ -19,14 +11,43 @@ namespace Task2
             Name = name;
         }
 
-        public void Hello(Person person, DateTime time)
+        public delegate void OnCame(Person person, DateTime time);
+        public delegate void OnGone(Person person);
+
+        public event OnCame Came;
+        public event OnGone Gone;
+
+        public void GoToWork()
         {
-            Came?.Invoke(person, this, new MyEventArgs(time));
+            
         }
 
-        public void Goodbye(Person whoGone)
+        public void GoHome()
         {
-            whoGone.Gone?.Invoke(whoGone, this);
+
+        }
+
+        internal void Hello(Person personWhoAlreadyInOffice, DateTime timeOfCame)
+        {
+            string whoAlreadyinOffice = personWhoAlreadyInOffice.Name;
+
+            if (timeOfCame.Hour < 12)
+            {
+                Console.WriteLine($"Доброе утро, {whoAlreadyinOffice}! - сказал {Name}");
+            }
+            else if (timeOfCame.Hour < 17)
+            {
+                Console.WriteLine($"Добрый день, {whoAlreadyinOffice}! - сказал {Name}");
+            }
+            else
+            {
+                Console.WriteLine($"Добрый вечер, {whoAlreadyinOffice}! - сказал {Name}");
+            }
+        }
+
+        internal void Goodbye(Person personWhoGone)
+        {
+            Console.WriteLine($"До свидания, {personWhoGone.Name}! - сказал {Name}");
         }
     }
 }
