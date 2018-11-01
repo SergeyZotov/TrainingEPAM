@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Linq;
 
 namespace Task1
 {
@@ -12,8 +10,8 @@ namespace Task1
         private protected bool medicalBook;
         private protected int id;
 
-        public Employee(string firstName, string lastName, string middleName, 
-            DateTime dateOfBirthday, string post, double workExperience, string medicalBook, int id) : 
+        public Employee(string firstName, string lastName, string middleName,
+            DateTime dateOfBirthday, string post, double workExperience, string medicalBook, int id) :
             base(firstName, lastName, middleName, dateOfBirthday)
 
         {
@@ -28,7 +26,9 @@ namespace Task1
             private set
             {
                 if (value < 0)
+                {
                     throw new ArgumentException("Work experience cannot be less than 0");
+                }
 
                 workExperience = value;
             }
@@ -40,7 +40,9 @@ namespace Task1
             private set
             {
                 if (string.IsNullOrEmpty(value))
+                {
                     throw new ArgumentNullException("You have to write your position");
+                }
 
                 post = Regex.Replace(value, pattern, "");
             }
@@ -52,11 +54,17 @@ namespace Task1
             get
             {
                 if (workExperience < 3)
+                {
                     return 0.12;
+                }
                 else if (workExperience < 5 && workExperience >= 3)
+                {
                     return 0.3;
+                }
                 else
+                {
                     return 0.5;
+                }
             }
         }
 
@@ -65,11 +73,17 @@ namespace Task1
             private set
             {
                 if (value.ToString().Equals("yes"))
+                {
                     medicalBook = true;
+                }
                 else if (value.ToString().Equals("no"))
+                {
                     medicalBook = false;
+                }
                 else
+                {
                     throw new ArgumentException("You can write only \"yes/no\" ");
+                }
             }
 
             get => medicalBook.ToString();
@@ -93,14 +107,11 @@ namespace Task1
 
         public bool Equals(Employee other)
         {
-            /*if (GetHashCode() == other.GetHashCode())
-                return true;
-            else return false;*/
-            if (FirstName == other.FirstName && LastName == other.LastName &&
-                MiddleName == other.MiddleName && DateOfBirthday == other.DateOfBirthday &&
-                EmployeeID == other.EmployeeID)
-                return true;
-            else return false;
+            return (base.Equals(other) && EmployeeID == other.EmployeeID && Position == other.Position &&
+                MedicalBook == other.MedicalBook && WorkExperience == other.WorkExperience);
+
+
+
         }
-    } 
+    }
 }

@@ -8,8 +8,11 @@ namespace Task3
 {
     class TwoDPointWithHash : TwoDPoint
     {
+        private Tuple<int, int> tuple;
         public TwoDPointWithHash(int x, int y) : base(x, y)
-        { }
+        {
+            tuple = Tuple.Create(x, y);
+        }
 
         /* public override int GetHashCode()
          {
@@ -20,7 +23,7 @@ namespace Task3
 
         public override int GetHashCode()
         {
-            return Tuple.Create(x, y).GetHashCode();
+            return x ^ (y << 2);
         }
     }
 }

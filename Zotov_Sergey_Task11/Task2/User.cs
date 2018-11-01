@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Task1
 {
-    public class User
+    public class User : IEquatable<User>
     {
         private protected string pattern = @"(\s+[\W*])|(\s+\w*)|([0-9]+)";
         private protected string firstName = "";
@@ -76,6 +76,13 @@ namespace Task1
                 return ((DateOfBirthday.Month <= DateTime.Today.Month) && 
                     (DateOfBirthday.Day <= DateTime.Today.Day)) == true ? age : --age;
             }
+        }
+
+        public bool Equals(User other)
+        {
+            return (FirstName == other.FirstName && LastName == other.LastName &&
+                MiddleName == other.MiddleName && DateOfBirthday == other.DateOfBirthday);
+
         }
     }
 }
