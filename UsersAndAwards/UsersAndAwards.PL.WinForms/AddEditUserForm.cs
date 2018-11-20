@@ -49,6 +49,17 @@ namespace UsersAndAwards.PL.WinForms
         {
             if (ValidateChildren())
             {
+                if (NewUser != null)
+                {
+                    NewUser.FirstName = FirstName;
+                    NewUser.LastName = LastName;
+                    NewUser.Birthdate = Birthdate;
+                }
+                else
+                {
+                    NewUser = new User(FirstName, LastName, Birthdate);
+                }
+
                 for (int i = 0; i < ctlCheckBoxAwards.Items.Count; ++i)
                 {
                     foreach(var award in memory.GetAllAwards())
@@ -72,45 +83,68 @@ namespace UsersAndAwards.PL.WinForms
             }
         }
 
-        private void btnOk_Validated(object sender, EventArgs e)
+        private void txtFirstName_Validated(object sender, EventArgs e)
         {
             FirstName = txtFirstName.Text;
-            LastName = txtLastName.Text;
-            Birthdate = DateTime.Parse(txtBirthdate.Text);
-            if (NewUser != null)
-            {
-                NewUser.FirstName = FirstName;
-                NewUser.LastName = LastName;
-                NewUser.Birthdate = Birthdate;
-            }
-            else
-            {
-                NewUser = new User(FirstName, LastName, Birthdate);
-            }
         }
 
-        private void btnOk_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string fname = txtFirstName.Text;
-            string lname = txtLastName.Text;
-            DateTime.TryParse(txtBirthdate.Text, out DateTime bdate);
-
-            bool valid = !string.IsNullOrWhiteSpace(lname) && !string.IsNullOrWhiteSpace(fname) &&
-                !string.IsNullOrWhiteSpace(txtBirthdate.Text);
-
+            bool valid = !string.IsNullOrWhiteSpace(fname);
             if (valid)
             {
                 ctlErrorProvider.SetError(txtFirstName, string.Empty);
+                e.Cancel = false;
+            }
+            else
+            {
+                ctlErrorProvider.SetError(txtFirstName, "First Name cannot be empty");
+                e.Cancel = true;
+            }
+        }
+
+        private void txtLastName_Validated(object sender, EventArgs e)
+        {
+            LastName = txtLastName.Text;
+        }
+
+        private void txtLastName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string lname = txtLastName.Text;
+
+            bool valid = !string.IsNullOrWhiteSpace(lname);
+
+            if (valid)
+            {
                 ctlErrorProvider.SetError(txtLastName, string.Empty);
-                ctlErrorProvider.SetError(txtBirthdate, string.Empty);
 
                 e.Cancel = false;
             }
             else
             {
-                ctlErrorProvider.SetError(txtFirstName, "Пустое поле");
-                ctlErrorProvider.SetError(txtLastName, "Пустое поле");
-                ctlErrorProvider.SetError(txtBirthdate, "Пустое поле");
+                ctlErrorProvider.SetError(txtLastName, "Last Name cannot be empty");
+                e.Cancel = true;
+            }
+        }
+
+        private void txtBirthdate_Validated(object sender, EventArgs e)
+        {
+            Birthdate = DateTime.Parse(txtBirthdate.Text);
+        }
+
+        private void txtBirthdate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool valid =  !string.IsNullOrWhiteSpace(txtBirthdate.Text) && DateTime.TryParse(txtBirthdate.Text, out DateTime bdate);
+
+            if (valid)
+            {
+                ctlErrorProvider.SetError(txtBirthdate, string.Empty);
+                e.Cancel = false;
+            }
+            else
+            {
+                ctlErrorProvider.SetError(txtBirthdate, "Birthdate cannot be empty and must be correct");
                 e.Cancel = true;
             }
         }

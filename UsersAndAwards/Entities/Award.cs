@@ -14,11 +14,6 @@ namespace Entities
             get => description;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Description cannot be empty");
-                }
-
                 description = value;
             }
         }

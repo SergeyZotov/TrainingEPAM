@@ -81,6 +81,11 @@ namespace UsersAndAwards.PL.WinForms
             }
         }
 
+        private void ctlAddUser_Click(object sender, EventArgs e)
+        {
+            AddUser();
+        }
+
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddUser();
@@ -101,6 +106,41 @@ namespace UsersAndAwards.PL.WinForms
             AddAward();
         }
 
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAward();
+        }
+
+        private void editAwardToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EditAward();
+        }
+
+        private void removeAwardToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            RemoveAward();
+        }
+
+        private void ctlEditUser_Click(object sender, EventArgs e)
+        {
+            EditUser();
+        }
+
+        private void editAwardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditAward();
+        }
+
+        private void removeAwardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveAward();
+        }
+
+        private void ctlRemoveUser_Click(object sender, EventArgs e)
+        {
+            RemoveUser();
+        }
+
         private void AddAward()
         {
             var form = new AddEditAwardForm();
@@ -112,11 +152,6 @@ namespace UsersAndAwards.PL.WinForms
             ctlAwardsGrid.DataSource = null;
             ctlAwardsGrid.DataSource = memory.GetAllAwards();
             ctlAwardsGrid.Columns[0].Visible = false;
-        }
-
-        private void editAwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EditAward();
         }
 
         private void EditAward()
@@ -134,11 +169,6 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
             ctlAwardsGrid.DataSource = memory.GetAllAwards();
             ctlAwardsGrid.Columns[0].Visible = false;
-        }
-
-        private void removeAwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveAward();
         }
 
         private void RemoveAward()
@@ -171,11 +201,6 @@ namespace UsersAndAwards.PL.WinForms
             ctlAwardsGrid.Columns[0].Visible = false;
         }
 
-        private void ctlAddUser_Click(object sender, EventArgs e)
-        {
-            AddUser();
-        }
-
         private void AddUser()
         {
             var form = new AddEditUserForm(memory);
@@ -186,11 +211,6 @@ namespace UsersAndAwards.PL.WinForms
             }
             ctlUsersGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-        }
-
-        private void ctlEditUser_Click(object sender, EventArgs e)
-        {
-            EditUser();
         }
 
         private void EditUser()
@@ -207,11 +227,6 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
         }
 
-        private void ctlRemoveUser_Click(object sender, EventArgs e)
-        {
-            RemoveUser();
-        }
-
         private void RemoveUser()
         {
             var form = new DeleteUserForm();
@@ -221,15 +236,15 @@ namespace UsersAndAwards.PL.WinForms
             {
                 foreach (var user in memory.GetAllUsers())
                 {
-                    if (form.user.FirstName == user.FirstName && form.user.LastName == user.LastName &&
-                        form.user.Birthdate == user.Birthdate)
+                    if (form.User.FirstName == user.FirstName && form.User.LastName == user.LastName &&
+                        form.User.Birthdate == user.Birthdate)
                     {
                         if (memory.RemoveUser(user))
                         {
                             deleted = true;
                             break;
                         }
-                        
+
                     }
                 }
             }
@@ -239,21 +254,6 @@ namespace UsersAndAwards.PL.WinForms
             }
             ctlUsersGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-        }
-
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddAward();
-        }
-
-        private void editAwardToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            EditAward();
-        }
-
-        private void removeAwardToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            RemoveAward();
         }
     }
 }

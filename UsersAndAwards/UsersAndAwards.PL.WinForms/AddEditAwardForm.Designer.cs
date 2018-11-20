@@ -42,7 +42,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(167, 107);
+            this.btnCancel.Location = new System.Drawing.Point(167, 72);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 15;
@@ -52,7 +52,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(51, 107);
+            this.btnOk.Location = new System.Drawing.Point(86, 72);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 14;
@@ -62,16 +62,16 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(167, 68);
+            this.txtDescription.Location = new System.Drawing.Point(141, 25);
+            this.txtDescription.MaxLength = 250;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(100, 20);
+            this.txtDescription.Size = new System.Drawing.Size(101, 20);
             this.txtDescription.TabIndex = 12;
-            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
-            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(51, 68);
+            this.txtTitle.Location = new System.Drawing.Point(10, 25);
+            this.txtTitle.MaxLength = 50;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(100, 20);
             this.txtTitle.TabIndex = 11;
@@ -81,7 +81,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(164, 52);
+            this.lblDescription.Location = new System.Drawing.Point(138, 9);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(60, 13);
             this.lblDescription.TabIndex = 9;
@@ -90,7 +90,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(48, 52);
+            this.lblTitle.Location = new System.Drawing.Point(7, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(27, 13);
             this.lblTitle.TabIndex = 8;
@@ -98,21 +98,25 @@
             // 
             // ctlErrorProvider
             // 
+            this.ctlErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.ctlErrorProvider.ContainerControl = this;
             // 
             // AddEditAwardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 207);
+            this.ClientSize = new System.Drawing.Size(263, 122);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblTitle);
+            this.MaximumSize = new System.Drawing.Size(279, 161);
+            this.MinimumSize = new System.Drawing.Size(279, 161);
             this.Name = "AddEditAwardForm";
-            this.Text = "AddAwardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Adding/Editing Award";
             ((System.ComponentModel.ISupportInitialize)(this.ctlErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

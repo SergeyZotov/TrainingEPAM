@@ -40,7 +40,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(301, 173);
+            this.btnCancel.Location = new System.Drawing.Point(130, 61);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 21;
@@ -50,7 +50,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(163, 173);
+            this.btnOk.Location = new System.Drawing.Point(26, 61);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 20;
@@ -60,9 +60,12 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(47, 65);
+            this.txtTitle.Location = new System.Drawing.Point(15, 25);
+            this.txtTitle.MaximumSize = new System.Drawing.Size(202, 20);
+            this.txtTitle.MaxLength = 50;
+            this.txtTitle.MinimumSize = new System.Drawing.Size(202, 20);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(100, 20);
+            this.txtTitle.Size = new System.Drawing.Size(202, 20);
             this.txtTitle.TabIndex = 18;
             this.txtTitle.Validating += new System.ComponentModel.CancelEventHandler(this.txtTitle_Validating);
             this.txtTitle.Validated += new System.EventHandler(this.txtTitle_Validated);
@@ -70,7 +73,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(44, 49);
+            this.lblTitle.Location = new System.Drawing.Point(12, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(113, 13);
             this.lblTitle.TabIndex = 16;
@@ -78,19 +81,23 @@
             // 
             // ctlErrorProvider
             // 
+            this.ctlErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.ctlErrorProvider.ContainerControl = this;
             // 
             // DeleteAwardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 215);
+            this.ClientSize = new System.Drawing.Size(240, 112);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.lblTitle);
+            this.MaximumSize = new System.Drawing.Size(256, 151);
+            this.MinimumSize = new System.Drawing.Size(256, 151);
             this.Name = "DeleteAwardForm";
-            this.Text = "DeleteAwardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Removing Award";
             ((System.ComponentModel.ISupportInitialize)(this.ctlErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

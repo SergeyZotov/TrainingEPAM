@@ -45,7 +45,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(145, 66);
+            this.lblFirstName.Location = new System.Drawing.Point(8, 9);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(55, 13);
             this.lblFirstName.TabIndex = 0;
@@ -54,7 +54,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(261, 66);
+            this.lblLastName.Location = new System.Drawing.Point(142, 9);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(56, 13);
             this.lblLastName.TabIndex = 1;
@@ -63,7 +63,7 @@
             // lblBirthdate
             // 
             this.lblBirthdate.AutoSize = true;
-            this.lblBirthdate.Location = new System.Drawing.Point(388, 66);
+            this.lblBirthdate.Location = new System.Drawing.Point(275, 9);
             this.lblBirthdate.Name = "lblBirthdate";
             this.lblBirthdate.Size = new System.Drawing.Size(49, 13);
             this.lblBirthdate.TabIndex = 2;
@@ -71,42 +71,48 @@
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(148, 82);
+            this.txtFirstName.Location = new System.Drawing.Point(12, 25);
+            this.txtFirstName.MaxLength = 50;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(100, 20);
             this.txtFirstName.TabIndex = 3;
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
+            this.txtFirstName.Validated += new System.EventHandler(this.txtFirstName_Validated);
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(264, 82);
+            this.txtLastName.Location = new System.Drawing.Point(145, 25);
+            this.txtLastName.MaxLength = 50;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(100, 20);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
+            this.txtLastName.Validated += new System.EventHandler(this.txtLastName_Validated);
             // 
             // txtBirthdate
             // 
-            this.txtBirthdate.Location = new System.Drawing.Point(391, 82);
+            this.txtBirthdate.Location = new System.Drawing.Point(278, 25);
             this.txtBirthdate.Name = "txtBirthdate";
             this.txtBirthdate.Size = new System.Drawing.Size(100, 20);
             this.txtBirthdate.TabIndex = 5;
+            this.txtBirthdate.Validating += new System.ComponentModel.CancelEventHandler(this.txtBirthdate_Validating);
+            this.txtBirthdate.Validated += new System.EventHandler(this.txtBirthdate_Validated);
             // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(127, 171);
+            this.btnOk.Location = new System.Drawing.Point(251, 122);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 6;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            this.btnOk.Validating += new System.ComponentModel.CancelEventHandler(this.btnOk_Validating);
-            this.btnOk.Validated += new System.EventHandler(this.btnOk_Validated);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(265, 171);
+            this.btnCancel.Location = new System.Drawing.Point(332, 122);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -122,16 +128,16 @@
             // 
             this.ctlCheckBoxAwards.BackColor = System.Drawing.Color.White;
             this.ctlCheckBoxAwards.FormattingEnabled = true;
-            this.ctlCheckBoxAwards.Location = new System.Drawing.Point(510, 35);
+            this.ctlCheckBoxAwards.Location = new System.Drawing.Point(11, 51);
             this.ctlCheckBoxAwards.Name = "ctlCheckBoxAwards";
-            this.ctlCheckBoxAwards.Size = new System.Drawing.Size(120, 94);
+            this.ctlCheckBoxAwards.Size = new System.Drawing.Size(234, 94);
             this.ctlCheckBoxAwards.TabIndex = 9;
             // 
             // AddEditUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 326);
+            this.ClientSize = new System.Drawing.Size(417, 179);
             this.Controls.Add(this.ctlCheckBoxAwards);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -141,8 +147,10 @@
             this.Controls.Add(this.lblBirthdate);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.lblFirstName);
+            this.MinimumSize = new System.Drawing.Size(368, 216);
             this.Name = "AddEditUserForm";
-            this.Text = "Adding user";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Adding/Editing User";
             ((System.ComponentModel.ISupportInitialize)(this.ctlErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

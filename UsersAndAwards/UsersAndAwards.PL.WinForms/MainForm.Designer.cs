@@ -140,7 +140,7 @@
             // btnExit
             // 
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(180, 22);
+            this.btnExit.Size = new System.Drawing.Size(92, 22);
             this.btnExit.Text = "Exit";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -160,42 +160,42 @@
             // addUserToolStripMenuItem
             // 
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
-            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addUserToolStripMenuItem.Text = "Add User";
             this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
             // 
             // editUserToolStripMenuItem
             // 
             this.editUserToolStripMenuItem.Name = "editUserToolStripMenuItem";
-            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.editUserToolStripMenuItem.Text = "Edit User";
             this.editUserToolStripMenuItem.Click += new System.EventHandler(this.editUserToolStripMenuItem_Click);
             // 
             // removeUserToolStripMenuItem
             // 
             this.removeUserToolStripMenuItem.Name = "removeUserToolStripMenuItem";
-            this.removeUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeUserToolStripMenuItem.Text = "Remove User";
             this.removeUserToolStripMenuItem.Click += new System.EventHandler(this.removeUserToolStripMenuItem_Click);
             // 
             // addAwardToolStripMenuItem
             // 
             this.addAwardToolStripMenuItem.Name = "addAwardToolStripMenuItem";
-            this.addAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addAwardToolStripMenuItem.Text = "Add Award";
             this.addAwardToolStripMenuItem.Click += new System.EventHandler(this.addAwardToolStripMenuItem_Click);
             // 
             // editAwardToolStripMenuItem
             // 
             this.editAwardToolStripMenuItem.Name = "editAwardToolStripMenuItem";
-            this.editAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.editAwardToolStripMenuItem.Text = "Edit Award";
             this.editAwardToolStripMenuItem.Click += new System.EventHandler(this.editAwardToolStripMenuItem_Click);
             // 
             // removeAwardToolStripMenuItem
             // 
             this.removeAwardToolStripMenuItem.Name = "removeAwardToolStripMenuItem";
-            this.removeAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeAwardToolStripMenuItem.Text = "Remove Award";
             this.removeAwardToolStripMenuItem.Click += new System.EventHandler(this.removeAwardToolStripMenuItem_Click);
             // 
@@ -236,26 +236,26 @@
             this.editAwardToolStripMenuItem1,
             this.removeAwardToolStripMenuItem1});
             this.ctlAwardStripMenu.Name = "ctlAwardStripMenu";
-            this.ctlAwardStripMenu.Size = new System.Drawing.Size(181, 92);
+            this.ctlAwardStripMenu.Size = new System.Drawing.Size(155, 70);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.addToolStripMenuItem.Text = "Add Award";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // editAwardToolStripMenuItem1
             // 
             this.editAwardToolStripMenuItem1.Name = "editAwardToolStripMenuItem1";
-            this.editAwardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.editAwardToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.editAwardToolStripMenuItem1.Text = "Edit Award";
             this.editAwardToolStripMenuItem1.Click += new System.EventHandler(this.editAwardToolStripMenuItem1_Click);
             // 
             // removeAwardToolStripMenuItem1
             // 
             this.removeAwardToolStripMenuItem1.Name = "removeAwardToolStripMenuItem1";
-            this.removeAwardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.removeAwardToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.removeAwardToolStripMenuItem1.Text = "Remove Award";
             this.removeAwardToolStripMenuItem1.Click += new System.EventHandler(this.removeAwardToolStripMenuItem1_Click);
             // 
@@ -270,6 +270,7 @@
             this.MaximumSize = new System.Drawing.Size(580, 489);
             this.MinimumSize = new System.Drawing.Size(580, 489);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Users and awards";
             this.ctlTabs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
