@@ -32,7 +32,7 @@ namespace UsersAndAwards.DAL
             _awards.Add(award);
         }
 
-        public void RemoveUser(User user)
+        public bool RemoveUser(User user)
         {
             foreach (var man in _users)
             {
@@ -40,9 +40,10 @@ namespace UsersAndAwards.DAL
                     man.Birthdate == user.Birthdate)
                 {
                     _users.Remove(man);
-                    return;
+                    return true;
                 }
             }
+            return false;        
         }
 
         public void EditUser(User user, int row)
@@ -55,7 +56,7 @@ namespace UsersAndAwards.DAL
             _awards[row] = award;
         }
 
-        public void RemoveAward(Award award)
+        public bool RemoveAward(Award award)
         {
             foreach (var innerAward in _awards)
             {
@@ -66,9 +67,10 @@ namespace UsersAndAwards.DAL
                         user.RemoveAward(award);
                     }
                     _awards.Remove(award);
-                    return;
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

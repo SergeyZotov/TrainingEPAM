@@ -28,16 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ctlTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ctlUsersGrid = new System.Windows.Forms.DataGridView();
-            this.btnRemoveUser = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
-            this.btnAddUser = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnEditAward = new System.Windows.Forms.Button();
-            this.btnDeleteAward = new System.Windows.Forms.Button();
-            this.btnAddAward = new System.Windows.Forms.Button();
             this.ctlAwardsGrid = new System.Windows.Forms.DataGridView();
             this.ctlMainMenu = new System.Windows.Forms.MenuStrip();
             this.ctlMenuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,12 +44,22 @@
             this.addAwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editAwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlUserStripMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctlAddUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlEditUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlRemoveUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctlAwardStripMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editAwardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeAwardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctlUsersGrid)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctlAwardsGrid)).BeginInit();
             this.ctlMainMenu.SuspendLayout();
+            this.ctlUserStripMenu.SuspendLayout();
+            this.ctlAwardStripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // ctlTabs
@@ -72,9 +77,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.ctlUsersGrid);
-            this.tabPage1.Controls.Add(this.btnRemoveUser);
-            this.tabPage1.Controls.Add(this.btnEditUser);
-            this.tabPage1.Controls.Add(this.btnAddUser);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -92,44 +94,11 @@
             this.ctlUsersGrid.ImeMode = System.Windows.Forms.ImeMode.On;
             this.ctlUsersGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlUsersGrid.Name = "ctlUsersGrid";
-            this.ctlUsersGrid.Size = new System.Drawing.Size(544, 339);
+            this.ctlUsersGrid.Size = new System.Drawing.Size(544, 388);
             this.ctlUsersGrid.TabIndex = 4;
-            // 
-            // btnRemoveUser
-            // 
-            this.btnRemoveUser.Location = new System.Drawing.Point(314, 380);
-            this.btnRemoveUser.Name = "btnRemoveUser";
-            this.btnRemoveUser.Size = new System.Drawing.Size(94, 40);
-            this.btnRemoveUser.TabIndex = 6;
-            this.btnRemoveUser.Text = "Remove user";
-            this.btnRemoveUser.UseVisualStyleBackColor = true;
-            this.btnRemoveUser.Click += new System.EventHandler(this.btnRemoveUser_Click);
-            // 
-            // btnEditUser
-            // 
-            this.btnEditUser.Location = new System.Drawing.Point(214, 380);
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(94, 40);
-            this.btnEditUser.TabIndex = 7;
-            this.btnEditUser.Text = "Edit user";
-            this.btnEditUser.UseVisualStyleBackColor = true;
-            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Location = new System.Drawing.Point(414, 380);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(94, 40);
-            this.btnAddUser.TabIndex = 5;
-            this.btnAddUser.Text = "Add user";
-            this.btnAddUser.UseVisualStyleBackColor = true;
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btnEditAward);
-            this.tabPage2.Controls.Add(this.btnDeleteAward);
-            this.tabPage2.Controls.Add(this.btnAddAward);
             this.tabPage2.Controls.Add(this.ctlAwardsGrid);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -139,36 +108,6 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnEditAward
-            // 
-            this.btnEditAward.Location = new System.Drawing.Point(223, 376);
-            this.btnEditAward.Name = "btnEditAward";
-            this.btnEditAward.Size = new System.Drawing.Size(94, 40);
-            this.btnEditAward.TabIndex = 8;
-            this.btnEditAward.Text = "Edit award";
-            this.btnEditAward.UseVisualStyleBackColor = true;
-            this.btnEditAward.Click += new System.EventHandler(this.btnEditAward_Click);
-            // 
-            // btnDeleteAward
-            // 
-            this.btnDeleteAward.Location = new System.Drawing.Point(323, 376);
-            this.btnDeleteAward.Name = "btnDeleteAward";
-            this.btnDeleteAward.Size = new System.Drawing.Size(94, 40);
-            this.btnDeleteAward.TabIndex = 7;
-            this.btnDeleteAward.Text = "Remove award";
-            this.btnDeleteAward.UseVisualStyleBackColor = true;
-            this.btnDeleteAward.Click += new System.EventHandler(this.btnDeleteAward_Click);
-            // 
-            // btnAddAward
-            // 
-            this.btnAddAward.Location = new System.Drawing.Point(423, 376);
-            this.btnAddAward.Name = "btnAddAward";
-            this.btnAddAward.Size = new System.Drawing.Size(94, 40);
-            this.btnAddAward.TabIndex = 6;
-            this.btnAddAward.Text = "Add award";
-            this.btnAddAward.UseVisualStyleBackColor = true;
-            this.btnAddAward.Click += new System.EventHandler(this.btnAddAward_Click);
-            // 
             // ctlAwardsGrid
             // 
             this.ctlAwardsGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -176,7 +115,7 @@
             this.ctlAwardsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ctlAwardsGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlAwardsGrid.Name = "ctlAwardsGrid";
-            this.ctlAwardsGrid.Size = new System.Drawing.Size(544, 339);
+            this.ctlAwardsGrid.Size = new System.Drawing.Size(544, 388);
             this.ctlAwardsGrid.TabIndex = 5;
             // 
             // ctlMainMenu
@@ -230,30 +169,95 @@
             this.editUserToolStripMenuItem.Name = "editUserToolStripMenuItem";
             this.editUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editUserToolStripMenuItem.Text = "Edit User";
+            this.editUserToolStripMenuItem.Click += new System.EventHandler(this.editUserToolStripMenuItem_Click);
             // 
             // removeUserToolStripMenuItem
             // 
             this.removeUserToolStripMenuItem.Name = "removeUserToolStripMenuItem";
             this.removeUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeUserToolStripMenuItem.Text = "Remove User";
+            this.removeUserToolStripMenuItem.Click += new System.EventHandler(this.removeUserToolStripMenuItem_Click);
             // 
             // addAwardToolStripMenuItem
             // 
             this.addAwardToolStripMenuItem.Name = "addAwardToolStripMenuItem";
             this.addAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addAwardToolStripMenuItem.Text = "Add Award";
+            this.addAwardToolStripMenuItem.Click += new System.EventHandler(this.addAwardToolStripMenuItem_Click);
             // 
             // editAwardToolStripMenuItem
             // 
             this.editAwardToolStripMenuItem.Name = "editAwardToolStripMenuItem";
             this.editAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editAwardToolStripMenuItem.Text = "Edit Award";
+            this.editAwardToolStripMenuItem.Click += new System.EventHandler(this.editAwardToolStripMenuItem_Click);
             // 
             // removeAwardToolStripMenuItem
             // 
             this.removeAwardToolStripMenuItem.Name = "removeAwardToolStripMenuItem";
             this.removeAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeAwardToolStripMenuItem.Text = "Remove Award";
+            this.removeAwardToolStripMenuItem.Click += new System.EventHandler(this.removeAwardToolStripMenuItem_Click);
+            // 
+            // ctlUserStripMenu
+            // 
+            this.ctlUserStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctlAddUser,
+            this.ctlEditUser,
+            this.ctlRemoveUser});
+            this.ctlUserStripMenu.Name = "ctlUserStripMenu";
+            this.ctlUserStripMenu.Size = new System.Drawing.Size(144, 70);
+            // 
+            // ctlAddUser
+            // 
+            this.ctlAddUser.Name = "ctlAddUser";
+            this.ctlAddUser.Size = new System.Drawing.Size(143, 22);
+            this.ctlAddUser.Text = "Add User";
+            this.ctlAddUser.Click += new System.EventHandler(this.ctlAddUser_Click);
+            // 
+            // ctlEditUser
+            // 
+            this.ctlEditUser.Name = "ctlEditUser";
+            this.ctlEditUser.Size = new System.Drawing.Size(143, 22);
+            this.ctlEditUser.Text = "Edit User";
+            this.ctlEditUser.Click += new System.EventHandler(this.ctlEditUser_Click);
+            // 
+            // ctlRemoveUser
+            // 
+            this.ctlRemoveUser.Name = "ctlRemoveUser";
+            this.ctlRemoveUser.Size = new System.Drawing.Size(143, 22);
+            this.ctlRemoveUser.Text = "Remove User";
+            this.ctlRemoveUser.Click += new System.EventHandler(this.ctlRemoveUser_Click);
+            // 
+            // ctlAwardStripMenu
+            // 
+            this.ctlAwardStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.editAwardToolStripMenuItem1,
+            this.removeAwardToolStripMenuItem1});
+            this.ctlAwardStripMenu.Name = "ctlAwardStripMenu";
+            this.ctlAwardStripMenu.Size = new System.Drawing.Size(181, 92);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Text = "Add Award";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // editAwardToolStripMenuItem1
+            // 
+            this.editAwardToolStripMenuItem1.Name = "editAwardToolStripMenuItem1";
+            this.editAwardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.editAwardToolStripMenuItem1.Text = "Edit Award";
+            this.editAwardToolStripMenuItem1.Click += new System.EventHandler(this.editAwardToolStripMenuItem1_Click);
+            // 
+            // removeAwardToolStripMenuItem1
+            // 
+            this.removeAwardToolStripMenuItem1.Name = "removeAwardToolStripMenuItem1";
+            this.removeAwardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.removeAwardToolStripMenuItem1.Text = "Remove Award";
+            this.removeAwardToolStripMenuItem1.Click += new System.EventHandler(this.removeAwardToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -274,6 +278,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ctlAwardsGrid)).EndInit();
             this.ctlMainMenu.ResumeLayout(false);
             this.ctlMainMenu.PerformLayout();
+            this.ctlUserStripMenu.ResumeLayout(false);
+            this.ctlAwardStripMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,13 +290,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView ctlUsersGrid;
-        private System.Windows.Forms.Button btnRemoveUser;
-        private System.Windows.Forms.Button btnEditUser;
-        private System.Windows.Forms.Button btnAddUser;
-        private System.Windows.Forms.Button btnAddAward;
         private System.Windows.Forms.DataGridView ctlAwardsGrid;
-        private System.Windows.Forms.Button btnDeleteAward;
-        private System.Windows.Forms.Button btnEditAward;
         private System.Windows.Forms.MenuStrip ctlMainMenu;
         private System.Windows.Forms.ToolStripMenuItem ctlMenuFile;
         private System.Windows.Forms.ToolStripMenuItem btnExit;
@@ -301,6 +301,14 @@
         private System.Windows.Forms.ToolStripMenuItem addAwardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editAwardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeAwardToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ctlUserStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctlAddUser;
+        private System.Windows.Forms.ToolStripMenuItem ctlEditUser;
+        private System.Windows.Forms.ToolStripMenuItem ctlRemoveUser;
+        private System.Windows.Forms.ContextMenuStrip ctlAwardStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editAwardToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem removeAwardToolStripMenuItem1;
     }
 }
 

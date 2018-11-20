@@ -46,7 +46,8 @@ namespace UsersAndAwards.PL.WinForms
         private void txtTitle_Validated(object sender, EventArgs e)
         {
             Title = txtTitle.Text;
-            Award.Title = Title;
+            if (Award != null)
+                Award.Title = Title;
         }
 
         private void txtTitle_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -70,7 +71,8 @@ namespace UsersAndAwards.PL.WinForms
         private void txtDescription_Validated(object sender, EventArgs e)
         {
             Description = txtDescription.Text;
-            Award.Description = Description;
+            if (Award != null)
+                Award.Description = Description;
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
