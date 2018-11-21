@@ -94,8 +94,10 @@
             this.ctlUsersGrid.ImeMode = System.Windows.Forms.ImeMode.On;
             this.ctlUsersGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlUsersGrid.Name = "ctlUsersGrid";
+            this.ctlUsersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ctlUsersGrid.Size = new System.Drawing.Size(544, 388);
             this.ctlUsersGrid.TabIndex = 4;
+            this.ctlUsersGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ctlUsersGrid_ColumnHeaderMouseClick);
             // 
             // tabPage2
             // 
@@ -115,8 +117,10 @@
             this.ctlAwardsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ctlAwardsGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlAwardsGrid.Name = "ctlAwardsGrid";
+            this.ctlAwardsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ctlAwardsGrid.Size = new System.Drawing.Size(544, 388);
             this.ctlAwardsGrid.TabIndex = 5;
+            this.ctlAwardsGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ctlAwardsGrid_ColumnHeaderMouseClick);
             // 
             // ctlMainMenu
             // 

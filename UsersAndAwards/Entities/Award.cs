@@ -5,18 +5,9 @@ namespace Entities
     public class Award
     {
         private string title;
-        private string description;
 
         public int Id { get; set; }
 
-        public string Description
-        {
-            get => description;
-            set
-            {
-                description = value;
-            }
-        }
 
         public string Title
         {
@@ -31,6 +22,12 @@ namespace Entities
                 title = value;
             }
         }
+
+        public string Description
+        {
+            get; set;
+        }
+
 
         public Award(string title, string description)
         {

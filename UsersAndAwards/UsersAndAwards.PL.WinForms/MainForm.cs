@@ -1,5 +1,7 @@
 ﻿using Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using UsersAndAwards.BLL;
 using UsersAndAwards.DAL;
@@ -17,11 +19,12 @@ namespace UsersAndAwards.PL.WinForms
             Desc
         };
 
-        SortOrder lastNameSort = SortOrder.Asc;
+        SortOrder Sort = SortOrder.Asc;
 
         public MainForm()
         {
             memory = new InMemoryStorage();
+
             InitializeComponent();
 
             ctlTabs.TabPages[0].Text = "Users";
@@ -44,14 +47,63 @@ namespace UsersAndAwards.PL.WinForms
             memory.AddAward(new Award("Nobel prize", "Epic award"));
             memory.AddAward(new Award("Small prize", "Award"));
             logic = new Logic();
+
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+
             ctlAwardsGrid.DataSource = memory.GetAllAwards();
             ctlAwardsGrid.Columns[0].Visible = false;
+            ctlUsersGrid.Columns[0].Visible = false;
         }
         //var connection = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-        private void ctlUsersAndAwardsGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void ctlUsersGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            ctlUsersGrid.DataSource = null;
 
+            if (e.ColumnIndex == 0)
+            {
+                if (Sort == SortOrder.Asc)
+                {
+                    ctlUsersGrid.DataSource = list.OrderBy(u => u.FirstName).ToList();
+                    Sort = SortOrder.Desc;
+                }
+                else
+                {
+                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.FirstName).ToList();
+                    Sort = SortOrder.Asc;
+                }
+            }
+            else if (e.ColumnIndex == 1)
+            {
+                if (Sort == SortOrder.Asc)
+                {
+                    ctlUsersGrid.DataSource = list.OrderBy(u => u.LastName).ToList();
+                    Sort = SortOrder.Desc;
+                }
+                else
+                {
+                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.LastName).ToList();
+                    Sort = SortOrder.Asc;
+                }
+            }
+            else if (e.ColumnIndex == 2)
+            {
+                if (Sort == SortOrder.Asc)
+                {
+                    ctlUsersGrid.DataSource = list.OrderBy(u => u.Birthdate).ToList();
+                    Sort = SortOrder.Desc;
+                }
+                else
+                {
+                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.Birthdate).ToList();
+                    Sort = SortOrder.Asc;
+                }
+            }
+            else
+            {
+                ctlUsersGrid.DataSource = list;
+            }
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void ctlTabs_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,36 +221,39 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
             ctlAwardsGrid.DataSource = memory.GetAllAwards();
             ctlAwardsGrid.Columns[0].Visible = false;
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void RemoveAward()
         {
-            var form = new DeleteAwardForm();
+            var userList = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            var awardList = (List<Award>)ctlAwardsGrid.DataSource;
             bool deleted = false;
-            if (form.ShowDialog() == DialogResult.OK)
+            foreach (var award in memory.GetAllAwards())
             {
-                foreach (var award in memory.GetAllAwards())
+                foreach (DataGridViewRow index in ctlAwardsGrid.Rows)
                 {
-                    if (form.Title == award.Title)
+                    if (index.Selected && award.Id == (int)index.Cells[0].Value)
                     {
-                        if (memory.RemoveAward(award))
+                        if (memory.RemoveAward(award) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
                             deleted = true;
                             break;
                         }
-
                     }
+
                 }
-            }
-            if (!deleted)
-            {
-                MessageBox.Show("Award not found!", "Attention", MessageBoxButtons.OK);
+                if (deleted)
+                {
+                    break;
+                }
             }
             ctlUsersGrid.DataSource = null;
             ctlAwardsGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
             ctlAwardsGrid.DataSource = memory.GetAllAwards();
             ctlAwardsGrid.Columns[0].Visible = false;
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void AddUser()
@@ -211,6 +266,7 @@ namespace UsersAndAwards.PL.WinForms
             }
             ctlUsersGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void EditUser()
@@ -225,35 +281,60 @@ namespace UsersAndAwards.PL.WinForms
             }
             ctlUsersGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void RemoveUser()
         {
-            var form = new DeleteUserForm();
             bool deleted = false;
-
-            if (form.ShowDialog() == DialogResult.OK)
+            foreach (var user in memory.GetAllUsers())
             {
-                foreach (var user in memory.GetAllUsers())
+                foreach (DataGridViewRow index in ctlUsersGrid.Rows)
                 {
-                    if (form.User.FirstName == user.FirstName && form.User.LastName == user.LastName &&
-                        form.User.Birthdate == user.Birthdate)
+                    if (index.Selected && user.Id == (int)index.Cells[0].Value)
                     {
-                        if (memory.RemoveUser(user))
+                        if (memory.RemoveUser(user) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
                             deleted = true;
                             break;
                         }
-
                     }
+
                 }
-            }
-            if (!deleted)
-            {
-                MessageBox.Show("User not found!", "Attention", MessageBoxButtons.OK);
+                if (deleted)
+                {
+                    break;
+                }
             }
             ctlUsersGrid.DataSource = null;
             ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlUsersGrid.Columns[0].Visible = false;
+        }
+
+        private void ctlAwardsGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var list = (List<Award>)ctlAwardsGrid.DataSource;
+
+            ctlAwardsGrid.DataSource = null;
+
+            if (e.ColumnIndex == 2)
+            {
+                if (Sort == SortOrder.Asc)
+                {
+                    ctlAwardsGrid.DataSource = list.OrderBy(u => u.Title).ToList();
+                    Sort = SortOrder.Desc;
+                }
+                else
+                {
+                    ctlAwardsGrid.DataSource = list.OrderByDescending(u => u.Title).ToList();
+                    Sort = SortOrder.Asc;
+                }
+            }
+            else
+            {
+                ctlAwardsGrid.DataSource = list;
+            }
+            ctlAwardsGrid.Columns[0].Visible = false;
         }
     }
 }

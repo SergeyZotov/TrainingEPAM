@@ -12,9 +12,11 @@ namespace UsersAndAwards.PL.WinForms
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
         public User User { get; set; }
+        private IStorage memory;
 
-        public DeleteUserForm()
+        public DeleteUserForm(IStorage mem)
         {
+            memory = mem;
             InitializeComponent();
         }
 
@@ -22,9 +24,28 @@ namespace UsersAndAwards.PL.WinForms
         {
             if (ValidateChildren())
             {
+                bool deleted = false;
                 if (MessageBox.Show("Are you sure you want to remove this user?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     User = new User(txtFirstName.Text, txtLastName.Text, DateTime.Parse(txtBirthdate.Text));
+                    foreach (var user in memory.GetAllUsers())
+                    {
+                        if (User.FirstName == user.FirstName && User.LastName == user.LastName &&
+                            User.Birthdate == user.Birthdate)
+                        {
+                            if (memory.RemoveUser(user))
+                            {
+                                deleted = true;
+                                break;
+                            }
+
+                        }
+                    }
+
+                    if (!deleted)
+                    {
+                        MessageBox.Show("User not found!", "Attention", MessageBoxButtons.OK);
+                    }
                     DialogResult = DialogResult.OK;
                 }
 
