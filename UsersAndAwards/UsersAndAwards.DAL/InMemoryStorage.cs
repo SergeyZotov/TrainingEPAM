@@ -1,5 +1,6 @@
 ﻿using Entities;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace UsersAndAwards.DAL
 {
@@ -9,6 +10,11 @@ namespace UsersAndAwards.DAL
         private List<Award> _awards = new List<Award>();
         private int userId = 0;
         private int awardId = 0;
+
+        public InMemoryStorage()
+        {
+            var connetion = ConfigurationManager.ConnectionStrings["MyConnectionString"];
+        }
 
         public List<User> GetAllUsers()
         {

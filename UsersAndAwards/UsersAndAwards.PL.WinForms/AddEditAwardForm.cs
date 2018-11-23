@@ -70,12 +70,27 @@ namespace UsersAndAwards.PL.WinForms
 
         private void txtDescription_Validated(object sender, EventArgs e)
         {
-
+            Description = txtDescription.Text;
+            if (Award != null)
+                Award.Description = Description;
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
+            string description = txtDescription.Text;
 
+            bool valid = !string.IsNullOrWhiteSpace(description);
+
+            if (valid)
+            {
+                ctlErrorProvider.SetError(txtTitle, string.Empty);
+                e.Cancel = false;
+            }
+            else
+            {
+                ctlErrorProvider.SetError(txtTitle, "Пустое поле");
+                e.Cancel = true;
+            }
         }
     }
 }

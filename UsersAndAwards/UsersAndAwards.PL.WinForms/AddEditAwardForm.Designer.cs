@@ -67,6 +67,8 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(101, 20);
             this.txtDescription.TabIndex = 12;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // txtTitle
             // 
