@@ -12,6 +12,9 @@ namespace UsersAndAwards.PL.WinForms
     {
         IStorage memory;
         Logic logic;
+        IStorage dataBase;
+        IStorage storage;
+
 
         enum SortOrder
         {
@@ -21,18 +24,26 @@ namespace UsersAndAwards.PL.WinForms
 
         // [0,] - fname, [1,] - lname, [2,] - bdate, [3,] - awards
         // [,0] - Asc, [,1] - Des
-        private bool[,] HowIsUsersSorted = new bool[5, 2];
+        private bool[,] HowIsUsersSorted = new bool[6, 2];
         private bool[,] HowIsAwardsSorted = new bool[3, 2]; 
 
         SortOrder Sort = SortOrder.Asc;
 
         public MainForm()
         {
+            if (DBStorage.connection.Contains("System.Data.SqlClient"))
+            {
+                memory = new DBStorage(DBStorage.connection);
+            }
+            else
+            {
+                memory = new InMemoryStorage();
+            }
 
-            memory = new InMemoryStorage();
+            //dataBase = new DBStorage(DBStorage.connection);
 
             // values for default table that you see the first time
-            HowIsUsersSorted[4, 0] = true;
+            HowIsUsersSorted[5, 0] = true;
             HowIsAwardsSorted[2, 0] = true;
 
             InitializeComponent();
@@ -63,14 +74,14 @@ namespace UsersAndAwards.PL.WinForms
 
             //ctlUsersGrid.AutoGenerateColumns = false;
 
-            ctlUsersGrid.DataSource = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            ctlAwardsGrid.DataSource = memory.GetAllAwards();
+            ctlUsersGrid.DataSource = /*dataBase.GetAllUsers(); logic.GetUsersForUI(dataBase.GetAllUsers(), dataBase); //*/logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlAwardsGrid.DataSource = /*dataBase.GetAllAwards(); //*/memory.GetAllAwards();
 
             ctlAwardsGrid.Columns[0].Visible = false;
             ctlUsersGrid.Columns[0].Visible = false;
 
         }
-        //var connection = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+
         private void ctlUsersGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
@@ -85,7 +96,6 @@ namespace UsersAndAwards.PL.WinForms
                     InitArray(index, Sort);
                     ctlUsersGrid.DataSource = list.OrderBy(u => u.FirstName).ToList();
                     Sort = SortOrder.Desc;
-
                 }
                 else
                 {
@@ -134,6 +144,22 @@ namespace UsersAndAwards.PL.WinForms
                 if (Sort == SortOrder.Asc)
                 {
                     InitArray(index, Sort);
+                    ctlUsersGrid.DataSource = list.OrderBy(u => u.Age).ToList();
+                    Sort = SortOrder.Desc;
+
+                }
+                else
+                {
+                    InitArray(index, Sort);
+                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.Age).ToList();
+                    Sort = SortOrder.Asc;
+                }
+            }
+            else if (e.ColumnIndex == 5)
+            {
+                if (Sort == SortOrder.Asc)
+                {
+                    InitArray(index, Sort);
                     ctlUsersGrid.DataSource = list.OrderBy(u => u.Awards).ToList();
                     Sort = SortOrder.Desc;
 
@@ -154,7 +180,7 @@ namespace UsersAndAwards.PL.WinForms
 
         private void InitArray(int index, SortOrder sortOrder)
         {
-            HowIsUsersSorted = new bool[5, 2];
+            HowIsUsersSorted = new bool[6, 2];
             HowIsAwardsSorted = new bool[2, 2];
 
             if (index == 1 && sortOrder == SortOrder.Asc)
@@ -177,21 +203,29 @@ namespace UsersAndAwards.PL.WinForms
                 HowIsUsersSorted[1, 1] = true;
                 HowIsAwardsSorted[1, 1] = true;
             }
-            if (index == 1 && sortOrder == SortOrder.Asc)
+            if (index == 3 && sortOrder == SortOrder.Asc)
             {
                 HowIsUsersSorted[2, 0] = true;
             }
-            else if (index == 1 && sortOrder == SortOrder.Desc)
+            else if (index == 3 && sortOrder == SortOrder.Desc)
             {
                 HowIsUsersSorted[2, 1] = true;
             }
-            else if (index == 2 && sortOrder == SortOrder.Asc)
+            else if (index == 4 && sortOrder == SortOrder.Asc)
             {
                 HowIsUsersSorted[3, 0] = true;
             }
-            else if (index == 2 && sortOrder == SortOrder.Desc)
+            else if (index == 4 && sortOrder == SortOrder.Desc)
             {
                 HowIsUsersSorted[3, 1] = true;
+            }
+            else if (index == 5 && sortOrder == SortOrder.Asc)
+            {
+                HowIsUsersSorted[4, 0] = true;
+            }
+            else if (index == 5 && sortOrder == SortOrder.Desc)
+            {
+                HowIsUsersSorted[4, 1] = true;
             }
 
         }
@@ -379,7 +413,7 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.DataSource = null;
             list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
             ctlUsersGrid.DataSource = GetListWithLastSort(list);
-            ctlUsersGrid.Columns[0].Visible = false;
+            //ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void EditUser()

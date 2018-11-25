@@ -9,7 +9,7 @@ namespace Entities
         private string lastName;
         private string firstName;
         private DateTime birthday;
-        private List<Award> awards = new List<Award>();
+        public List<Award> awards = new List<Award>();
 
 
         public User(string firstName, string lastName, DateTime birthday)

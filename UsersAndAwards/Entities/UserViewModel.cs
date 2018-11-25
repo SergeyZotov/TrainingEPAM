@@ -9,6 +9,7 @@ namespace Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
+        public int Age { get; set; }
         public string Awards { get; set; }
 
 
@@ -17,9 +18,9 @@ namespace Entities
             FirstName = user.FirstName;
             LastName = user.LastName;
             Birthdate = user.Birthdate;
+            Age = user.Age;
             Id = user.Id;
             Awards = string.Join(", ", user.GetAwards().Select(award => award.Title));
         }
-
     }
 }
