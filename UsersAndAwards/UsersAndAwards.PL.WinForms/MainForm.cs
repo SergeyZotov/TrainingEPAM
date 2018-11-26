@@ -31,14 +31,14 @@ namespace UsersAndAwards.PL.WinForms
 
         public MainForm()
         {
-            if (DBStorage.connection.Contains("System.Data.SqlClient"))
-            {
+            /*if (DBStorage.connection.Contains("System.Data.SqlClient"))
+            {*/
                 memory = new DBStorage(DBStorage.connection);
-            }
+            /*}
             else
             {
                 memory = new InMemoryStorage();
-            }
+            }*/
 
             //dataBase = new DBStorage(DBStorage.connection);
 
@@ -444,7 +444,7 @@ namespace UsersAndAwards.PL.WinForms
                 ctlUsersGrid.DataSource = null;
                 list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
                 ctlUsersGrid.DataSource = GetListWithLastSort(list);
-                ctlUsersGrid.Columns[0].Visible = false;
+                //ctlUsersGrid.Columns[0].Visible = false;
             }
         }
 
@@ -473,7 +473,7 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.DataSource = null;
             list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
             ctlUsersGrid.DataSource = GetListWithLastSort(list);
-            ctlUsersGrid.Columns[0].Visible = false;
+            //ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void ctlAwardsGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

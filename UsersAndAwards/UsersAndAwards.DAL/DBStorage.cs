@@ -29,15 +29,15 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "AddAward";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
-
+                command.Prepare();
                 command.Parameters.AddWithValue("@title", newAward.Title);
                 command.Parameters.AddWithValue("@description", newAward.Description);
 
                 connection.Open();
 
                 var result = command.ExecuteScalar();
-                var newAwardId = (int)result;
-                newAward.Id = newAwardId;
+                //var newAwardId = (int)result;
+                //newAward.Id = newAwardId;
             }
         }
 
@@ -49,16 +49,16 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "AddUser";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
-
+                command.Prepare();
                 command.Parameters.AddWithValue("@fname", newUser.FirstName);
                 command.Parameters.AddWithValue("@lname", newUser.LastName);
                 command.Parameters.AddWithValue("@bdate", newUser.Birthdate);
 
                 connection.Open();
 
-                var result = command.ExecuteScalar();
-                var userId = (int)result;
-                newUser.Id = userId;
+                var result = command.ExecuteReader();
+                // var userId = (int)result;
+                //newUser.Id = result.GetInt32(0);
 
                 //AddUserAwards(newUser, connection);
 
@@ -80,7 +80,7 @@ namespace UsersAndAwards.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
 
-
+                command.Prepare();
                 command.Parameters.AddWithValue("@userId", user.Id);
                 var awardsTablePArameter = command.Parameters.AddWithValue("@rewardIds", awardsTable);
                 awardsTablePArameter.SqlDbType = SqlDbType.Structured;
@@ -97,7 +97,7 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "EditAward";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
-
+                command.Prepare();
                 command.Parameters.AddWithValue("@awardId", row);
                 command.Parameters.AddWithValue("@title", currentAward.Title);
                 command.Parameters.AddWithValue("@description", currentAward.Description);
@@ -119,16 +119,33 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "EditUser";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
+                DataTable awards = new DataTable();
+                awards.Columns.Add();
+                currentUser.awards =  currentUser.awards.Distinct().ToList();
+                if (currentUser.awards.Any())
+                {
+                    foreach (var aw in currentUser.awards)
+                    {
+                        if (aw.Id == 0)
+                            continue;
+                        awards.Rows.Add(aw.Id);
+                    }
 
+                }
+
+
+                command.Prepare();
                 command.Parameters.AddWithValue("@userId", row);
                 command.Parameters.AddWithValue("@fname", currentUser.FirstName);
                 command.Parameters.AddWithValue("@lname", currentUser.LastName);
                 command.Parameters.AddWithValue("@bdate", currentUser.Birthdate);
-                command.Parameters.AddWithValue("@awards", currentUser.awards);
+                command.Parameters.AddWithValue("@awards", awards);
 
                 connection.Open();
 
-                /*var result = */command.ExecuteNonQuery();
+                /*var result = */
+
+                command.ExecuteNonQuery();
                 /*var userId = (int)result;
                 currentUser.Id = userId;*/
 
@@ -182,6 +199,7 @@ namespace UsersAndAwards.DAL
 
                     "WHERE Relations.UserId = @userId";*/
                     command.Connection = connection;
+                    command.Prepare();
                     command.Parameters.AddWithValue("@userId", user.Id);
 
                     connection.Open();
@@ -192,7 +210,7 @@ namespace UsersAndAwards.DAL
                         while (reader.Read())
                         {
                             var award = new Award(reader.GetString(1), reader.GetString(2));
-
+                            award.Id = reader.GetInt32(0);
                             user.awards.Add(award);
                         }
                     }
@@ -221,6 +239,7 @@ namespace UsersAndAwards.DAL
                     while (reader.Read())
                     {
                         var user = new User(reader.GetString(1), reader.GetString(2), reader.GetDateTime(3));
+                        user.Id = reader.GetInt32(0);
                         users.Add(user);
                     }
                 }
@@ -239,6 +258,7 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "DeleteAward";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
+                command.Prepare();
                 command.Parameters.AddWithValue("@awardId", award.Id);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -255,6 +275,7 @@ namespace UsersAndAwards.DAL
                 command.CommandText = "DeleteUser";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
+                command.Prepare();
                 command.Parameters.AddWithValue("@userId", user.Id);
                 connection.Open();
                 command.ExecuteNonQuery();
