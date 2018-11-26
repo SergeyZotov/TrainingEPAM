@@ -14,7 +14,8 @@ namespace UsersAndAwards.DAL
     {
         private readonly string connectionString = string.Empty;
 
-        public static readonly string connection =  ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        public static readonly string connection = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+        public static readonly string providerName = ConfigurationManager.ConnectionStrings["MyConnectionString"].ProviderName;
 
         public DBStorage(string connection)
         {

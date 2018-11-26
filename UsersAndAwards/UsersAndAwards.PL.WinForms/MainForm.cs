@@ -31,14 +31,14 @@ namespace UsersAndAwards.PL.WinForms
 
         public MainForm()
         {
-            /*if (DBStorage.connection.Contains("System.Data.SqlClient"))
-            {*/
+            if (DBStorage.providerName.Contains("System.Data.SqlClient"))
+            {
                 memory = new DBStorage(DBStorage.connection);
-            /*}
+            }
             else
             {
                 memory = new InMemoryStorage();
-            }*/
+            }
 
             //dataBase = new DBStorage(DBStorage.connection);
 
