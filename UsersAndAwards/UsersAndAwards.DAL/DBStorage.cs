@@ -61,7 +61,7 @@ namespace UsersAndAwards.DAL
                 // var userId = (int)result;
                 //newUser.Id = result.GetInt32(0);
 
-                //AddUserAwards(newUser, connection);
+                AddUserAwards(newUser, connection);
 
             }
         }
@@ -83,8 +83,8 @@ namespace UsersAndAwards.DAL
 
                 command.Prepare();
                 command.Parameters.AddWithValue("@userId", user.Id);
-                var awardsTablePArameter = command.Parameters.AddWithValue("@rewardIds", awardsTable);
-                awardsTablePArameter.SqlDbType = SqlDbType.Structured;
+              /* var awardsTablePArameter = */command.Parameters.AddWithValue("@rewardIds", awardsTable);
+                //awardsTablePArameter.SqlDbType = SqlDbType.Structured;
 
                 command.ExecuteNonQuery();
             }
@@ -121,7 +121,7 @@ namespace UsersAndAwards.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
                 DataTable awards = new DataTable();
-                awards.Columns.Add();
+                awards.Columns.Add("AwardId", typeof(int));
                 currentUser.awards =  currentUser.awards.Distinct().ToList();
                 if (currentUser.awards.Any())
                 {

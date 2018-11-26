@@ -22,9 +22,11 @@ namespace UsersAndAwards.PL.WinForms
             Desc
         };
 
-        // [0,] - fname, [1,] - lname, [2,] - bdate, [3,] - awards
+        // [0,] - fname, [1,] - lname, [2,] - bdate, [3,] - age, [4,] - awards, [5,] - default
         // [,0] - Asc, [,1] - Des
         private bool[,] HowIsUsersSorted = new bool[6, 2];
+
+        // [0,] - title, [1,] - description, [2,] - default
         private bool[,] HowIsAwardsSorted = new bool[3, 2]; 
 
         SortOrder Sort = SortOrder.Asc;
