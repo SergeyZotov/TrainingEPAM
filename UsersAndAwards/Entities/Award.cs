@@ -4,14 +4,13 @@ namespace Entities
 {
     public class Award
     {
-        private string title;
+        private string _title;
 
-        public int Id { get; set; }
-
+        public int AwardId { get; set; }
 
         public string Title
         {
-            get => title;
+            get => _title;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -19,7 +18,7 @@ namespace Entities
                     throw new ArgumentException("Title cannot be empty");
                 }
 
-                title = value;
+                _title = value;
             }
         }
 
@@ -27,7 +26,6 @@ namespace Entities
         {
             get; set;
         }
-
 
         public Award(string title, string description)
         {

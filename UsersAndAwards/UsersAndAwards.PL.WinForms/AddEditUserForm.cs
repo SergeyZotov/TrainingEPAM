@@ -1,8 +1,8 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using System.Linq;
 using UsersAndAwards.DAL;
 
 namespace UsersAndAwards.PL.WinForms
@@ -21,9 +21,11 @@ namespace UsersAndAwards.PL.WinForms
         {
             InitializeComponent();
             memory = mem;
-            foreach (var award in memory.GetAllAwards())
+            var awards = memory.GetAllAwards();
+            foreach (var award in awards)
             {
-                ctlCheckBoxAwards.Items.Add(award.Title, false);       
+                ctlCheckBoxAwards.Items.Add(award.Title, false);
+
             }
         }
 
@@ -34,13 +36,32 @@ namespace UsersAndAwards.PL.WinForms
             txtBirthdate.Text = user.Birthdate.ToShortDateString();
             txtFirstName.Text = user.FirstName;
             txtLastName.Text = user.LastName;
-            foreach (var award in memory.GetAllAwards())
+            var awards = memory.GetAllAwards();
+            int _index = 0;
+
+            if (user.Awards.Any())
             {
-                if (user.GetAwards().Contains(award))
-                    ctlCheckBoxAwards.Items.Add(award.Title, true);
-                else
-                    ctlCheckBoxAwards.Items.Add(award.Title, false);
+                foreach (var award in awards)
+                {
+                    if (_index < user.Awards.Count && user.Awards[_index].AwardId == award.AwardId)
+                    {
+                        ctlCheckBoxAwards.Items.Add(award.Title, true);
+                        _index++;
+                    }
+                    else
+                    {
+                        ctlCheckBoxAwards.Items.Add(award.Title, false);
+                    }
+                }
             }
+            else
+            {
+                foreach (var award in awards)
+                {
+                    ctlCheckBoxAwards.Items.Add(award.Title, false);
+                }
+            }
+
 
             NewUser = user;
         }
@@ -60,20 +81,35 @@ namespace UsersAndAwards.PL.WinForms
                     NewUser = new User(FirstName, LastName, Birthdate);
                 }
 
+                var awards = memory.GetAllAwards();
+
                 for (int i = 0; i < ctlCheckBoxAwards.Items.Count; ++i)
                 {
-                    foreach(var award in memory.GetAllAwards())
+                    for (int j = 0; j < awards.Count; j++)
                     {
-                        if (ctlCheckBoxAwards.GetItemChecked(i) && !NewUser.GetAwards().Contains(award) && award.Title == ctlCheckBoxAwards.Items[i].ToString())
+                        if (NewUser.Awards.Count != 0)
                         {
-                            NewUser.AddAward(award);
+                            for (int k = 0; k < NewUser.Awards.Count; ++k)
+                            {
+                                if (ctlCheckBoxAwards.GetItemChecked(i) && NewUser.Awards[k].AwardId != awards[j].AwardId && awards[j].Title == ctlCheckBoxAwards.Items[i].ToString())
+                                {
+                                    NewUser.AddAward(awards[j]);
+                                }
+                                else if (!ctlCheckBoxAwards.GetItemChecked(i) && NewUser.Awards[k].AwardId == awards[j].AwardId && awards[j].Title == ctlCheckBoxAwards.Items[i].ToString())
+                                {
+                                    NewUser.RemoveAward(NewUser.Awards[k]);
+                                }
+                            }
                         }
-                        else if (!ctlCheckBoxAwards.GetItemChecked(i) && NewUser.GetAwards().Contains(award) && award.Title == ctlCheckBoxAwards.Items[i].ToString())
+                        else
                         {
-                            NewUser.RemoveAward(award);
+                            if (ctlCheckBoxAwards.GetItemChecked(i) && awards[j].Title == ctlCheckBoxAwards.Items[i].ToString())
+                            {
+                                NewUser.AddAward(awards[j]);
+                            }
                         }
                     }
-                } 
+                }
 
                 DialogResult = DialogResult.OK;
             }
@@ -135,7 +171,7 @@ namespace UsersAndAwards.PL.WinForms
 
         private void txtBirthdate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool valid =  !string.IsNullOrWhiteSpace(txtBirthdate.Text) && DateTime.TryParse(txtBirthdate.Text, out DateTime bdate);
+            bool valid = !string.IsNullOrWhiteSpace(txtBirthdate.Text) && DateTime.TryParse(txtBirthdate.Text, out DateTime bdate);
 
             if (valid)
             {

@@ -6,11 +6,9 @@ namespace Entities
     public class User
     {
         
-        private string lastName;
-        private string firstName;
-        private DateTime birthday;
-        public List<Award> awards = new List<Award>();
-
+        private string _lastName;
+        private string _firstName;
+        private DateTime _birthday;
 
         public User(string firstName, string lastName, DateTime birthday)
         {
@@ -21,15 +19,13 @@ namespace Entities
 
         public int Id { get; set; }
 
-        public List<Award> GetAwards() => awards;
+        public void AddAward(Award award) => Awards.Add(award);
 
-        public void AddAward(Award award) => awards.Add(award);
-
-        public void RemoveAward(Award award) => awards.Remove(award);
+        public void RemoveAward(Award award) => Awards.Remove(award);
 
         public string FirstName
         {
-            get => firstName;
+            get => _firstName;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -37,12 +33,12 @@ namespace Entities
                     throw new ArgumentException("First name cannot be empty!");
                 }
 
-                firstName = value;
+                _firstName = value;
             }
         }
         public string LastName
         {
-            get => lastName;
+            get => _lastName;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -50,13 +46,13 @@ namespace Entities
                     throw new ArgumentException("Last name cannot be empty!");
                 }
 
-                lastName = value;
+                _lastName = value;
             }
         }
 
         public DateTime Birthdate
         {
-            get => birthday;
+            get => _birthday;
             set
             {
                 if (value > DateTime.Now || (DateTime.Now.Year - value.Year) > 150)
@@ -64,7 +60,7 @@ namespace Entities
                     throw new ArgumentException("Birthday cannot be more or less then (date now - 150 years)");
                 }
 
-                birthday = value;
+                _birthday = value;
             }
         }
 
@@ -81,6 +77,10 @@ namespace Entities
             {
                 if (Birthdate.Day <= DateTime.Today.Day)
                 {
+                    return 0;
+                }
+                else
+                {
                     return 1;
                 }
             }
@@ -88,6 +88,7 @@ namespace Entities
             return 0;
         }
 
+        public List<Award> Awards = new List<Award>();
 
     }
 }

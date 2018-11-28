@@ -32,6 +32,12 @@
             this.ctlTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ctlUsersGrid = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Birthdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Awards = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ctlAwardsGrid = new System.Windows.Forms.DataGridView();
             this.ctlMainMenu = new System.Windows.Forms.MenuStrip();
@@ -91,6 +97,13 @@
             this.ctlUsersGrid.AllowUserToResizeRows = false;
             this.ctlUsersGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ctlUsersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ctlUsersGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.FirstName,
+            this.LastName,
+            this.Birthdate,
+            this.Age,
+            this.Awards});
             this.ctlUsersGrid.ImeMode = System.Windows.Forms.ImeMode.On;
             this.ctlUsersGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlUsersGrid.Name = "ctlUsersGrid";
@@ -99,6 +112,48 @@
             this.ctlUsersGrid.Size = new System.Drawing.Size(544, 388);
             this.ctlUsersGrid.TabIndex = 4;
             this.ctlUsersGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ctlUsersGrid_ColumnHeaderMouseClick);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // FirstName
+            // 
+            this.FirstName.DataPropertyName = "FirstName";
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            // 
+            // LastName
+            // 
+            this.LastName.DataPropertyName = "LastName";
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.ReadOnly = true;
+            // 
+            // Birthdate
+            // 
+            this.Birthdate.DataPropertyName = "Birthdate";
+            this.Birthdate.HeaderText = "Birthdate";
+            this.Birthdate.Name = "Birthdate";
+            this.Birthdate.ReadOnly = true;
+            // 
+            // Age
+            // 
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            // 
+            // Awards
+            // 
+            this.Awards.DataPropertyName = "Awards";
+            this.Awards.HeaderText = "Awards";
+            this.Awards.Name = "Awards";
+            this.Awards.ReadOnly = true;
             // 
             // tabPage2
             // 
@@ -315,6 +370,12 @@
         private System.Windows.Forms.ToolStripMenuItem ctlAddAward;
         private System.Windows.Forms.ToolStripMenuItem ctlEditAward;
         private System.Windows.Forms.ToolStripMenuItem ctlRemoveAward;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Birthdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Age;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Awards;
     }
 }
 

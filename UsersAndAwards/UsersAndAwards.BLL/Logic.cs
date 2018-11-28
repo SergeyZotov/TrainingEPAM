@@ -16,24 +16,8 @@ namespace UsersAndAwards.BLL
             for (int i = 0; i < users.Count; i++)
             {
                 _users.Add(new UserViewModel(users[i]));
-                _users[i].Awards = GetStringAwards(users[i], memory);
             }
             return _users;
-        }
-
-        private string GetStringAwards(User user, IStorage memory)
-        {
-            var stringAwardsOfUser = memory.GetAllAwards();
-            string awards = string.Empty;
-
-            foreach (var award in stringAwardsOfUser)
-            {
-                if (user.GetAwards().Contains(award))
-                {
-                    awards = string.Join(", ", user.GetAwards().Select(_award => _award.Title));
-                }
-            }
-            return awards;
         }
     }
 }

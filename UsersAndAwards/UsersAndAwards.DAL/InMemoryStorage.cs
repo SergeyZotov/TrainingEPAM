@@ -34,7 +34,7 @@ namespace UsersAndAwards.DAL
 
         public void AddAward(Award award)
         {
-            award.Id = ++awardId;
+            award.AwardId = ++awardId;
             _awards.Add(award);
         }
 

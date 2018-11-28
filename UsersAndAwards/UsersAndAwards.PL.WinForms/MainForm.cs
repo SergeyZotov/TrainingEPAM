@@ -12,9 +12,6 @@ namespace UsersAndAwards.PL.WinForms
     {
         IStorage memory;
         Logic logic;
-        IStorage dataBase;
-        IStorage storage;
-
 
         enum SortOrder
         {
@@ -35,14 +32,12 @@ namespace UsersAndAwards.PL.WinForms
         {
             if (DBStorage.providerName.Contains("System.Data.SqlClient"))
             {
-                memory = new DBStorage(DBStorage.connection);
+                memory = new DBStorage();
             }
             else
             {
                 memory = new InMemoryStorage();
             }
-
-            //dataBase = new DBStorage(DBStorage.connection);
 
             // values for default table that you see the first time
             HowIsUsersSorted[5, 0] = true;
@@ -64,20 +59,20 @@ namespace UsersAndAwards.PL.WinForms
             ctlUsersGrid.ContextMenuStrip = ctlUserStripMenu;
             ctlAwardsGrid.ContextMenuStrip = ctlAwardStripMenu;
 
-
-
-            memory.AddUser(new User("Petr", "Petrov", new DateTime(1998, 1, 14)));
-            memory.AddUser(new User("Sidor", "Sidorov", new DateTime(2000, 6, 28)));
-            memory.AddUser(new User("Ivan", "Ivanov", new DateTime(1960, 7, 7)));
-            memory.AddUser(new User("Sergey", "Zotov", new DateTime(2016, 12, 12)));
-            memory.AddAward(new Award("Nobel prize", "Epic award"));
-            memory.AddAward(new Award("Small prize", "Award"));
+            // Есть ли смысл тут сделать статичный метод на получение UserViewModel?
             logic = new Logic();
 
-            //ctlUsersGrid.AutoGenerateColumns = false;
+            ctlUsersGrid.AutoGenerateColumns = false;
 
-            ctlUsersGrid.DataSource = /*dataBase.GetAllUsers(); logic.GetUsersForUI(dataBase.GetAllUsers(), dataBase); //*/logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            ctlAwardsGrid.DataSource = /*dataBase.GetAllAwards(); //*/memory.GetAllAwards();
+            // Не выводится содержимое на таблицу, если AutoGenerateColumns == false
+            //ctlAwardsGrid.AutoGenerateColumns = false;
+
+            var usersFromStorage = memory.GetAllUsers();
+            var usersViewModel = logic.GetUsersForUI(usersFromStorage, memory);
+            var awardsFromStorage = memory.GetAllAwards();
+
+            ctlUsersGrid.DataSource = usersViewModel;
+            ctlAwardsGrid.DataSource = awardsFromStorage;
 
             ctlAwardsGrid.Columns[0].Visible = false;
             ctlUsersGrid.Columns[0].Visible = false;
@@ -86,23 +81,23 @@ namespace UsersAndAwards.PL.WinForms
 
         private void ctlUsersGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            var listOfUsers = (List<UserViewModel>)ctlUsersGrid.DataSource;
             ctlUsersGrid.DataSource = null;
 
-            int index = e.ColumnIndex;
+            int columnIndex = e.ColumnIndex;
 
-            if (index == 1)
+            if (columnIndex == 1)
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderBy(u => u.FirstName).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderBy(u => u.FirstName).ToList();
                     Sort = SortOrder.Desc;
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.FirstName).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderByDescending(u => u.FirstName).ToList();
                     Sort = SortOrder.Asc;
 
                 }
@@ -111,15 +106,15 @@ namespace UsersAndAwards.PL.WinForms
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderBy(u => u.LastName).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderBy(u => u.LastName).ToList();
                     Sort = SortOrder.Desc;
 
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.LastName).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderByDescending(u => u.LastName).ToList();
                     Sort = SortOrder.Asc;
 
                 }
@@ -128,15 +123,15 @@ namespace UsersAndAwards.PL.WinForms
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderBy(u => u.Birthdate).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderBy(u => u.Birthdate).ToList();
                     Sort = SortOrder.Desc;
 
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.Birthdate).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderByDescending(u => u.Birthdate).ToList();
                     Sort = SortOrder.Asc;
 
                 }
@@ -145,15 +140,15 @@ namespace UsersAndAwards.PL.WinForms
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderBy(u => u.Age).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderBy(u => u.Age).ToList();
                     Sort = SortOrder.Desc;
 
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.Age).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderByDescending(u => u.Age).ToList();
                     Sort = SortOrder.Asc;
                 }
             }
@@ -161,29 +156,30 @@ namespace UsersAndAwards.PL.WinForms
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderBy(u => u.Awards).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderBy(u => u.Awards).ToList();
                     Sort = SortOrder.Desc;
 
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlUsersGrid.DataSource = list.OrderByDescending(u => u.Awards).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlUsersGrid.DataSource = listOfUsers.OrderByDescending(u => u.Awards).ToList();
                     Sort = SortOrder.Asc;
                 }
             }
             else
             {
-                ctlUsersGrid.DataSource = list;
+                ctlUsersGrid.DataSource = listOfUsers;
             }
+
             ctlUsersGrid.Columns[0].Visible = false;
         }
 
-        private void InitArray(int index, SortOrder sortOrder)
+        private void InitializationOfSortingArray(int index, SortOrder sortOrder)
         {
             HowIsUsersSorted = new bool[6, 2];
-            HowIsAwardsSorted = new bool[2, 2];
+            HowIsAwardsSorted = new bool[3, 2];
 
             if (index == 1 && sortOrder == SortOrder.Asc)
             {
@@ -229,6 +225,11 @@ namespace UsersAndAwards.PL.WinForms
             {
                 HowIsUsersSorted[4, 1] = true;
             }
+            else
+            {
+                HowIsUsersSorted[5, 0] = true;
+                HowIsAwardsSorted[2, 0] = true;
+            }
 
         }
 
@@ -240,7 +241,6 @@ namespace UsersAndAwards.PL.WinForms
                     removeUserToolStripMenuItem.Enabled = false;
                 addAwardToolStripMenuItem.Enabled = editAwardToolStripMenuItem.Enabled =
                     removeAwardToolStripMenuItem.Enabled = true;
-
             }
             else
             {
@@ -261,7 +261,7 @@ namespace UsersAndAwards.PL.WinForms
 
         private void ctlAddUser_Click(object sender, EventArgs e)
         {
-            AddUser();
+                AddUser();
         }
 
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,140 +321,149 @@ namespace UsersAndAwards.PL.WinForms
 
         private void AddAward()
         {
-            var form = new AddEditAwardForm();
+            var addEditAwardForm = new AddEditAwardForm();
+            var listOfAwards = (List<Award>)ctlAwardsGrid.DataSource;
 
-            var list = (List<Award>)ctlAwardsGrid.DataSource;
-
-
-            if (form.ShowDialog() == DialogResult.OK)
+            if (addEditAwardForm.ShowDialog() == DialogResult.OK)
             {
-                memory.AddAward(new Award(form.Title, form.Description));
+                memory.AddAward(new Award(addEditAwardForm.Title, addEditAwardForm.Description));
             }
+
             ctlAwardsGrid.DataSource = null;
-            list = memory.GetAllAwards();
-            ctlAwardsGrid.DataSource = GetListWithLastSort(list);
+            listOfAwards = memory.GetAllAwards();
+            ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
             ctlAwardsGrid.Columns[0].Visible = false;
         }
 
         private void EditAward()
         {
-            DataGridViewRow selected = new DataGridViewRow();
+            DataGridViewRow selectedRow = new DataGridViewRow();
 
             foreach (DataGridViewRow row in ctlAwardsGrid.Rows)
             {
                 if (row.Selected)
                 {
-                    selected = row;
+                    selectedRow = row;
                     break;
                 }
             }
+
             var listOfAwards = memory.GetAllAwards();
-            int awardId = (int)selected.Cells[0].Value;
-            var selectedAward = listOfAwards.FirstOrDefault(a => a.Id == awardId);
+            int awardId = (int)selectedRow.Cells[0].Value;
+            var selectedAward = listOfAwards.FirstOrDefault(a => a.AwardId == awardId);
             if (selectedAward != null)
             {
-                var form = new AddEditAwardForm(selectedAward);
-                var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
+                var addEditAwardForm = new AddEditAwardForm(selectedAward);
+                var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
 
-                if (form.ShowDialog() == DialogResult.OK)
+                if (addEditAwardForm.ShowDialog() == DialogResult.OK)
                 {
-                    var us = memory.GetAllAwards().IndexOf(selectedAward);
-                    memory.EditAward(form.Award, us);
+                    var indexOfSelectedAward = listOfAwards.IndexOf(selectedAward);
+                    memory.EditAward(addEditAwardForm.Award, indexOfSelectedAward);
                 }
                 ctlUsersGrid.DataSource = null;
-                list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-                ctlUsersGrid.DataSource = GetListWithLastSort(list);
+                ctlAwardsGrid.DataSource = null;
+                listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+                listOfAwards = memory.GetAllAwards();
+                ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
+                ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
                 ctlUsersGrid.Columns[0].Visible = false;
+                ctlAwardsGrid.Columns[0].Visible = false;
             }
         }
 
         private void RemoveAward()
         {
-            var userList = (List<UserViewModel>)ctlUsersGrid.DataSource;
-            var awardList = (List<Award>)ctlAwardsGrid.DataSource;
-            bool deleted = false;
-            foreach (var award in memory.GetAllAwards())
+            var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            var listOfAwards = (List<Award>)ctlAwardsGrid.DataSource;
+            var awardsFromStorage = memory.GetAllAwards();
+            bool isDeleted = false;
+            foreach (var award in awardsFromStorage)
             {
                 foreach (DataGridViewRow index in ctlAwardsGrid.Rows)
                 {
-                    if (index.Selected && award.Id == (int)index.Cells[0].Value)
+                    if (index.Selected && award.AwardId == (int)index.Cells[0].Value)
                     {
                         if (memory.RemoveAward(award) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
-                            deleted = true;
+                            isDeleted = true;
                             break;
                         }
                     }
 
                 }
-                if (deleted)
+
+                if (isDeleted)
                 {
                     break;
                 }
             }
+
             ctlUsersGrid.DataSource = null;
             ctlAwardsGrid.DataSource = null;
-            userList = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            awardList = memory.GetAllAwards();
-            ctlUsersGrid.DataSource = GetListWithLastSort(userList);
-            ctlAwardsGrid.DataSource = GetListWithLastSort(awardList);
+            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            listOfAwards = memory.GetAllAwards();
+            ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
+            ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
             ctlAwardsGrid.Columns[0].Visible = false;
             ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void AddUser()
         {
-            var form = new AddEditUserForm(memory);
+            var addEditUserForm = new AddEditUserForm(memory);
 
-            var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
 
-            if (form.ShowDialog() == DialogResult.OK)
+            if (addEditUserForm.ShowDialog() == DialogResult.OK)
             {
-                memory.AddUser(form.NewUser);
+                memory.AddUser(addEditUserForm.NewUser);
             }
             ctlUsersGrid.DataSource = null;
-            list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            ctlUsersGrid.DataSource = GetListWithLastSort(list);
-            //ctlUsersGrid.Columns[0].Visible = false;
+            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void EditUser()
         {
-            DataGridViewRow selected = new DataGridViewRow();
+            DataGridViewRow selectedRow = new DataGridViewRow();
 
             foreach(DataGridViewRow row in ctlUsersGrid.Rows)
             {
                 if (row.Selected)
                 {
-                    selected = row;
+                    selectedRow = row;
                     break;
                 }
             }
             var users = memory.GetAllUsers();
-            int userId = (int)selected.Cells[0].Value;
+            int userId = (int)selectedRow.Cells[0].Value;
             var selectedUser = users.FirstOrDefault(u => u.Id == userId);
             if (selectedUser != null)
             {
-                var form = new AddEditUserForm(selectedUser, memory);
-                var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
+                var addEditUserForm = new AddEditUserForm(selectedUser, memory);
+                var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
 
-                if (form.ShowDialog() == DialogResult.OK)
+                if (addEditUserForm.ShowDialog() == DialogResult.OK)
                 {
-                    var us = memory.GetAllUsers().IndexOf(selectedUser);
-                    memory.EditUser(form.NewUser, us);
+                    var indexOfSelectedUser = users.IndexOf(selectedUser);
+                    memory.EditUser(addEditUserForm.NewUser, indexOfSelectedUser);
                 }
+
                 ctlUsersGrid.DataSource = null;
-                list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-                ctlUsersGrid.DataSource = GetListWithLastSort(list);
-                //ctlUsersGrid.Columns[0].Visible = false;
+                listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+                ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
+                ctlUsersGrid.Columns[0].Visible = false;
             }
         }
 
         private void RemoveUser()
         {
-            bool deleted = false;
-            var list = (List<UserViewModel>)ctlUsersGrid.DataSource;
-            foreach (var user in memory.GetAllUsers())
+            bool isDeleted = false;
+            var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
+            var usersFromStorage = memory.GetAllUsers();
+            foreach (var user in usersFromStorage)
             {
                 foreach (DataGridViewRow index in ctlUsersGrid.Rows)
                 {
@@ -462,63 +471,62 @@ namespace UsersAndAwards.PL.WinForms
                     {
                         if (memory.RemoveUser(user) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
-                            deleted = true;
+                            isDeleted = true;
                             break;
                         }
                     }
                 }
-                if (deleted)
+
+                if (isDeleted)
                 {
                     break;
                 }
             }
             ctlUsersGrid.DataSource = null;
-            list = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            ctlUsersGrid.DataSource = GetListWithLastSort(list);
-            //ctlUsersGrid.Columns[0].Visible = false;
+            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
+            ctlUsersGrid.Columns[0].Visible = false;
         }
 
         private void ctlAwardsGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var list = (List<Award>)ctlAwardsGrid.DataSource;
-
+            var listOfAwards = (List<Award>)ctlAwardsGrid.DataSource;
             ctlAwardsGrid.DataSource = null;
+            int columnIndex = e.ColumnIndex;
 
-            int index = e.ColumnIndex;
-
-            if (index == 1)
+            if (columnIndex == 1)
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlAwardsGrid.DataSource = list.OrderBy(u => u.Title).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlAwardsGrid.DataSource = listOfAwards.OrderBy(u => u.Title).ToList();
                     Sort = SortOrder.Desc;
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlAwardsGrid.DataSource = list.OrderByDescending(u => u.Title).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlAwardsGrid.DataSource = listOfAwards.OrderByDescending(u => u.Title).ToList();
                     Sort = SortOrder.Asc;
                 }
             }
-            else if (index == 2)
+            else if (columnIndex == 2)
             {
                 if (Sort == SortOrder.Asc)
                 {
-                    InitArray(index, Sort);
-                    ctlAwardsGrid.DataSource = list.OrderBy(u => u.Description).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlAwardsGrid.DataSource = listOfAwards.OrderBy(u => u.Description).ToList();
                     Sort = SortOrder.Desc;
                 }
                 else
                 {
-                    InitArray(index, Sort);
-                    ctlAwardsGrid.DataSource = list.OrderByDescending(u => u.Description).ToList();
+                    InitializationOfSortingArray(columnIndex, Sort);
+                    ctlAwardsGrid.DataSource = listOfAwards.OrderByDescending(u => u.Description).ToList();
                     Sort = SortOrder.Asc;
                 }
             }
             else
             {
-                ctlAwardsGrid.DataSource = list;
+                ctlAwardsGrid.DataSource = listOfAwards;
             }
             ctlAwardsGrid.Columns[0].Visible = false;
         }
@@ -551,18 +559,22 @@ namespace UsersAndAwards.PL.WinForms
             }
             else if (HowIsUsersSorted[3, 0])
             {
-                return list.OrderBy(u => u.Awards).ToList();
+                return list.OrderBy(u => u.Age).ToList();
             }
             else if (HowIsUsersSorted[3, 1])
             {
-                return list.OrderByDescending(u => u.Awards).ToList();
+                return list.OrderByDescending(u => u.Age).ToList();
             }
             else if (HowIsUsersSorted[4, 0])
             {
-                return list;
+                return list.OrderBy(u => u.Awards).ToList();
+            }
+            else if (HowIsUsersSorted[4, 1])
+            {
+                return list.OrderByDescending(u => u.Awards).ToList();
             }
 
-            return null;
+            return list;
         }
 
         private List<Award> GetListWithLastSort(List<Award> list)
@@ -583,8 +595,8 @@ namespace UsersAndAwards.PL.WinForms
             {
                 return list.OrderByDescending(u => u.Description).ToList();
             }
-            
-            return null;
+
+            return list;
         }
     }
 }

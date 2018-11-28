@@ -20,7 +20,7 @@ namespace Entities
             Birthdate = user.Birthdate;
             Age = user.Age;
             Id = user.Id;
-            Awards = string.Join(", ", user.GetAwards().Select(award => award.Title));
+            Awards = string.Join(", ", user.Awards.Select(award => award.Title));
         }
     }
 }

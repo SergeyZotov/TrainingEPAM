@@ -11,7 +11,7 @@ namespace UsersAndAwards.DAL
         void AddAward(Award newAward);
         bool RemoveUser(User user);
         bool RemoveAward(Award award);
-        void EditUser(User currentUser, int row);
-        void EditAward(Award currentAward, int row);
+        void EditUser(User currentUser, int indexOfSelectedUser);
+        void EditAward(Award currentAward, int indexOfSelectedAward);
     }
 }
