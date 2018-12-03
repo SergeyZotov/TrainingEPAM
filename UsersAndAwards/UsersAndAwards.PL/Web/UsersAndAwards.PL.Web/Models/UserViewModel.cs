@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Web;
 
 namespace UsersAndAwards.PL.Web.Models
@@ -20,46 +22,31 @@ namespace UsersAndAwards.PL.Web.Models
 
         public List<Award> Awards { get; set; }
 
-        public List<Award> AvailableRewards { get; set; }
+        public List<AwardViewModel> AvailableAwards { get; set; }
 
-        public User ToUser()
+        public UserViewModel(string fname, string lname, DateTime bdate, List<Award> awards)
         {
-            var user = new User
+            FirstName = fname;
+            LastName = lname;
+            Birthdate = bdate;
+            Awards = awards;
+            
+        }
+
+        public User ToUser(UserViewModel user1)
+        {
+            return new User(user1.FirstName, user1.LastName, user1.Birthdate)
             {
-                Id = Id,
-                FirstName = FirstName,
-                LastName = LastName,
-                Birthdate = Birthdate,
-                Awards = AvailableRewards
-                    .Where(r => r.IsAssigned == true)
-                    .Select(r => new Award
+                Id = user1.Id,
+                Awards = AvailableAwards
+                    .Where(a => a.IsAssigned == true)
+                    .Select(a => new Award(a.Title, a.Description)
                     {
-                        Id = r.Id,
-                        Title = r.Title,
-                        Description = r.Description
+                        AwardId = a.Id
                     }).ToList()
             };
 
-
-            return user;
-        }
-       public static UserViewModel GetViewModel(User user, List<Award> availableRewards)
-        {
-            var userModel = new UserViewModel();
-            userModel.Id = user.Id;
-            userModel.FirstName = user.FirstName;
-            userModel.LastName = user.LastName;
-            userModel.Birthdate = user.Birthdate;
-            userModel.Awards = user.Awards;
-            userModel.Age = user.Age;
-            var rewards = new List<Award>();
-            foreach (var reward in availableRewards)
-            {
-                rewards.Add(AwardViewModel.GetViewModel(reward, user.Awards));
-            }
-
-            userModel.AvailableRewards = rewards.ToList();
-            return userModel;
+           
         }
     }
 }

@@ -116,9 +116,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Award.cs" />
     <Compile Include="Models\AwardViewModel.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +140,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Entities.csproj">
+      <Project>{7749183b-f7ac-472d-af28-1f00f07fecff}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\UsersAndAwards.BLL\UsersAndAwards.BLL.csproj">
       <Project>{32aef1ed-08d1-4c1d-a139-990f481aa26f}</Project>
       <Name>UsersAndAwards.BLL</Name>
