@@ -5,74 +5,14 @@ using System.Web;
 
 namespace UsersAndAwards.PL.Web.Models
 {
-    /*
-     * <!--><p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Birthdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Birthdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
-    </!-->*/
     public class User
     {
         private string _lastName;
         private string _firstName;
         private DateTime _birthday;
 
-        public User(string firstName, string lastName, DateTime birthday)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Birthdate = birthday;
-        }
-
-        public User()
-        {
-
-        }
-
         public int Id { get; set; }
-
-        public void AddAward(Award award) => Awards.Add(award);
-
-        public void RemoveAward(Award award) => Awards.Remove(award);
 
         public string FirstName
         {
@@ -140,6 +80,10 @@ namespace UsersAndAwards.PL.Web.Models
         }
 
         public List<Award> Awards = new List<Award>();
+
+        public void AddAward(Award award) => Awards.Add(award);
+
+        public void RemoveAward(Award award) => Awards.Remove(award);
 
     }
 }

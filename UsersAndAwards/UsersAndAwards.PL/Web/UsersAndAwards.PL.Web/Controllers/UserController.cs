@@ -4,35 +4,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UsersAndAwards.BLL;
 using UsersAndAwards.PL.Web.Models;
 
 namespace UsersAndAwards.PL.Web.Controllers
 {
     public class UserController : Controller
     {
-        private static List<Award> rewards = new List<Award>
+        Logic logic;
+
+        public UserController()
         {
-            new Award { AwardId = 1, Title = "reward1", Description = "first userovich"},
-            new Award { AwardId = 2, Title = "reward2", Description = "second userovich"},
-            new Award { AwardId = 3, Title = "reward3", Description = "third userovich"}
+            logic = new Logic();
+        }
+
+        public static List<Award> awards = new List<Award>
+        {
+            new Award
+            {
+                Title = "Epipc",
+                Description = "epic",
+                Id = 0
+            }
         };
 
-        private static List<User> users = new List<User>
+        public static List<UserViewModel> users = new List<UserViewModel>
         {
-            new User { Id = 1, FirstName = "first user", LastName = "first userovich", Birthdate = new DateTime(1900, 10, 10), Awards = new List<Award> { rewards[2] } },
-            new User { Id = 2, FirstName = "second user", LastName = "second userovich", Birthdate = new DateTime(1900, 10, 10), Awards = new List<Award> { rewards[1], rewards[2] } },
-            new User { Id = 3, FirstName = "third user", LastName = "third userovich", Birthdate = new DateTime(1900, 10, 10)}
+            new UserViewModel
+            {
+                FirstName = "User1",
+                LastName = "Us1",
+                Birthdate = new DateTime(1990, 2, 1)
+            },
+            new UserViewModel
+            {
+                FirstName = "User2",
+                LastName = "Us2",
+                Birthdate = new DateTime(1990, 2, 1),
+                Awards = awards,
+                Id = 2
+            }
         };
 
         public ActionResult Index()
         {
-            return View(users);
+            try
+            {
+                return View((List<UsersAndAwards.PL.Web.Models.User>)Logic.GetAllUsers());
+                //return View(users);
+            }
+            catch
+            {
+                return View();
+            }
+
         }
 
         public ActionResult Edit(int userId)
         {
-            var currentUser = users.FirstOrDefault(u => u.Id == userId);
-            return View(UserViewModel.GetViewModel(currentUser, rewards));
+           
+            var currentUser = logic.GetAllUsers();//users.FirstOrDefault(u => u.Id == 2);
+            var allAwards = logic.GetAllAwards();//awards;
+            var model = new UserViewModel();
+            model.Id = 2;
+            model.FirstName = currentUser.FirstName;
+            model.Awards = allAwards.Select(a => new UsersAndAwards.PL.Web.Models.Award{ IsAssigned = currentUser.Awards.Any(aw => aw.AwardId == a.AwardId) }).ToList();
+            return View(model);
         }
 
         public ActionResult Add()
@@ -42,10 +79,10 @@ namespace UsersAndAwards.PL.Web.Controllers
 
         public ActionResult Delete(int userId)
         {
-            var currentUser = users.FirstOrDefault(u => u.Id == userId);
+            var currentUser = logic.GetAllUsers();// users.FirstOrDefault(u => u.Id == userId);
             if (currentUser != null)
             {
-                users.Remove(currentUser);
+               // storage.RemoveUser(currentUser);
             }
 
             return RedirectToAction("Index");
@@ -58,19 +95,19 @@ namespace UsersAndAwards.PL.Web.Controllers
                 if (userModel.Id == default(int))
                 {
                     // add
-                    users.Add(userModel.ToUser());
+                    //storage.EditUser(userModel as Entities.User, userModel.Id);
                 }
                 else
                 {
                     // update
-                    var currentUser = users.FirstOrDefault(u => u.Id == userModel.Id);
+                    var currentUser = /*storage.GetAllUsers()*/users.FirstOrDefault(u => u.Id == userModel.Id);
                     if (currentUser != null)
                     {
                         var user = userModel.ToUser();
                         currentUser.FirstName = user.FirstName;
                         currentUser.LastName = user.LastName;
                         currentUser.Birthdate = user.Birthdate;
-                        currentUser.Awards = user.Awards;
+                        //currentUser.Awards = (List<Entities.Award>)user.Awards;
                     }
                 }
             }

@@ -16,9 +16,11 @@ namespace UsersAndAwards.PL.Web.Models
 
         public DateTime Birthdate { get; set; }
 
+        public int Age { get; set; }
+
         public List<Award> Awards { get; set; }
 
-        public List<AwardViewModel> AvailableRewards { get; set; }
+        public List<Award> AvailableRewards { get; set; }
 
         public User ToUser()
         {
@@ -29,10 +31,10 @@ namespace UsersAndAwards.PL.Web.Models
                 LastName = LastName,
                 Birthdate = Birthdate,
                 Awards = AvailableRewards
-                    .Where(r => r.Checked == true)
+                    .Where(r => r.IsAssigned == true)
                     .Select(r => new Award
                     {
-                        AwardId = r.AwardId,
+                        Id = r.Id,
                         Title = r.Title,
                         Description = r.Description
                     }).ToList()
@@ -41,7 +43,7 @@ namespace UsersAndAwards.PL.Web.Models
 
             return user;
         }
-        public static UserViewModel GetViewModel(User user, List<Award> availableRewards)
+       public static UserViewModel GetViewModel(User user, List<Award> availableRewards)
         {
             var userModel = new UserViewModel();
             userModel.Id = user.Id;
@@ -49,7 +51,8 @@ namespace UsersAndAwards.PL.Web.Models
             userModel.LastName = user.LastName;
             userModel.Birthdate = user.Birthdate;
             userModel.Awards = user.Awards;
-            var rewards = new List<AwardViewModel>();
+            userModel.Age = user.Age;
+            var rewards = new List<Award>();
             foreach (var reward in availableRewards)
             {
                 rewards.Add(AwardViewModel.GetViewModel(reward, user.Awards));

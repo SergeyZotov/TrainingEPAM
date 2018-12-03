@@ -58,6 +58,9 @@
             this.ctlAddAward = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlEditAward = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlRemoveAward = new System.Windows.Forms.ToolStripMenuItem();
+            this.AwardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctlTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctlUsersGrid)).BeginInit();
@@ -170,6 +173,10 @@
             // 
             this.ctlAwardsGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ctlAwardsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ctlAwardsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AwardId,
+            this.Title,
+            this.Description});
             this.ctlAwardsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ctlAwardsGrid.Location = new System.Drawing.Point(6, 6);
             this.ctlAwardsGrid.Name = "ctlAwardsGrid";
@@ -220,42 +227,42 @@
             // addUserToolStripMenuItem
             // 
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
-            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addUserToolStripMenuItem.Text = "Add User";
             this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
             // 
             // editUserToolStripMenuItem
             // 
             this.editUserToolStripMenuItem.Name = "editUserToolStripMenuItem";
-            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editUserToolStripMenuItem.Text = "Edit User";
             this.editUserToolStripMenuItem.Click += new System.EventHandler(this.editUserToolStripMenuItem_Click);
             // 
             // removeUserToolStripMenuItem
             // 
             this.removeUserToolStripMenuItem.Name = "removeUserToolStripMenuItem";
-            this.removeUserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.removeUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeUserToolStripMenuItem.Text = "Remove User";
             this.removeUserToolStripMenuItem.Click += new System.EventHandler(this.removeUserToolStripMenuItem_Click);
             // 
             // addAwardToolStripMenuItem
             // 
             this.addAwardToolStripMenuItem.Name = "addAwardToolStripMenuItem";
-            this.addAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.addAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addAwardToolStripMenuItem.Text = "Add Award";
             this.addAwardToolStripMenuItem.Click += new System.EventHandler(this.addAwardToolStripMenuItem_Click);
             // 
             // editAwardToolStripMenuItem
             // 
             this.editAwardToolStripMenuItem.Name = "editAwardToolStripMenuItem";
-            this.editAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.editAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editAwardToolStripMenuItem.Text = "Edit Award";
             this.editAwardToolStripMenuItem.Click += new System.EventHandler(this.editAwardToolStripMenuItem_Click);
             // 
             // removeAwardToolStripMenuItem
             // 
             this.removeAwardToolStripMenuItem.Name = "removeAwardToolStripMenuItem";
-            this.removeAwardToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.removeAwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeAwardToolStripMenuItem.Text = "Remove Award";
             this.removeAwardToolStripMenuItem.Click += new System.EventHandler(this.removeAwardToolStripMenuItem_Click);
             // 
@@ -319,6 +326,25 @@
             this.ctlRemoveAward.Text = "Remove Award";
             this.ctlRemoveAward.Click += new System.EventHandler(this.removeAwardToolStripMenuItem1_Click);
             // 
+            // AwardId
+            // 
+            this.AwardId.DataPropertyName = "AwardId";
+            this.AwardId.HeaderText = "Id";
+            this.AwardId.Name = "AwardId";
+            this.AwardId.Visible = false;
+            // 
+            // Title
+            // 
+            this.Title.DataPropertyName = "Title";
+            this.Title.HeaderText = "Title";
+            this.Title.Name = "Title";
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,6 +402,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Birthdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.DataGridViewTextBoxColumn Awards;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AwardId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }
 

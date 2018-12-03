@@ -1,5 +1,5 @@
-﻿@using UsersAndAwards.PL.Web.Models;
-@model List<User>
+﻿
+@model List<UsersAndAwards.PL.Web.Models.UserViewModel>
 
 
 @{
@@ -18,6 +18,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Birthdate</th>
+            <th>Age</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -28,6 +29,7 @@
                 <td>@user.FirstName</td>
                 <td>@user.LastName</td>
                 <td>@user.Birthdate.ToShortDateString()</td>
+                <td>@user.Age</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", "User", new { UserId = @user.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Delete", "Delete", "User", new { UserId = @user.Id }, new { @class = "btn btn-danger" })

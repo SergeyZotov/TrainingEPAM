@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
-using UsersAndAwards.DAL;
+using UsersAndAwards.BLL;
 
 namespace UsersAndAwards.PL.WinForms
 {
@@ -15,13 +15,13 @@ namespace UsersAndAwards.PL.WinForms
         public User NewUser { get; set; }
         public List<string> checkedBoxes = new List<string>();
 
-        IStorage memory;
+        Logic logic;
 
-        public AddEditUserForm(IStorage mem)
+        public AddEditUserForm(Logic mem)
         {
             InitializeComponent();
-            memory = mem;
-            var awards = memory.GetAllAwards();
+            logic = mem;
+            var awards = logic.GetAllAwards();
             foreach (var award in awards)
             {
                 ctlCheckBoxAwards.Items.Add(award.Title, false);
@@ -29,14 +29,14 @@ namespace UsersAndAwards.PL.WinForms
             }
         }
 
-        public AddEditUserForm(User user, IStorage mem)
+        public AddEditUserForm(User user, Logic mem)
         {
             InitializeComponent();
-            memory = mem;
+            logic = mem;
             txtBirthdate.Text = user.Birthdate.ToShortDateString();
             txtFirstName.Text = user.FirstName;
             txtLastName.Text = user.LastName;
-            var awards = memory.GetAllAwards();
+            var awards = logic.GetAllAwards();
             int _index = 0;
 
             if (user.Awards.Any())
@@ -81,7 +81,7 @@ namespace UsersAndAwards.PL.WinForms
                     NewUser = new User(FirstName, LastName, Birthdate);
                 }
 
-                var awards = memory.GetAllAwards();
+                var awards = logic.GetAllAwards();
 
                 for (int i = 0; i < ctlCheckBoxAwards.Items.Count; ++i)
                 {

@@ -22,5 +22,7 @@ namespace Entities
             Id = user.Id;
             Awards = string.Join(", ", user.Awards.Select(award => award.Title));
         }
+
+        
     }
 }

@@ -129,8 +129,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Award\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -142,13 +142,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Entities\Entities.csproj">
-      <Project>{7749183B-F7AC-472D-AF28-1F00F07FECFF}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\UsersAndAwards.DAL\UsersAndAwards.DAL.csproj">
-      <Project>{971906FC-4D76-4520-9CE2-565D10470B99}</Project>
-      <Name>UsersAndAwards.DAL</Name>
+    <ProjectReference Include="..\..\..\UsersAndAwards.BLL\UsersAndAwards.BLL.csproj">
+      <Project>{32aef1ed-08d1-4c1d-a139-990f481aa26f}</Project>
+      <Name>UsersAndAwards.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -5,46 +5,13 @@ using System.Web;
 
 namespace UsersAndAwards.PL.Web.Models
 {
-    /*
-     * <!----<h2>Award</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AwardId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AwardId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AwardId })
-        </td>
-    </tr>
-}
-
-</table>
-    </!-->*/
     public class Award
     {
         private string _title;
 
-        public int AwardId { get; set; }
+        private string _description;
+
+        public int Id { get; set; }
 
         public string Title
         {
@@ -62,8 +29,19 @@ namespace UsersAndAwards.PL.Web.Models
 
         public string Description
         {
-            get; set;
+            get => _description;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Title cannot be empty");
+                }
+
+                _description = value;
+            }
         }
+
+        public bool IsAssigned { get; set; }
 
         public Award(string title, string description)
         {

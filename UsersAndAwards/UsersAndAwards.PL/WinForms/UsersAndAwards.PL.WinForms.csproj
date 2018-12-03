@@ -111,10 +111,6 @@
       <Project>{32AEF1ED-08D1-4C1D-A139-990F481AA26F}</Project>
       <Name>UsersAndAwards.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UsersAndAwards.DAL\UsersAndAwards.DAL.csproj">
-      <Project>{971906FC-4D76-4520-9CE2-565D10470B99}</Project>
-      <Name>UsersAndAwards.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

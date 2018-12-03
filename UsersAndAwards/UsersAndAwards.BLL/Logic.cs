@@ -1,23 +1,70 @@
 ﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UsersAndAwards.DAL;
 
 namespace UsersAndAwards.BLL
 {
-    public class Logic
+    public class Logic : IStorage
     {
-        private List<UserViewModel> _users;
+        IStorage storage;
 
-        public List<UserViewModel> GetUsersForUI(List<User> users, IStorage memory)
+        public Logic()
         {
-            _users = new List<UserViewModel>();
-
-            for (int i = 0; i < users.Count; i++)
+            if (DBStorage.providerName.Contains("System.Data.SqlClient"))
             {
-                _users.Add(new UserViewModel(users[i]));
+                storage = new DBStorage();
             }
-            return _users;
+            else
+            {
+                storage = new InMemoryStorage();
+            }
+        }
+
+        public List<UserViewModel> GetUsersForUI()
+        {
+            return storage.GetAllUsers().Select(u => new UserViewModel(u)).ToList();
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return storage.GetAllUsers().ToList();
+        }
+
+        public List<Award> GetAllAwards()
+        {
+            return storage.GetAllAwards();
+        }
+
+        public void AddUser(User newUser)
+        {
+            storage.AddUser(newUser);
+        }
+
+        public void AddAward(Award award)
+        {
+            storage.AddAward(award);
+        }
+
+        public void EditAward(Award award, int indexOfSelectedAward)
+        {
+            storage.EditAward(award, indexOfSelectedAward);
+        }
+
+        public bool RemoveAward(Award award)
+        {
+            return storage.RemoveAward(award);
+        }
+
+        public void EditUser(User newUser, int indexOfSelectedUser)
+        {
+            storage.EditUser(newUser, indexOfSelectedUser);
+        }
+
+        public bool RemoveUser(User user)
+        {
+            return storage.RemoveUser(user);
         }
     }
 }

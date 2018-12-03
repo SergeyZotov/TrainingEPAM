@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using UsersAndAwards.BLL;
-using UsersAndAwards.DAL;
 
 namespace UsersAndAwards.PL.WinForms
 {
     public partial class MainForm : Form
     {
-        IStorage memory;
         Logic logic;
 
         enum SortOrder
@@ -30,14 +28,7 @@ namespace UsersAndAwards.PL.WinForms
 
         public MainForm()
         {
-            if (DBStorage.providerName.Contains("System.Data.SqlClient"))
-            {
-                memory = new DBStorage();
-            }
-            else
-            {
-                memory = new InMemoryStorage();
-            }
+
 
             // values for default table that you see the first time
             HowIsUsersSorted[5, 0] = true;
@@ -63,13 +54,11 @@ namespace UsersAndAwards.PL.WinForms
             logic = new Logic();
 
             ctlUsersGrid.AutoGenerateColumns = false;
+            ctlAwardsGrid.AutoGenerateColumns = false;
 
-            // Не выводится содержимое на таблицу, если AutoGenerateColumns == false
-            //ctlAwardsGrid.AutoGenerateColumns = false;
-
-            var usersFromStorage = memory.GetAllUsers();
-            var usersViewModel = logic.GetUsersForUI(usersFromStorage, memory);
-            var awardsFromStorage = memory.GetAllAwards();
+            //var usersFromStorage = memory.GetAllUsers();//.Select(u => new UserViewModel(u)).ToList();
+            var usersViewModel =  logic.GetUsersForUI(); 
+            var awardsFromStorage = logic.GetAllAwards();
 
             ctlUsersGrid.DataSource = usersViewModel;
             ctlAwardsGrid.DataSource = awardsFromStorage;
@@ -326,11 +315,11 @@ namespace UsersAndAwards.PL.WinForms
 
             if (addEditAwardForm.ShowDialog() == DialogResult.OK)
             {
-                memory.AddAward(new Award(addEditAwardForm.Title, addEditAwardForm.Description));
+                logic.AddAward(new Award(addEditAwardForm.Title, addEditAwardForm.Description));
             }
 
             ctlAwardsGrid.DataSource = null;
-            listOfAwards = memory.GetAllAwards();
+            listOfAwards = logic.GetAllAwards();
             ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
             ctlAwardsGrid.Columns[0].Visible = false;
         }
@@ -348,7 +337,7 @@ namespace UsersAndAwards.PL.WinForms
                 }
             }
 
-            var listOfAwards = memory.GetAllAwards();
+            var listOfAwards = logic.GetAllAwards();
             int awardId = (int)selectedRow.Cells[0].Value;
             var selectedAward = listOfAwards.FirstOrDefault(a => a.AwardId == awardId);
             if (selectedAward != null)
@@ -359,12 +348,12 @@ namespace UsersAndAwards.PL.WinForms
                 if (addEditAwardForm.ShowDialog() == DialogResult.OK)
                 {
                     var indexOfSelectedAward = listOfAwards.IndexOf(selectedAward);
-                    memory.EditAward(addEditAwardForm.Award, indexOfSelectedAward);
+                    logic.EditAward(addEditAwardForm.Award, indexOfSelectedAward);
                 }
                 ctlUsersGrid.DataSource = null;
                 ctlAwardsGrid.DataSource = null;
-                listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-                listOfAwards = memory.GetAllAwards();
+                listOfUsersViewModel = logic.GetUsersForUI();
+                listOfAwards = logic.GetAllAwards();
                 ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
                 ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
                 ctlUsersGrid.Columns[0].Visible = false;
@@ -376,7 +365,7 @@ namespace UsersAndAwards.PL.WinForms
         {
             var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
             var listOfAwards = (List<Award>)ctlAwardsGrid.DataSource;
-            var awardsFromStorage = memory.GetAllAwards();
+            var awardsFromStorage = logic.GetAllAwards();
             bool isDeleted = false;
             foreach (var award in awardsFromStorage)
             {
@@ -384,13 +373,12 @@ namespace UsersAndAwards.PL.WinForms
                 {
                     if (index.Selected && award.AwardId == (int)index.Cells[0].Value)
                     {
-                        if (memory.RemoveAward(award) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        if (MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK && logic.RemoveAward(award))
                         {
                             isDeleted = true;
                             break;
                         }
                     }
-
                 }
 
                 if (isDeleted)
@@ -401,8 +389,8 @@ namespace UsersAndAwards.PL.WinForms
 
             ctlUsersGrid.DataSource = null;
             ctlAwardsGrid.DataSource = null;
-            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
-            listOfAwards = memory.GetAllAwards();
+            listOfUsersViewModel = logic.GetUsersForUI();
+            listOfAwards = logic.GetAllAwards();
             ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
             ctlAwardsGrid.DataSource = GetListWithLastSort(listOfAwards);
             ctlAwardsGrid.Columns[0].Visible = false;
@@ -411,16 +399,16 @@ namespace UsersAndAwards.PL.WinForms
 
         private void AddUser()
         {
-            var addEditUserForm = new AddEditUserForm(memory);
+            var addEditUserForm = new AddEditUserForm(logic);
 
             var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
 
             if (addEditUserForm.ShowDialog() == DialogResult.OK)
             {
-                memory.AddUser(addEditUserForm.NewUser);
+                logic.AddUser(addEditUserForm.NewUser);
             }
             ctlUsersGrid.DataSource = null;
-            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            listOfUsersViewModel = logic.GetUsersForUI();
             ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
             ctlUsersGrid.Columns[0].Visible = false;
         }
@@ -437,22 +425,22 @@ namespace UsersAndAwards.PL.WinForms
                     break;
                 }
             }
-            var users = memory.GetAllUsers();
+            var users = logic.GetAllUsers();
             int userId = (int)selectedRow.Cells[0].Value;
             var selectedUser = users.FirstOrDefault(u => u.Id == userId);
             if (selectedUser != null)
             {
-                var addEditUserForm = new AddEditUserForm(selectedUser, memory);
+                var addEditUserForm = new AddEditUserForm(selectedUser, logic);
                 var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
 
                 if (addEditUserForm.ShowDialog() == DialogResult.OK)
                 {
                     var indexOfSelectedUser = users.IndexOf(selectedUser);
-                    memory.EditUser(addEditUserForm.NewUser, indexOfSelectedUser);
+                    logic.EditUser(addEditUserForm.NewUser, indexOfSelectedUser);
                 }
 
                 ctlUsersGrid.DataSource = null;
-                listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+                listOfUsersViewModel = logic.GetUsersForUI();
                 ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
                 ctlUsersGrid.Columns[0].Visible = false;
             }
@@ -462,14 +450,14 @@ namespace UsersAndAwards.PL.WinForms
         {
             bool isDeleted = false;
             var listOfUsersViewModel = (List<UserViewModel>)ctlUsersGrid.DataSource;
-            var usersFromStorage = memory.GetAllUsers();
+            var usersFromStorage = logic.GetAllUsers();
             foreach (var user in usersFromStorage)
             {
                 foreach (DataGridViewRow index in ctlUsersGrid.Rows)
                 {
                     if (index.Selected && user.Id == (int)index.Cells[0].Value)
                     {
-                        if (memory.RemoveUser(user) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        if (logic.RemoveUser(user) && MessageBox.Show("Are you sure?", "Attention", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
                             isDeleted = true;
                             break;
@@ -483,7 +471,7 @@ namespace UsersAndAwards.PL.WinForms
                 }
             }
             ctlUsersGrid.DataSource = null;
-            listOfUsersViewModel = logic.GetUsersForUI(memory.GetAllUsers(), memory);
+            listOfUsersViewModel = logic.GetUsersForUI();
             ctlUsersGrid.DataSource = GetListWithLastSort(listOfUsersViewModel);
             ctlUsersGrid.Columns[0].Visible = false;
         }

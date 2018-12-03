@@ -1,46 +1,30 @@
-﻿@using UsersAndAwards.PL.Web.Models;
-
-@model UserViewModel
+﻿@model UsersAndAwards.PL.Web.Models.UserViewModel
 
 @{
-    ViewBag.Title = "Index";
-    var currentUser = Model;
-    if (currentUser == null)
-    {
-        currentUser = new UserViewModel();
-    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class=" = " form-horizontal">
+    <h4>User</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
-<form action="Save" method="post">
-    <input name="Id" style="display: none;" value="@currentUser.Id" />
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input name="FirstName" type="text" class="form-control" id="firstName" value="@currentUser.FirstName" />
+    <div class=" = " form-froup>
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label col-md-2" })
     </div>
-    <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input name="LastName" type="text" class="form-control" id="lastName" value="@currentUser.LastName" />
-    </div>
-    <div class="form-group">
-        <label for="birthdate">Birthdate</label>
-        <input name="Birthdate" type="date" class="form-control" id="birthdate" value="@currentUser.Birthdate.ToString("yyyy-MM-dd")" />
-    </div>
-    <div class="form-group">
-        <p>Rewards</p>
-        @for (var i = 0; i < currentUser.AvailableRewards.Count; i++)
+    <!--@if (Model.Awards != null)
+    {
+        for (int i = 0; i < Model.Awards.Count; ++i)
         {
-            var r = Model.AvailableRewards[i];
-            <label>@r.Title</label>
-            <input type="number" name="AvailableRewards[@i].Id" style="display: none;" value="@r.AwardId" />
-            @Html.EditorFor(m => m.AvailableRewards[i].Checked)
-            <br />
+            <div>
+                @Html.CheckBoxFor(model => Model.Awards[i].IsAssigned);
+                @Html.Display(Model.Awards[i].Title);
+                @Html.HiddenFor(model => Model.Awards[i].AwardId)
+            </div>
         }
-    </div>
+    }-->
+</div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-success">Save</button>
-        @Html.ActionLink("Cancel", "Index", "User", new { }, new { @class = "btn btn-warning" })
-    </div>
-</form>
+
