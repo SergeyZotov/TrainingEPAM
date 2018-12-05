@@ -14,6 +14,11 @@ namespace UsersAndAwards.PL.Web.Models
 
         public bool IsAssigned { get; set; }
 
+        public AwardViewModel()
+        {
+
+        }
+
         public AwardViewModel(string title, string description)
         {
             Title = title;

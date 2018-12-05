@@ -21,7 +21,7 @@ namespace UsersAndAwards.PL.Web.Controllers
         public ActionResult Index()
         {
             var users = logic.GetAllUsers()
-                .Select(u => new UserViewModel(u.FirstName, u.LastName, u.Birthdate, u.Awards))
+                .Select(u => new UserViewModel(u.FirstName, u.LastName, u.Birthdate, u.Awards) { Id = u.Id })
                 .ToList();
 
             return View(users);
@@ -31,49 +31,67 @@ namespace UsersAndAwards.PL.Web.Controllers
         public ActionResult Edit(int userId)
         {
             var user = logic.GetAllUsers().FirstOrDefault(u => u.Id == userId);
+            var awards = logic.GetAllAwards().Select(a => new AwardViewModel(a.Title, a.Description) { Id = a.AwardId }).ToList();
+            var uvm = new UserAndAwardsModel
+            {
+                User = new UserViewModel(user.FirstName, user.LastName, user.Birthdate, user.Awards) { Id = user.Id, Age = user.Age, Awards = user.Awards },
+                AllAvailableAwards = awards
+            };
 
-
-            return View(user);
+            return View(uvm);
         }
 
-        public ActionResult Add()
+
+        public ActionResult Create()
         {
-            return View("Edit", null);
+            var awards = logic.GetAllAwards().Select(a => new AwardViewModel(a.Title, a.Description) { Id = a.AwardId }).ToList();
+            var uvm = new UserAndAwardsModel
+            {                
+                AllAvailableAwards = awards
+            };
+
+            return View(uvm);
         }
 
         public ActionResult Delete(int userId)
         {
+            var deletingUser = logic.GetAllUsers().FirstOrDefault(u => u.Id == userId);
+            logic.RemoveUser(deletingUser);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Save(UserViewModel userModel)
+
+        [HttpPost]
+        public ActionResult Save(UserAndAwardsModel userModel)
         {
 			if (userModel != null)
 			{
-				if (userModel.Id == default(int))
-				{
-                    // add
-                    
-                    logic.AddUser(userModel.ToUser(userModel));
-				}
-				/*else
-				{
+
 					// update
-					var currentUser = users.FirstOrDefault(u => u.Id == userModel.Id);
+					var currentUser = logic.GetAllUsers().FirstOrDefault(u => u.Id == userModel.User.Id);
+
 					if (currentUser != null)
 					{
-						var user = userModel.ToUser();
+						var user = userModel.ToUser(userModel.User);
 						currentUser.FirstName = user.FirstName;
 						currentUser.LastName = user.LastName;
 						currentUser.Birthdate = user.Birthdate;
-						currentUser.Rewards = user.Rewards;
+						currentUser.Awards = user.Awards;
+                    logic.EditUser(currentUser, currentUser.Id);
 					}
-				}*/
 			}
 
 			return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public ActionResult Add(UserAndAwardsModel userModel)
+        {
+            logic.AddUser(userModel.ToUser(userModel.User));
+
             return RedirectToAction("Index");
+
         }
     }
 }

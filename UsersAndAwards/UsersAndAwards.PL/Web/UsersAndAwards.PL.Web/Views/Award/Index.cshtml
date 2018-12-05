@@ -1,9 +1,39 @@
 ﻿
-@{
-    ViewBag.Title = "Award";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@model UsersAndAwards.PL.Web.Models.Award
 
 <h2>Awards</h2>
+
+@using UsersAndAwards.PL.Web.Models;
+
+@model List<AwardViewModel>
+
+@{
+    ViewBag.Title = "Awards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.ActionLink("Add", "Create", "Award", new { }, new { @class = "btn btn-primary" })
+
+<table class="table table-bordered" style="margin-top: 50px;">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var award in Model)
+        {
+            <tr>
+                <td>@award.Title</td>
+                <td>@award.Description</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Award", new { AwardId = @award.Id }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", "Award", new { AwardId = @award.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 

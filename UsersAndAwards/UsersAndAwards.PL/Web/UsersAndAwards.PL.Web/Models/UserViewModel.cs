@@ -24,13 +24,23 @@ namespace UsersAndAwards.PL.Web.Models
 
         public List<AwardViewModel> AvailableAwards { get; set; }
 
+        public UserViewModel()
+        {
+
+        }
+
         public UserViewModel(string fname, string lname, DateTime bdate, List<Award> awards)
         {
             FirstName = fname;
             LastName = lname;
             Birthdate = bdate;
             Awards = awards;
-            
+            AvailableAwards = new List<AwardViewModel>();
+            if (awards != null)
+            foreach(var award in Awards)
+            {
+                AvailableAwards.Add(AwardViewModel.GetViewModel(award, awards));
+            }
         }
 
         public User ToUser(UserViewModel user1)
