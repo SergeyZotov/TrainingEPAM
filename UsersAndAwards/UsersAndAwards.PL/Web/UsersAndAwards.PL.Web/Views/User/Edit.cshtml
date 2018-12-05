@@ -5,39 +5,40 @@
 @{
     ViewBag.Title = "Index";
     var userModel = Model;
-
 }
 
 <h2>Edit</h2>
 
-<form action="Save" method="post">
+<form action="Edit" method="post">
     <input name="Id" style="display: none;" value="@userModel.User.Id" />
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <div class="form-group">
         <label for="firstName">First Name</label>
         <input name="User.FirstName" type="text" class="form-control" id="firstName" value="@userModel.User.FirstName" />
+        @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         <label for="lastName">Last Name</label>
         <input name="User.LastName" type="text" class="form-control" id="lastName" value="@userModel.User.LastName" />
+        @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         <label for="birthdate">Birthdate</label>
         <input name="User.Birthdate" type="date" class="form-control" id="birthdate" value="@userModel.User.Birthdate.ToString("yyyy-MM-dd")" />
+        @Html.ValidationMessageFor(model => model.User.Birthdate, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         <p>Awards</p>
-            @for (int i = 0, j = 0; i < Model.AllAvailableAwards.Count; ++i)
-            {
-                <div class="col-md-9">
-                    @Html.DisplayFor(model => model.AllAvailableAwards[i].Title)
-                    @Html.CheckBoxFor(model => model.AllAvailableAwards[i].IsAssigned)
-                    @Html.HiddenFor(model => model.AllAvailableAwards[i].Id)
-                </div>
-            }
-        
+        @for (int i = 0; i < Model.AllAvailableAwards.Count; ++i)
+        {
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.AllAvailableAwards[i].Title)
+                @Html.CheckBoxFor(model => model.AllAvailableAwards[i].IsAssigned)
+                @Html.HiddenFor(model => model.AllAvailableAwards[i].Id)
+            </div>
+        }
 
     </div>
-
     <div class="form-group">
         <button type="submit" class="btn btn-success">Save</button>
         @Html.ActionLink("Cancel", "Index", "User", new { }, new { @class = "btn btn-warning" })

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using UsersAndAwards.BLL;
 using UsersAndAwards.PL.Web.Models;
@@ -32,7 +29,7 @@ namespace UsersAndAwards.PL.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create (AwardViewModel model)
+        public ActionResult Create(AwardViewModel model)
         {
             try
             {
@@ -50,7 +47,7 @@ namespace UsersAndAwards.PL.Web.Controllers
         {
             var award = logic.GetAllAwards().FirstOrDefault(u => u.AwardId == awardId);
 
-            var avm = new AwardViewModel(award.Title, award.Description) { Id = award.AwardId};
+            var avm = new AwardViewModel(award.Title, award.Description) { Id = award.AwardId };
 
             return View(avm);
         }

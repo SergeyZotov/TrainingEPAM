@@ -1,10 +1,8 @@
 ﻿using Entities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
-using System.Web;
 
 namespace UsersAndAwards.PL.Web.Models
 {
@@ -12,10 +10,13 @@ namespace UsersAndAwards.PL.Web.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
 
+        [Required]
         public DateTime Birthdate { get; set; }
 
         public int Age { get; set; }
@@ -35,11 +36,14 @@ namespace UsersAndAwards.PL.Web.Models
             LastName = lname;
             Birthdate = bdate;
             Awards = awards;
-            AvailableAwards = new List<AwardViewModel>();
+
             if (awards != null)
-            foreach(var award in Awards)
             {
-                AvailableAwards.Add(AwardViewModel.GetViewModel(award, awards));
+                AvailableAwards = new List<AwardViewModel>();
+                foreach (var award in Awards)
+                {
+                    AvailableAwards.Add(AwardViewModel.GetViewModel(award, awards));
+                }
             }
         }
 
@@ -55,8 +59,6 @@ namespace UsersAndAwards.PL.Web.Models
                         AwardId = a.Id
                     }).ToList()
             };
-
-           
         }
     }
 }
