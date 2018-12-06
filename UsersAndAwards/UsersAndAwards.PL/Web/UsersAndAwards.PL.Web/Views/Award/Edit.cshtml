@@ -1,0 +1,26 @@
+﻿@using UsersAndAwards.PL.Web.Models;
+
+@model AwardViewModel
+
+@{
+    ViewBag.Title = "Index";
+    var currentAward = Model;
+}
+
+<h2>Edit</h2>
+
+<form action="Edit" method="post">
+    <input name="Id" style="display: none;" value="@currentAward.Id" />
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input name="Title" type="text" class="form-control" id="title" value="@currentAward.Title" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input name="Description" type="text" class="form-control" id="description" value="@currentAward.Description" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+        @Html.ActionLink("Cancel", "Index", "Award", new { }, new { @class = "btn btn-warning" })
+    </div>
+</form>
