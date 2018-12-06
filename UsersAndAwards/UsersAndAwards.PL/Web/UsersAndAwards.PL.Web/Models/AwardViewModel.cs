@@ -10,9 +10,11 @@ namespace UsersAndAwards.PL.Web.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string Title { get; set; }
 
         [Required]
+        [StringLength(250)]
         public string Description { get; set; }
 
         public bool IsAssigned { get; set; }
