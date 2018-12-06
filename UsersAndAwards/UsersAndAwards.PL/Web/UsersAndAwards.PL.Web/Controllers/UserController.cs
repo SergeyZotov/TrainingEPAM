@@ -100,7 +100,7 @@ namespace UsersAndAwards.PL.Web.Controllers
         {
             var awards = logic.GetAllAwards();
             int i = 0;
-
+            if(userModel.AllAvailableAwards != null)
             foreach (var award in userModel.AllAvailableAwards)
             {
                 award.Id = awards[i].AwardId;

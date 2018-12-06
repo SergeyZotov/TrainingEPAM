@@ -11,6 +11,8 @@ namespace UsersAndAwards.PL.Web.Models
 
         [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
 
         public bool IsAssigned { get; set; }

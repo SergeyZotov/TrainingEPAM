@@ -128,11 +128,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Award\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Award\Create.cshtml" />
     <Content Include="Views\Award\Edit.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
